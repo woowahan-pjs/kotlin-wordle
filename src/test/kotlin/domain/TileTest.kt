@@ -23,4 +23,24 @@ internal class TileTest {
             .isThrownBy { Tile(character) }
             .withMessage("문자는 알파벳만 입력이 가능합니다.")
     }
+
+    @Test
+    fun `두개의 Tile이 서로 일치하면 참을 반환한다`() {
+        // given
+        val tile = Tile('a')
+        val anotherTile = Tile('a')
+
+        // then
+        assertThat(tile).isEqualTo(anotherTile)
+    }
+
+    @Test
+    fun `두개의 Tile이 서로 다르면 거짓을 반환한다`() {
+        // given
+        val tile = Tile('a')
+        val anotherTile = Tile('b')
+
+        // then
+        assertThat(tile).isNotEqualTo(anotherTile)
+    }
 }

@@ -60,7 +60,7 @@ spill
 - [X] 하나의 Tile이 있다. => (Tile)
   - [X] Tile에는 문자가 들어간다.
     - [X] 알파벳만 입력이 가능하다.
-  - [ ] Tile과 Tile은 비교할 수 있다.
+  - [X] Tile과 Tile은 비교할 수 있다.
 - [ ] 여러개의 Tile을 묶는다. => (Tiles) (입력되어서 생성된 Tiles)
   - [ ] Tiles는 5개의 Tile로 구성이 되어있다.
   - [ ] Tiles는 5글자의 글자를 받는다.
