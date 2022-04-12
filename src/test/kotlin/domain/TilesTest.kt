@@ -30,4 +30,20 @@ internal class TilesTest {
             .isThrownBy { Tiles(elements) }
             .withMessage("타일은 5개로 구성되어야 합니다.")
     }
+
+    @Test
+    fun `Tiles는 문자열 5글자로 구성 할 수 있다`() {
+        val tiles = Tiles.of("hello")
+
+        assertThat(tiles.tiles)
+            .containsExactly(Tile('h'), Tile('e'), Tile('l'), Tile('l'), Tile('o'))
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["", "h", "hell", "hellow"])
+    fun `Tiles는 문자열 5글자로 구성이 안되면 실패한다`(words: String) {
+        assertThatIllegalArgumentException()
+            .isThrownBy { Tiles.of(words) }
+            .withMessage("타일은 5개로 구성되어야 합니다.")
+    }
 }
