@@ -36,6 +36,16 @@ class WordTest {
         assertThat(message).isEqualTo("5글자여야합니다")
     }
 
+    @Test
+    fun `인덱스 위치에 있는 알파벳을 가져온다`() {
+        val givenWord = "value"
+        val word = Word(givenWord)
+
+        val actual = word.foundAlphabet(1)
+
+        assertThat(actual).isEqualTo("a")
+    }
+
     @ParameterizedTest
     @ValueSource(ints = [-1, 8])
     fun `인덱스 위치가 올바르지 않은 경우 예외를 던진다`(index: Int) {
