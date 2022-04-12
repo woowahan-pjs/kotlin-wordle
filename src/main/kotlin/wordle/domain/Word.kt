@@ -1,6 +1,6 @@
 package wordle.domain
 
-data class Word(val value:String) {
+data class Word(val value: String) {
 
     init {
         require(value.length == WORD_SIZE && regex.matches(value)) {
