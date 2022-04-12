@@ -29,7 +29,7 @@ internal class AnswerTest {
         // then
         Assertions.assertThatIllegalArgumentException()
             .isThrownBy { Answer(elements) }
-            .withMessage("타일은 5개로 구성되어야 합니다.")
+            .withMessage(Answer.ERROR_TILE_SIZE_MSG)
     }
 
     @Test
@@ -48,11 +48,11 @@ internal class AnswerTest {
         // then
         Assertions.assertThatIllegalArgumentException()
             .isThrownBy { Answer.of(words) }
-            .withMessage("타일은 5개로 구성되어야 합니다.")
+            .withMessage(Answer.ERROR_TILE_SIZE_MSG)
     }
 
     @Test
-    fun `정답과 비교하여 같은 위치에 있으면 GREEN이다`() {
+    fun `정답과 비교하여 같은 위치에 있으면 CORRECT이다`() {
         // given
         val answer = Answer.of("hello")
         val tiles = Tiles.of("hello")
@@ -61,11 +61,11 @@ internal class AnswerTest {
         val matches: List<MatchResult> = answer.match(tiles)
 
         // then
-        assertThat(matches).containsOnly(GREEN)
+        assertThat(matches).containsOnly(CORRECT)
     }
 
     @Test
-    fun `정답은 아니지만 Tile이 있으면 YELLOW이다`() {
+    fun `정답은 아니지만 Tile이 있으면 MISSING이다`() {
         // given
         val answer = Answer.of("hello")
         val tiles = Tiles.of("olehl")
@@ -74,11 +74,11 @@ internal class AnswerTest {
         val matches: List<MatchResult> = answer.match(tiles)
 
         // then
-        assertThat(matches).containsOnly(YELLOW)
+        assertThat(matches).containsOnly(MISSING)
     }
 
     @Test
-    fun `정답에 Tile이 없으면 GRAY이다`() {
+    fun `정답에 Tile이 없으면 INCORRECT이다`() {
         // given
         val answer = Answer.of("hello")
         val tiles = Tiles.of("zzzzz")
@@ -87,11 +87,11 @@ internal class AnswerTest {
         val matches: List<MatchResult> = answer.match(tiles)
 
         // then
-        assertThat(matches).containsOnly(GRAY)
+        assertThat(matches).containsOnly(INCORRECT)
     }
 
     @Test
-    fun `정답을 머저 초록색으로 변경하고 나머지 존재하는 부분을 노란색으로 변경한다`() {
+    fun `정답을 머저 CORRECT으로 변경하고 나머지 존재하는 부분을 MISSING으로 변경한다`() {
         // given
         val answer = Answer.of("hello")
         val tiles = Tiles.of("olleh")
@@ -100,11 +100,11 @@ internal class AnswerTest {
         val matches: List<MatchResult> = answer.match(tiles)
 
         // then
-        assertThat(matches).containsExactly(YELLOW, YELLOW, GREEN, YELLOW, YELLOW)
+        assertThat(matches).containsExactly(MISSING, MISSING, CORRECT, MISSING, MISSING)
     }
 
     @Test
-    fun `정답이 뒤에 있으면 정답부터 초록색으로 변경된다`() {
+    fun `정답이 뒤에 있으면 정답부터 CORRECT으로 변경된다`() {
         // given
         val answer = Answer.of("hello")
         val tiles = Tiles.of("lllll")
@@ -113,11 +113,11 @@ internal class AnswerTest {
         val matches: List<MatchResult> = answer.match(tiles)
 
         // then
-        assertThat(matches).containsExactly(GRAY, GRAY, GREEN, GREEN, GRAY)
+        assertThat(matches).containsExactly(INCORRECT, INCORRECT, CORRECT, CORRECT, INCORRECT)
     }
 
     @Test
-    fun `답에 있는 타일 개수보다 많으면 회색으로 변경된다`() {
+    fun `답에 있는 타일 개수보다 많으면 INCORRECT으로 변경된다`() {
         // given
         val answer = Answer.of("hello")
         val tiles = Tiles.of("llool")
@@ -126,6 +126,6 @@ internal class AnswerTest {
         val matches: List<MatchResult> = answer.match(tiles)
 
         // then
-        assertThat(matches).containsExactly(YELLOW, YELLOW, YELLOW, GRAY, GRAY)
+        assertThat(matches).containsExactly(MISSING, MISSING, MISSING, INCORRECT, INCORRECT)
     }
 }

@@ -29,7 +29,7 @@ internal class TilesTest {
         // then
         assertThatIllegalArgumentException()
             .isThrownBy { Tiles(elements) }
-            .withMessage("타일은 5개로 구성되어야 합니다.")
+            .withMessage(Tiles.ERROR_TILE_SIZE_MSG)
     }
 
     @Test
@@ -48,7 +48,7 @@ internal class TilesTest {
         // then
         assertThatIllegalArgumentException()
             .isThrownBy { Tiles.of(words) }
-            .withMessage("타일은 5개로 구성되어야 합니다.")
+            .withMessage(Tiles.ERROR_TILE_SIZE_MSG)
     }
 
     @ParameterizedTest

@@ -21,7 +21,7 @@ internal class TileTest {
     fun `타일은 알파벳만 입력이 가능하다`(character: Char) {
         assertThatIllegalArgumentException()
             .isThrownBy { Tile(character) }
-            .withMessage("문자는 알파벳만 입력이 가능합니다.")
+            .withMessage(Tile.ERROR_ALLOWED_CHARACTER_MSG)
     }
 
     @Test

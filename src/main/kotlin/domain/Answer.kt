@@ -1,15 +1,15 @@
 package domain
 
-import domain.MatchResult.GRAY
-import domain.MatchResult.YELLOW
+import domain.MatchResult.INCORRECT
+import domain.MatchResult.MISSING
 
 class Answer(val tiles: List<Tile>) {
     init {
-        require(tiles.size == 5) { "타일은 5개로 구성되어야 합니다." }
+        require(tiles.size == REQUIRE_TILE_SIZE) { ERROR_TILE_SIZE_MSG }
     }
 
     fun match(other: Tiles): List<MatchResult> {
-        val result: Array<MatchResult> = arrayOf(GRAY, GRAY, GRAY, GRAY, GRAY)
+        val result: Array<MatchResult> = arrayOf(INCORRECT, INCORRECT, INCORRECT, INCORRECT, INCORRECT)
         val countOfTile: MutableMap<Tile, Int> = tiles.groupingBy { it }.eachCount().toMutableMap()
 
         fillGreen(result, other, countOfTile)
@@ -25,7 +25,7 @@ class Answer(val tiles: List<Tile>) {
     ) {
         this.tiles.mapIndexed { index, tile ->
             if (other.equals(tile, index)) {
-                result[index] = MatchResult.GREEN
+                result[index] = MatchResult.CORRECT
 
                 countOfTile[tile] = countOfTile[tile]!!.dec()
             }
@@ -38,10 +38,10 @@ class Answer(val tiles: List<Tile>) {
         countOfTile: MutableMap<Tile, Int>
     ) {
         other.mapIndexed { index, tile ->
-            val count = countOfTile[tile] ?: 0
+            val count = countOfTile[tile] ?: EMPTY
 
-            if (result[index] == GRAY && count > 0) {
-                result[index] = YELLOW
+            if (result[index] == INCORRECT && count > EMPTY) {
+                result[index] = MISSING
 
                 countOfTile[tile] = count.dec()
             }
@@ -49,6 +49,10 @@ class Answer(val tiles: List<Tile>) {
     }
 
     companion object {
+        const val ERROR_TILE_SIZE_MSG = "타일은 5개로 구성되어야 합니다."
+        const val REQUIRE_TILE_SIZE = 5
+        const val EMPTY = 0
+
         fun of(words: String): Answer = Answer(words.map { Tile(it) })
     }
 }

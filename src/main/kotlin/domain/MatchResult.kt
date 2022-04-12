@@ -1,7 +1,7 @@
 package domain
 
 enum class MatchResult {
-    GREEN,
-    YELLOW,
-    GRAY
+    CORRECT,
+    MISSING,
+    INCORRECT
 }
