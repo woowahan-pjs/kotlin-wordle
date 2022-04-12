@@ -89,4 +89,43 @@ internal class AnswerTest {
         // then
         assertThat(matches).containsOnly(GRAY)
     }
+
+    @Test
+    fun `정답을 머저 초록색으로 변경하고 나머지 존재하는 부분을 노란색으로 변경한다`() {
+        // given
+        val answer = Answer.of("hello")
+        val tiles = Tiles.of("olleh")
+
+        // when
+        val matches: List<MatchResult> = answer.match(tiles)
+
+        // then
+        assertThat(matches).containsExactly(YELLOW, YELLOW, GREEN, YELLOW, YELLOW)
+    }
+
+    @Test
+    fun `정답이 뒤에 있으면 정답부터 초록색으로 변경된다`() {
+        // given
+        val answer = Answer.of("hello")
+        val tiles = Tiles.of("lllll")
+
+        // when
+        val matches: List<MatchResult> = answer.match(tiles)
+
+        // then
+        assertThat(matches).containsExactly(GRAY, GRAY, GREEN, GREEN, GRAY)
+    }
+
+    @Test
+    fun `답에 있는 타일 개수보다 많으면 회색으로 변경된다`() {
+        // given
+        val answer = Answer.of("hello")
+        val tiles = Tiles.of("llool")
+
+        // when
+        val matches: List<MatchResult> = answer.match(tiles)
+
+        // then
+        assertThat(matches).containsExactly(YELLOW, YELLOW, YELLOW, GRAY, GRAY)
+    }
 }
