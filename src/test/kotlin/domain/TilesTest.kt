@@ -64,4 +64,15 @@ internal class TilesTest {
         // then
         assertThat(tiles.equals(tile, index)).isEqualTo(result)
     }
+
+    @ParameterizedTest
+    @CsvSource(value = ["h,1","e,1","l,2","o,1","z,0"])
+    fun `Tiles에 Tile이 몇개 있는지 확인할 수 있다`(tile: Char, count: Int) {
+        // given
+        val tiles = Tiles.of("hello")
+        val tile = Tile(tile)
+
+        // then
+        assertThat(tiles.countOf(tile)).isEqualTo(count)
+    }
 }

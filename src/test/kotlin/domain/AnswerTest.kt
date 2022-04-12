@@ -52,7 +52,7 @@ internal class AnswerTest {
     }
 
     @Test
-    fun `정답과 비교하여 같은 위치에 있으면 GREEN이다`() {// given
+    fun `정답과 비교하여 같은 위치에 있으면 GREEN이다`() {
         // given
         val answer = Answer.of("hello")
         val tiles = Tiles.of("hello")
@@ -62,5 +62,18 @@ internal class AnswerTest {
 
         // then
         assertThat(matches).containsOnly(GREEN)
+    }
+
+    @Test
+    fun `정답은 아니지만 Tile이 있으면 YELLOW이다`() {
+        // given
+        val answer = Answer.of("hello")
+        val tiles = Tiles.of("olehl")
+
+        // when
+        val matches: List<MatchResult> = answer.match(tiles)
+
+        // then
+        assertThat(matches).containsOnly(YELLOW)
     }
 }

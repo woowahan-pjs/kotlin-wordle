@@ -9,6 +9,8 @@ class Answer(val tiles: List<Tile>) {
         return this.tiles.mapIndexed { index, tile ->
             if (another.equals(tile, index)) {
                 MatchResult.GREEN
+            } else if (another.countOf(tile) > 0) {
+                MatchResult.YELLOW
             } else {
                 MatchResult.GRAY
             }

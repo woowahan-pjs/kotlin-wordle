@@ -7,6 +7,8 @@ class Tiles(val tiles: List<Tile>) {
 
     fun equals(tile: Tile, index: Int): Boolean = this.tiles[index] == tile
 
+    fun countOf(tile: Tile): Int = this.tiles.count { it == tile }
+
     companion object {
         fun of(words: String): Tiles = Tiles(words.map { Tile(it) })
     }
