@@ -35,4 +35,17 @@ class WordTest {
 
         assertThat(message).isEqualTo("5글자여야합니다")
     }
+
+    @ParameterizedTest
+    @ValueSource(ints = [-1, 8])
+    fun `인덱스 위치가 올바르지 않은 경우 예외를 던진다`(index: Int) {
+        val givenWord = "value"
+        val word = Word(givenWord)
+
+        val message = assertThrows<IllegalArgumentException> {
+            word.foundAlphabet(index)
+        }.message
+
+        assertThat(message).isEqualTo("인덱스 범위를 초과했습니다.")
+    }
 }
