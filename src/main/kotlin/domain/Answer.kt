@@ -8,14 +8,14 @@ class Answer(val tiles: List<Tile>) {
         require(tiles.size == REQUIRE_TILE_SIZE) { ERROR_TILE_SIZE_MSG }
     }
 
-    fun match(other: Tiles): List<MatchResult> {
+    fun match(other: Tiles): MatchResults {
         val result: Array<MatchResult> = arrayOf(INCORRECT, INCORRECT, INCORRECT, INCORRECT, INCORRECT)
         val countOfTile: MutableMap<Tile, Int> = tiles.groupingBy { it }.eachCount().toMutableMap()
 
         fillGreen(result, other, countOfTile)
         fillYellow(result, other, countOfTile)
 
-        return result.toList()
+        return MatchResults(result.toList())
     }
 
     private fun fillGreen(

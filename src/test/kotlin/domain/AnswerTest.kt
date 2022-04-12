@@ -58,10 +58,10 @@ internal class AnswerTest {
         val tiles = Tiles.of("hello")
 
         // when
-        val matches: List<MatchResult> = answer.match(tiles)
+        val matches = answer.match(tiles)
 
         // then
-        assertThat(matches).containsOnly(CORRECT)
+        assertThat(matches.results).containsOnly(CORRECT)
     }
 
     @Test
@@ -71,10 +71,10 @@ internal class AnswerTest {
         val tiles = Tiles.of("olehl")
 
         // when
-        val matches: List<MatchResult> = answer.match(tiles)
+        val matches = answer.match(tiles)
 
         // then
-        assertThat(matches).containsOnly(MISSING)
+        assertThat(matches.results).containsOnly(MISSING)
     }
 
     @Test
@@ -84,10 +84,10 @@ internal class AnswerTest {
         val tiles = Tiles.of("zzzzz")
 
         // when
-        val matches: List<MatchResult> = answer.match(tiles)
+        val matches = answer.match(tiles)
 
         // then
-        assertThat(matches).containsOnly(INCORRECT)
+        assertThat(matches.results).containsOnly(INCORRECT)
     }
 
     @Test
@@ -97,10 +97,10 @@ internal class AnswerTest {
         val tiles = Tiles.of("olleh")
 
         // when
-        val matches: List<MatchResult> = answer.match(tiles)
+        val matches = answer.match(tiles)
 
         // then
-        assertThat(matches).containsExactly(MISSING, MISSING, CORRECT, MISSING, MISSING)
+        assertThat(matches.results).containsExactly(MISSING, MISSING, CORRECT, MISSING, MISSING)
     }
 
     @Test
@@ -110,10 +110,10 @@ internal class AnswerTest {
         val tiles = Tiles.of("lllll")
 
         // when
-        val matches: List<MatchResult> = answer.match(tiles)
+        val matches = answer.match(tiles)
 
         // then
-        assertThat(matches).containsExactly(INCORRECT, INCORRECT, CORRECT, CORRECT, INCORRECT)
+        assertThat(matches.results).containsExactly(INCORRECT, INCORRECT, CORRECT, CORRECT, INCORRECT)
     }
 
     @Test
@@ -123,9 +123,9 @@ internal class AnswerTest {
         val tiles = Tiles.of("llool")
 
         // when
-        val matches: List<MatchResult> = answer.match(tiles)
+        val matches = answer.match(tiles)
 
         // then
-        assertThat(matches).containsExactly(MISSING, MISSING, MISSING, INCORRECT, INCORRECT)
+        assertThat(matches.results).containsExactly(MISSING, MISSING, MISSING, INCORRECT, INCORRECT)
     }
 }
