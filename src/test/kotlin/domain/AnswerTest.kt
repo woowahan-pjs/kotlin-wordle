@@ -29,4 +29,20 @@ internal class AnswerTest {
             .isThrownBy { Answer(elements) }
             .withMessage("타일은 5개로 구성되어야 합니다.")
     }
+
+    @Test
+    fun `Answer는 문자열 5글자로 구성 할 수 있다`() {
+        val answer = Answer.of("hello")
+
+        Assertions.assertThat(answer.tiles)
+            .containsExactly(Tile('h'), Tile('e'), Tile('l'), Tile('l'), Tile('o'))
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["", "h", "hell", "hellow"])
+    fun `Answer는 문자열 5글자로 구성이 안되면 실패한다`(words: String) {
+        Assertions.assertThatIllegalArgumentException()
+            .isThrownBy { Answer.of(words) }
+            .withMessage("타일은 5개로 구성되어야 합니다.")
+    }
 }
