@@ -76,4 +76,17 @@ internal class AnswerTest {
         // then
         assertThat(matches).containsOnly(YELLOW)
     }
+
+    @Test
+    fun `정답에 Tile이 없으면 GRAY이다`() {
+        // given
+        val answer = Answer.of("hello")
+        val tiles = Tiles.of("zzzzz")
+
+        // when
+        val matches: List<MatchResult> = answer.match(tiles)
+
+        // then
+        assertThat(matches).containsOnly(GRAY)
+    }
 }
