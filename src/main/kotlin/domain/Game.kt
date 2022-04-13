@@ -2,6 +2,7 @@ package domain
 
 class Game(
     private val input: Input,
+    private val output: Output,
     private val wordsRepository: WordsRepository
 ) {
     fun start() {
@@ -12,6 +13,8 @@ class Game(
 
             if (wordsRepository.exists(tiles)) {
                 val match = answer.match(tiles)
+
+                output.write(match)
 
                 if (match.isCorrect()) {
                     return

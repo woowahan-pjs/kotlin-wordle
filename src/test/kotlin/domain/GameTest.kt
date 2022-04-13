@@ -1,5 +1,7 @@
 package domain
 
+import domain.MatchResult.INCORRECT
+import domain.MatchResult.MISSING
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import java.util.*
@@ -10,16 +12,19 @@ class GameTest {
         // given
         val answer = listOf(Tile('h'), Tile('e'), Tile('l'), Tile('l'), Tile('o'))
         val input = TestInput(LinkedList(listOf("hello", "hello", "hello", "hello", "hello", "hello")))
+        val output = TestOutput()
         val repository = TestWordsRepository(answer, setOf(Tiles(answer)))
-        val game = Game(input, repository)
+        val game = Game(input, output, repository)
 
         // when
         game.start()
 
         // then
         assertThat(repository.calledTodayWords).isTrue
-        assertThat(input.result).hasSize(5)
         assertThat(repository.tilesStack).contains(Tiles(answer))
+        assertThat(input.result).hasSize(5)
+        assertThat(output.resultsStack).hasSize(1)
+        assertThat(output.resultsStack[0].isCorrect()).isTrue
     }
 
     @Test
@@ -27,8 +32,9 @@ class GameTest {
         // given
         val answer = listOf(Tile('h'), Tile('e'), Tile('l'), Tile('l'), Tile('o'))
         val input = TestInput(LinkedList(listOf("abcde", "abcde", "abcde", "abcde", "abcde", "abcde")))
+        val output = TestOutput()
         val repository = TestWordsRepository(answer, setOf(Tiles(answer), Tiles.of("abcde")))
-        val game = Game(input, repository)
+        val game = Game(input, output, repository)
 
         // when
         game.start()
@@ -36,6 +42,9 @@ class GameTest {
         // then
         assertThat(input.result).isEmpty()
         assertThat(repository.calledTodayWords).isTrue
+        assertThat(output.resultsStack).hasSize(6)
+        assertThat(output.resultsStack)
+            .containsOnly(MatchResults(listOf(INCORRECT, INCORRECT, INCORRECT, INCORRECT, MISSING)))
     }
 
     @Test
@@ -43,20 +52,33 @@ class GameTest {
         // given
         val answer = listOf(Tile('h'), Tile('e'), Tile('l'), Tile('l'), Tile('o'))
         val input = TestInput(LinkedList(listOf("abcde", "abcde", "abcde", "abcde", "abcde", "abcde", "abcde")))
+        val output = TestOutput()
         val repository = TestWordsRepository(answer, setOf(Tiles(answer), Tiles.of("abcde")))
-        val game = Game(input, repository)
+        val game = Game(input, output, repository)
 
         // when
         game.start()
 
         // then
         assertThat(input.result).hasSize(1)
+        assertThat(output.resultsStack).hasSize(6)
+        assertThat(output.resultsStack)
+            .flatMap({it.isCorrect()})
+            .containsExactly(false, false, false, false, false, false)
     }
 }
 
 class TestInput(val result: Queue<String>) : Input {
     override fun read(): Tiles {
         return Tiles.of(result.poll())
+    }
+}
+
+class TestOutput : Output {
+    val resultsStack = mutableListOf<MatchResults>()
+
+    override fun write(matchResults: MatchResults) {
+        resultsStack.add(matchResults)
     }
 }
 

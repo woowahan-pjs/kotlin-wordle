@@ -1,6 +1,6 @@
 package domain
 
-class MatchResults(val results: List<MatchResult>) {
+data class MatchResults(val results: List<MatchResult>) {
     init {
         require(results.size == REQUIRE_RESULTS_SIZE) { ERROR_RESULTS_SIZE_MSG }
     }
