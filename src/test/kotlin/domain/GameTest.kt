@@ -66,6 +66,23 @@ class GameTest {
             .flatMap({it.isCorrect()})
             .containsExactly(false, false, false, false, false, false)
     }
+
+    @Test
+    fun `존재하지 않는 단어를 입력하면 재입력 기회를 준다`() {
+        // given
+        val answer = listOf(Tile('h'), Tile('e'), Tile('l'), Tile('l'), Tile('o'))
+        val input = TestInput(LinkedList(listOf("abcde", "abcde", "abcde", "abcde", "abcde", "abcde", "abcde", "hello")))
+        val output = TestOutput()
+        val repository = TestWordsRepository(answer, setOf(Tiles(answer)))
+        val game = Game(input, output, repository)
+
+        // when
+        game.start()
+
+        // then
+        assertThat(input.result).hasSize(0)
+        assertThat(output.resultsStack).hasSize(1)
+    }
 }
 
 class TestInput(val result: Queue<String>) : Input {

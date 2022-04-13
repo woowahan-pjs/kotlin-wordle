@@ -7,14 +7,16 @@ class Game(
 ) {
     fun start() {
         val answer = Answer(wordsRepository.getTodayWords())
+        var inputCount = 0
 
-        (BEGIN_INDEX..MAX_TRY_COUNT).forEach { index ->
+        while (inputCount < MAX_TRY_COUNT) {
             val tiles = input.read()
 
             if (wordsRepository.exists(tiles)) {
                 val match = answer.match(tiles)
 
                 output.write(match)
+                inputCount++
 
                 if (match.isCorrect()) {
                     return
