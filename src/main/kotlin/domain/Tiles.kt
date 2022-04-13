@@ -1,6 +1,6 @@
 package domain
 
-class Tiles(val tiles: List<Tile>) : List<Tile> by tiles {
+data class Tiles(val tiles: List<Tile>) : List<Tile> by tiles {
     init {
         require(tiles.size == REQUIRE_TILE_SIZE) { ERROR_TILE_SIZE_MSG }
     }

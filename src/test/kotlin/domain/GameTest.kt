@@ -2,29 +2,49 @@ package domain
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
-
-import org.junit.jupiter.api.Assertions.*
 import java.util.*
 
 class GameTest {
     @Test
-    fun `게임은 6번을 입력할 기회가 주어진다`() {
+    fun `답안에 정답이 있을 경우 게임이 종료된다`() {
         // given
+        val answer = listOf(Tile('h'), Tile('e'), Tile('l'), Tile('l'), Tile('o'))
         val input = TestInput(LinkedList(listOf("hello", "hello", "hello", "hello", "hello", "hello")))
-        val game = Game(input)
+        val repository = TestWordsRepository(answer, setOf(Tiles(answer)))
+        val game = Game(input, repository)
+
+        // when
+        game.start()
+
+        // then
+        assertThat(repository.calledTodayWords).isTrue
+        assertThat(input.result).hasSize(5)
+        assertThat(repository.tilesStack).contains(Tiles(answer))
+    }
+
+    @Test
+    fun `답을 못맞출 경우 최대 6번을 입력할 기회가 주어진다`() {
+        // given
+        val answer = listOf(Tile('h'), Tile('e'), Tile('l'), Tile('l'), Tile('o'))
+        val input = TestInput(LinkedList(listOf("abcde", "abcde", "abcde", "abcde", "abcde", "abcde")))
+        val repository = TestWordsRepository(answer, setOf(Tiles(answer), Tiles.of("abcde")))
+        val game = Game(input, repository)
 
         // when
         game.start()
 
         // then
         assertThat(input.result).isEmpty()
+        assertThat(repository.calledTodayWords).isTrue
     }
 
     @Test
     fun `게임은 7번 이상 입력시 6번만 입력 된다`() {
         // given
-        val input = TestInput(LinkedList(listOf("hello", "hello", "hello", "hello", "hello", "hello", "hello")))
-        val game = Game(input)
+        val answer = listOf(Tile('h'), Tile('e'), Tile('l'), Tile('l'), Tile('o'))
+        val input = TestInput(LinkedList(listOf("abcde", "abcde", "abcde", "abcde", "abcde", "abcde", "abcde")))
+        val repository = TestWordsRepository(answer, setOf(Tiles(answer), Tiles.of("abcde")))
+        val game = Game(input, repository)
 
         // when
         game.start()
@@ -34,8 +54,24 @@ class GameTest {
     }
 }
 
-class TestInput(val result: Queue<String>): Input {
+class TestInput(val result: Queue<String>) : Input {
     override fun read(): Tiles {
         return Tiles.of(result.poll())
+    }
+}
+
+class TestWordsRepository(val answer: List<Tile>, val words: Set<Tiles>) : WordsRepository {
+    var tilesStack = mutableListOf<Tiles>()
+    var calledTodayWords = false
+
+    override fun exists(tiles: Tiles): Boolean {
+        tilesStack.add(tiles)
+
+        return words.contains(tiles)
+    }
+
+    override fun getTodayWords(): List<Tile> {
+        calledTodayWords = true
+        return answer
     }
 }
