@@ -58,4 +58,15 @@ class WordTest {
 
         assertThat(message).isEqualTo("인덱스 범위를 초과했습니다.")
     }
+
+    @Test
+    fun `단어에 알파벳이 포함되면 참을 리턴한다`() {
+        val givenWord = "value"
+        val word = Word(givenWord)
+        val givenAlphabet = "e"
+
+        val actual = word.contains(givenAlphabet)
+
+        assertThat(actual).isTrue
+    }
 }

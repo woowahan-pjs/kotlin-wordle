@@ -16,6 +16,10 @@ data class Word(val value: String) {
         return value[index].toString()
     }
 
+    fun contains(compareValue: String): Boolean {
+        return value.contains(compareValue)
+    }
+
     companion object {
         const val FIRST_INDEX = 0
         const val WORD_SIZE = 5
