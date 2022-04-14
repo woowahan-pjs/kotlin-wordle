@@ -11,7 +11,8 @@ class GameTest {
         val game = Game(TryCount(2), givenAnswer)
         val givenInput = Word("words")
 
-        val isWinner = game.play(givenInput)
+        val result = game.play(givenInput)
+        val isWinner = game.isWinner(result)
 
         assertThat(isWinner).isTrue
     }
@@ -27,18 +28,18 @@ class GameTest {
         assertThat(game.tryCount()).isEqualTo(TryCount(4))
     }
 
-//    @Test
-//    fun `정답과 답안을 비교하여 결과 타일을 담아 전달한다`() {
-//        val game = Game(TryCount(0))
-//        val input = Word("input")
-//        val answer = Word("hello")
-//
-//        game.play(input, answer)
-//
-//        val game = Game(TryCount(3))
-//
-//        List<Tile> resultTiles = game.retreiveResultTiles()
-//
-//        assertThat(resultTiles).isEqualTo(TryCount(4))
-//    }
+    @Test
+    fun `정답과 답안을 비교하여 결과 타일을 담아 전달한다`() {
+        val givenAnswer = Word("hello")
+        val game = Game(TryCount(0), givenAnswer)
+        val input = Word("oxide")
+
+        game.play(input)
+
+        val resultTiles = game.retrieveResultTiles()
+
+        assertThat(resultTiles).containsExactly(
+            Tile.YELLOW, Tile.GRAY, Tile.GRAY, Tile.GRAY, Tile.GRAY
+        )
+    }
 }

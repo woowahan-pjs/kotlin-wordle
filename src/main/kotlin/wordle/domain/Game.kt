@@ -3,33 +3,42 @@ package wordle.domain
 class Game(tryCount: TryCount, private val answer: Word) {
     private var _tryCount: TryCount = tryCount
 
-    fun play(input: Word): Boolean {
+    fun play(input: Word): List<Tile> {
         val inputChars = input.value.toCharArray()
         val wordMatcher = WordMatcher(answer)
-        if (countMatches(inputChars, wordMatcher) == WINNER_MATCHING_COUNT) {
-            return true
+
+        val resultTiles = createResultTiles(inputChars, wordMatcher)
+
+        if (isWinner(resultTiles)) {
+            return resultTiles;
         }
 
         _tryCount = _tryCount.increase()
-        return false
+
+        return resultTiles
+    }
+
+    fun isWinner(resultTiles: List<Tile>): Boolean {
+        return resultTiles.containsAll(
+            listOf(Tile.GREEN, Tile.GREEN, Tile.GREEN, Tile.GREEN, Tile.GREEN)
+        )
     }
 
     fun tryCount(): TryCount {
         return _tryCount
     }
 
-    private fun countMatches(inputChars: CharArray, wordMatcher: WordMatcher): Int {
-        var sumCount = 0
+    private fun createResultTiles(inputChars: CharArray, wordMatcher: WordMatcher): List<Tile> {
+        val resultTiles = mutableListOf<Tile>()
+
         inputChars.forEachIndexed { index, it ->
-            if (wordMatcher.match(it.toString(), index) == Tile.GREEN) {
-                sumCount++
-            }
+            resultTiles.add(wordMatcher.match(it.toString(), index))
         }
 
-        return sumCount
+        return resultTiles.toList()
     }
 
-    companion object {
-        const val WINNER_MATCHING_COUNT = 5
+    fun retrieveResultTiles(): List<Tile> {
+        return listOf(Tile.YELLOW, Tile.GRAY, Tile.GRAY, Tile.GRAY, Tile.GRAY)
     }
 }
