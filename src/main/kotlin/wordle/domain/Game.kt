@@ -1,7 +1,6 @@
 package wordle.domain
 
-class Game(tryCount: TryCount, private val answer: Word) {
-    private var _tryCount: TryCount = tryCount
+class Game(private val answer: Word) {
 
     fun play(input: Word): Tiles {
         val inputChars = input.value.toCharArray()
@@ -13,17 +12,11 @@ class Game(tryCount: TryCount, private val answer: Word) {
             return resultTiles
         }
 
-        _tryCount = _tryCount.increase()
-
         return resultTiles
     }
 
     fun isWinner(resultTiles: Tiles): Boolean {
         return resultTiles.isWinner()
-    }
-
-    fun tryCount(): TryCount {
-        return _tryCount
     }
 
     private fun createResultTiles(inputChars: CharArray, wordMatcher: WordMatcher): Tiles {
@@ -36,7 +29,7 @@ class Game(tryCount: TryCount, private val answer: Word) {
         return Tiles(resultTiles.toList())
     }
 
-    fun retrieveResultTiles(): List<Tile> {
-        return listOf(Tile.YELLOW, Tile.GRAY, Tile.GRAY, Tile.GRAY, Tile.GRAY)
+    fun retrieveResultTiles(): Tiles {
+        return Tiles(listOf(Tile.YELLOW, Tile.GRAY, Tile.GRAY, Tile.GRAY, Tile.GRAY))
     }
 }

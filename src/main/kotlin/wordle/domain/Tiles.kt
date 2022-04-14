@@ -1,6 +1,6 @@
 package wordle.domain
 
-class Tiles(private val tiles: List<Tile>) {
+class Tiles(val tiles: List<Tile>) {
 
     fun isWinner(): Boolean {
         val count = tiles.count { it == Tile.GREEN }

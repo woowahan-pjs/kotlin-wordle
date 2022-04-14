@@ -21,5 +21,4 @@ class TilesTest {
 
         assertThat(actual).isFalse
     }
-
 }
