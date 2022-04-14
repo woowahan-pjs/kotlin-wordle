@@ -22,10 +22,7 @@ class Answers {
             return Words(words)
         }
 
-        private fun createAnswer(): Word {
-            return WORDS[(createAnswerPosition() % WORDS.size).toInt()]
-        }
-
+        private fun createAnswer() = WORDS[(createAnswerPosition() % WORDS.size).toInt()]
         private fun createAnswerPosition() = ChronoUnit.DAYS.between(LocalDate.of(2021, 6, 19), LocalDate.now())
     }
 }
