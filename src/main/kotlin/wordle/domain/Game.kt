@@ -1,9 +1,9 @@
 package wordle.domain
 
-class Game(tryCount: TryCount) {
+class Game(tryCount: TryCount, private val answer: Word) {
     private var _tryCount: TryCount = tryCount
 
-    fun play(input: Word, answer: Word): Boolean {
+    fun play(input: Word): Boolean {
         val inputChars = input.value.toCharArray()
         val wordMatcher = WordMatcher(answer)
         if (countMatches(inputChars, wordMatcher) == WINNER_MATCHING_COUNT) {
@@ -25,6 +25,7 @@ class Game(tryCount: TryCount) {
                 sumCount++
             }
         }
+
         return sumCount
     }
 
