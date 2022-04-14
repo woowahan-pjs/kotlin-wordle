@@ -79,9 +79,9 @@ spill
   - [X] 결과를 전달할 수 있다.
 
 ### PRESENTATION
-- [ ] DefaultOutput
-  - [ ] 새로운 문자를 적으면 과거에 있던 결과도 같이 표출된다.
-  - [ ] 지금까지 입력한 Tiles를 가지고 있는다.
+- [X] DefaultOutput
+  - [X] 새로운 문자를 적으면 과거에 있던 결과도 같이 표출된다.
+  - [X] 지금까지 입력한 Tiles를 가지고 있는다.
 - [X] DefaultWordsRepository
   - [X] 정답과 답안은 `words.txt`에 존재하는 단어여야 한다.
   - [X] 정답은 매일 바뀌며 ((현재 날짜 - 2021년 6월 19일) % 배열의 크기) 번째의 단어이다.

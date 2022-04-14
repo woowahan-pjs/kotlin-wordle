@@ -1,9 +1,14 @@
-import domain.Tiles
-import presentation.DefaultWordsRepository
+import domain.Game
+import infra.DefaultWordsRepository
+import presentation.DefaultInput
+import presentation.DefaultOutput
 
 fun main() {
+    val input = DefaultInput()
+    val output = DefaultOutput()
     val repository = DefaultWordsRepository()
 
-    println(repository.getTodayWords())
-    println(repository.exists(Tiles.of("royal")))
+    val game = Game(input, output, repository)
+
+    game.start()
 }
