@@ -1,6 +1,7 @@
 package wordle.domain
 
-data class Word(val value: String) {
+@JvmInline
+value class Word(val value: String) {
 
     init {
         require(isWordSizeAndAlphabet()) {
