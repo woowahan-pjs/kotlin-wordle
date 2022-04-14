@@ -16,11 +16,12 @@ fun main() {
 
     ResultView.printInit()
 
-    val results = mutableListOf<Tiles>()
-    playGame(game, results)
+    playGame(game)
 }
 
-private fun playGame(game: Game, results: MutableList<Tiles>) {
+private fun playGame(game: Game) {
+    val results = mutableListOf<Tiles>()
+
     (START_PLAY_COUNT until LAST_PLAY_COUNT).forEachIndexed { _, index ->
         val inputWord = InputView.askWord(Answers.WORDS)
 
