@@ -38,7 +38,7 @@ private fun playGame(game: Game) {
 private fun checkIsWinner(game: Game, resultTiles: Tiles, index: Int) {
     if (game.isWinner(resultTiles)) {
         ResultView.printGamePlayCount(index)
-        throw IllegalStateException("게임이 종료되었습니다.")
+        throw IllegalStateException("정답을 맞추셨습니다.")
     }
 }
 
