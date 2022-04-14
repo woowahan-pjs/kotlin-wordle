@@ -3,7 +3,7 @@ package wordle.domain
 @JvmInline
 value class TryCount(private val value: Int) {
     init {
-        require(MIN_VALUE <= value && MAX_VALUE > value) {
+        require(value in MIN_VALUE until MAX_VALUE) {
             INPUT_NOT_ALLOWED_MESSAGE
         }
     }
