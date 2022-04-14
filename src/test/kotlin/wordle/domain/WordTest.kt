@@ -41,7 +41,7 @@ class WordTest {
         val givenWord = "value"
         val word = Word(givenWord)
 
-        val actual = word.foundAlphabet(1)
+        val actual = word.findAlphabet(1)
 
         assertThat(actual).isEqualTo("a")
     }
@@ -53,7 +53,7 @@ class WordTest {
         val word = Word(givenWord)
 
         val message = assertThrows<IllegalArgumentException> {
-            word.foundAlphabet(index)
+            word.findAlphabet(index)
         }.message
 
         assertThat(message).isEqualTo("인덱스 범위를 초과했습니다.")

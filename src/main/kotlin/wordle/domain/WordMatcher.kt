@@ -3,7 +3,7 @@ package wordle.domain
 class WordMatcher(private val answer: Word) {
 
     fun match(alphabet: String, index: Int): Tile {
-        if (alphabet == answer.foundAlphabet(index)) {
+        if (alphabet == answer.findAlphabet(index)) {
             return Tile.GREEN
         }
 
