@@ -16,19 +16,4 @@ class GameTest {
 
         assertThat(isWinner).isTrue
     }
-
-    @Test
-    fun `정답과 답안을 비교하여 결과 타일을 담아 전달한다`() {
-        val givenAnswer = Word("hello")
-        val game = Game(givenAnswer)
-        val input = Word("oxide")
-
-        game.play(input)
-
-        val resultTiles = game.retrieveResultTiles()
-
-        assertThat(resultTiles.tiles).containsExactly(
-            Tile.YELLOW, Tile.GRAY, Tile.GRAY, Tile.GRAY, Tile.GRAY
-        )
-    }
 }

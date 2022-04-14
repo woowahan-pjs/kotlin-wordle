@@ -15,10 +15,6 @@ class Game(private val answer: Word) {
         return resultTiles
     }
 
-    fun isWinner(resultTiles: Tiles): Boolean {
-        return resultTiles.isWinner()
-    }
-
     private fun createResultTiles(inputChars: CharArray, wordMatcher: WordMatcher): Tiles {
         val resultTiles = mutableListOf<Tile>()
 
@@ -26,10 +22,10 @@ class Game(private val answer: Word) {
             resultTiles.add(wordMatcher.match(it.toString(), index))
         }
 
-        return Tiles(resultTiles.toList())
+        return Tiles(resultTiles)
     }
 
-    fun retrieveResultTiles(): Tiles {
-        return Tiles(listOf(Tile.YELLOW, Tile.GRAY, Tile.GRAY, Tile.GRAY, Tile.GRAY))
+    fun isWinner(resultTiles: Tiles): Boolean {
+        return resultTiles.isWinner()
     }
 }
