@@ -26,16 +26,19 @@ class DefaultOutput : Output {
 
     private fun printLine(matchResults: MatchResults) {
         println(
-            matchResults.results.joinToString("") {
+            matchResults.results.joinToString(BLANK) {
                 blockOf(it)
             }
         )
     }
 
-
     private fun blockOf(matchResult: MatchResult): String = when (matchResult) {
         MatchResult.CORRECT -> "\uD83D\uDFE9"
         MatchResult.MISSING -> "\uD83D\uDFE8"
         else -> "⬜"
+    }
+
+    companion object {
+        private const val BLANK = ""
     }
 }

@@ -1,9 +1,9 @@
 package domain
 
-import org.junit.jupiter.api.Test
 import domain.MatchResult.*
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatIllegalArgumentException
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.EnumSource
 import org.junit.jupiter.params.provider.ValueSource
@@ -20,7 +20,7 @@ internal class MatchResultsTest {
     }
 
     @ParameterizedTest
-    @ValueSource(ints = [0,1,2,3,4,6,7,8])
+    @ValueSource(ints = [0, 1, 2, 3, 4, 6, 7, 8])
     fun `5개의 결과가 아니면 실패한다`(size: Int) {
         // given
         val matchResult = (0 until size).map { CORRECT }

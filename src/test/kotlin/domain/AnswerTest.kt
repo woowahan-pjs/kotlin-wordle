@@ -11,25 +11,13 @@ internal class AnswerTest {
     @Test
     fun `Answer는 5개의 Tile로 구성이 되어있다`() {
         // given
-        val elements = listOf(Tile('a'), Tile('b'), Tile('c'), Tile('d'), Tile('e'))
+        val elements = Tiles.of("hello")
 
         // when
         val answer = Answer(elements)
 
         // then
         assertThat(answer.tiles).containsExactlyElementsOf(elements)
-    }
-
-    @ParameterizedTest
-    @ValueSource(ints = [0, 1, 2, 3, 4, 6, 10])
-    fun `Answer는 5개의 Tile로 구성이 안되면 실패한다`(size: Int) {
-        // given
-        val elements: List<Tile> = (0 until size).map { Tile('a') }
-
-        // then
-        Assertions.assertThatIllegalArgumentException()
-            .isThrownBy { Answer(elements) }
-            .withMessage(Answer.ERROR_TILE_SIZE_MSG)
     }
 
     @Test

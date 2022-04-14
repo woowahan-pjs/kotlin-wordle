@@ -52,10 +52,12 @@ internal class TilesTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = [
-        "h,0,true","e,1,true","l,2,true","l,3,true","o,4,true", // 성공케이스
-        "a,0,false","b,1,false","c,2,false","d,3,false","e,4,false" // 실패케이스
-    ])
+    @CsvSource(
+        value = [
+            "h,0,true", "e,1,true", "l,2,true", "l,3,true", "o,4,true", // 성공케이스
+            "a,0,false", "b,1,false", "c,2,false", "d,3,false", "e,4,false" // 실패케이스
+        ]
+    )
     fun `Tiles는 위치와 Tile을 받아서 해당 위치에 같은 타일이 있는지 확인할 수 있다`(tile: Char, index: Int, result: Boolean) {
         // given
         val tile = Tile(tile)
@@ -66,7 +68,7 @@ internal class TilesTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = ["h,1","e,1","l,2","o,1","z,0"])
+    @CsvSource(value = ["h,1", "e,1", "l,2", "o,1", "z,0"])
     fun `Tiles에 Tile이 몇개 있는지 확인할 수 있다`(tile: Char, count: Int) {
         // given
         val tiles = Tiles.of("hello")
