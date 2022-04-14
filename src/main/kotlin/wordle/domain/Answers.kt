@@ -11,7 +11,7 @@ class Answers {
         val WORDS = createWords()
         val ANSWER = createAnswer()
 
-        private fun createWords(): List<Word> {
+        private fun createWords(): Words {
             val wordsFile = getResourceText(ANSWERS_TEXT_PATH)
 
             val words = mutableListOf<Word>()
@@ -19,7 +19,7 @@ class Answers {
                 words.add(Word(it))
             }
 
-            return words
+            return Words(words)
         }
 
         private fun createAnswer(): Word {
