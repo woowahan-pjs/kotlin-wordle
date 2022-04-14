@@ -2,15 +2,17 @@ package wordle.view
 
 import wordle.domain.Tiles
 
+private const val MAX_TRY_COUNT = 6
+
 object ResultView {
     fun printInit() {
-        println("WORDLE을 6번 만에 맞춰 보세요.")
+        println("WORDLE을 ${MAX_TRY_COUNT}번 만에 맞춰 보세요.")
         println("시도의 결과는 타일의 색 변화로 나타납니다.")
     }
 
     fun printGamePlayCount(index: Int) {
         print(index)
-        print("/6")
+        print("/$MAX_TRY_COUNT")
         println()
     }
 
@@ -22,7 +24,7 @@ object ResultView {
     }
 
     private fun printAllTiles(tiles: Tiles) {
-        tiles.tiles.forEach { tile ->
+        tiles.forEach { tile ->
             print(tile.value)
         }
     }
