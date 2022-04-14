@@ -26,7 +26,6 @@ class Game(
     }
 
     companion object {
-        const val BEGIN_INDEX = 1
         const val MAX_TRY_COUNT = 6
     }
 }
