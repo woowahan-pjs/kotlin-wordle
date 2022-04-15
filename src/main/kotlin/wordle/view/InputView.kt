@@ -1,13 +1,13 @@
 package wordle.view
 
-import wordle.domain.Word
+import wordle.domain.Words
 
 object InputView {
 
-    fun askWord(words: List<Word>): String {
+    fun askWord(words: Words): String {
         while (true) {
             val input = question()
-            if (words.contains(Word(input))) {
+            if (words.contains(input)) {
                 return input
             }
 
