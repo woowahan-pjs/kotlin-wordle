@@ -2,17 +2,15 @@ package wordle.controller
 
 import wordle.domain.Answers
 import wordle.domain.Game
-import wordle.domain.Tiles
+import wordle.domain.Results
 import wordle.domain.Word
 import wordle.view.InputView
 import wordle.view.ResultView
-import java.io.File
 
-private const val START_PLAY_COUNT = 1
-private const val LAST_PLAY_COUNT = 7
+private const val LAST_PLAY_COUNT = 6
 
 fun main() {
-    val game = Game(Answers.ANSWER)
+    val game = Game(Answers().answer)
 
     ResultView.printInit()
 
@@ -20,28 +18,22 @@ fun main() {
 }
 
 private fun playGame(game: Game) {
-    val results = mutableListOf<Tiles>()
+    val results = Results()
 
-    (START_PLAY_COUNT until LAST_PLAY_COUNT).forEachIndexed { _, index ->
+    var tryCount = 0
+
+    while (tryCount < LAST_PLAY_COUNT) {
         val inputWord = InputView.askWord(Answers.WORDS)
-
         val resultTiles = game.play(Word(inputWord))
+        results.combine(resultTiles)
 
-        results.add(resultTiles)
+        ResultView.printAllResults(results.results)
 
-        ResultView.printAllResults(results)
+        tryCount++
 
-        checkIsWinner(game, resultTiles, index)
+        if (game.isWinner(resultTiles)) {
+            ResultView.printGamePlayCount(tryCount)
+            break
+        }
     }
-}
-
-private fun checkIsWinner(game: Game, resultTiles: Tiles, index: Int) {
-    if (game.isWinner(resultTiles)) {
-        ResultView.printGamePlayCount(index)
-        throw IllegalStateException("정답을 맞추셨습니다.")
-    }
-}
-
-fun getResourceText(path: String): File {
-    return File(ClassLoader.getSystemResource(path).file)
 }
