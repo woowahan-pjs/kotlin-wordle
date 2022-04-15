@@ -1,7 +1,5 @@
 package edu.nextstep.wordle.application.wordle.window
 
-import edu.nextstep.wordle.application.wordle.window.Alphabet
-import edu.nextstep.wordle.application.wordle.window.AlphabetFactory
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
