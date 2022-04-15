@@ -8,7 +8,7 @@ internal class AlphabetFactoryTest {
     @Test
     fun `팩토리를 통해 알파벳을 찾을 수 있다`() {
         //given
-        val alphabetFactory = AlphabetFactory.create()
+        val alphabetFactory = AlphabetFactory.instance
 
         //when
         val alphabet = alphabetFactory.findBy("a")

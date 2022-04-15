@@ -22,7 +22,7 @@ internal class WordleTest {
         //then
         assertThat(answer).isInstanceOf(WordleAnswer.Retry::class.java)
         assertThat(answer.wordle).isEqualTo(wordle)
-        assertThat((answer as WordleAnswer.Retry).message).isEqualTo("사전에 없는 단어($notExist)입니다.")
+        assertThat((answer as WordleAnswer.Retry).message).isEqualTo("사전에 없는 단어(asdfa)입니다.")
     }
 
     @Test

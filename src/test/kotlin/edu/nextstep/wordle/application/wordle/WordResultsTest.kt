@@ -7,7 +7,7 @@ internal class WordResultsTest {
     @Test
     fun `결과가 없다면 실패로 간주한다`() {
         //given
-        val result = WordResult(round = 0, windowResults = listOf())
+        val result = WordResults(emptyList())
 
         //when
         val success = result.isSuccess()

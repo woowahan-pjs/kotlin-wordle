@@ -3,16 +3,12 @@ package edu.nextstep.wordle.application.wordle.window
 class Alphabet(
     value: String,
 ) {
-    val _value: String = value.lowercase()
+    val alphabet: String = value.lowercase()
 
     init {
-        if (!alphabets.contains(_value)) {
-            throw IllegalArgumentException("$_value 알파벳 입력만 허용합니다.")
+        if (!alphabets.contains(alphabet)) {
+            throw IllegalArgumentException("$alphabet 알파벳 입력만 허용합니다.")
         }
-    }
-
-    companion object {
-        private val alphabets = ('A'..'Z').map { it.lowercase() }.toSet()
     }
 
     override fun equals(other: Any?): Boolean {
@@ -21,12 +17,16 @@ class Alphabet(
 
         other as Alphabet
 
-        if (_value != other._value) return false
+        if (alphabet != other.alphabet) return false
 
         return true
     }
 
     override fun hashCode(): Int {
-        return _value.hashCode()
+        return alphabet.hashCode()
+    }
+
+    companion object {
+        private val alphabets = ('A'..'Z').map { it.lowercase() }.toSet()
     }
 }

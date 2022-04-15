@@ -23,7 +23,7 @@ data class Wordle(
     private fun WordFinder.notContain(word: Word): Boolean = !this.contain(word)
 
     private fun Word.rawWord(): String {
-        return windows.sortedBy { it.position }.joinToString(separator = "") { it.alphabet._value }
+        return windows.sortedBy { it.position }.joinToString(separator = "") { it.alphabet.alphabet }
     }
 
     fun isSuccess(): Boolean {

@@ -9,7 +9,9 @@ class AlphabetFactory(
     }
 
     companion object {
-        fun create(): AlphabetFactory {
+        val instance = create()
+
+        private fun create(): AlphabetFactory {
             val alphabets: Set<Alphabet> = ('A'..'Z').map { Alphabet(it.lowercase()) }
                 .toSet()
 
