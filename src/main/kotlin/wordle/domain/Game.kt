@@ -16,13 +16,7 @@ class Game(private val answer: Word) {
     }
 
     private fun createResultTiles(inputChars: CharArray, wordMatcher: WordMatcher): Tiles {
-        val resultTiles = mutableListOf<Tile>()
-
-        inputChars.forEachIndexed { index, it ->
-            resultTiles.add(wordMatcher.match(it.toString(), index))
-        }
-
-        return Tiles(resultTiles)
+        return Tiles(inputChars.mapIndexed { index, it -> wordMatcher.match(it.toString(), index) })
     }
 
     fun isWinner(resultTiles: Tiles): Boolean {

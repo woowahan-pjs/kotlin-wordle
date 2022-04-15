@@ -16,14 +16,8 @@ class Answers {
         private val SUBTRACT_DATE_FOR_ANSWER = LocalDate.of(2021, 6, 19)
 
         private fun createWords(): Words {
-            val wordsFile = getResourceText()
-
-            val words = mutableListOf<Word>()
-            wordsFile.forEachLine {
-                words.add(Word(it))
-            }
-
-            return Words(words)
+            val wordsFile = getResourceText().readLines()
+            return Words(wordsFile.map { Word(it) })
         }
 
         private fun createAnswerPosition() = ChronoUnit.DAYS.between(SUBTRACT_DATE_FOR_ANSWER, LocalDate.now())
