@@ -14,7 +14,7 @@ internal class WordleTest {
             wordFinder = { false }
         )
 
-        val notExist = "asdfasdf"
+        val notExist = Word.create("asdfa")
 
         //when
         val answer = wordle.input(notExist)
@@ -28,14 +28,14 @@ internal class WordleTest {
     @Test
     fun `입력이 정상적으로 처리되면 결과와 함께 반환한다`() {
         //given
-        val wordFinder = { _: String -> true }
+        val wordFinder = { _: Word -> true }
 
         val wordle = Wordle(
             target = Word.create("match"),
             wordFinder = wordFinder
         )
 
-        val input = "matle"
+        val input = Word.create("matle")
 
         //when
         val answer = wordle.input(input)
@@ -71,7 +71,7 @@ internal class WordleTest {
             wordFinder = { true }
         )
 
-        val input = "match"
+        val input = Word.create("match")
 
         //when
         val answer = wordle.input(input)
