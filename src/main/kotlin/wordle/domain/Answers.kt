@@ -23,7 +23,6 @@ class Answers {
                 words.add(Word(it))
             }
 
-
             return Words(words)
         }
 
