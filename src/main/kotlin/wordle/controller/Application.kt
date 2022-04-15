@@ -27,7 +27,7 @@ private fun playGame(game: Game) {
         val resultTiles = game.play(Word(inputWord))
         results.combine(resultTiles)
 
-        ResultView.printAllResults(results.results)
+        ResultView.printAllResults(results)
 
         tryCount++
 
