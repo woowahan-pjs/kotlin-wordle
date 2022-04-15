@@ -15,6 +15,8 @@ class WordleConfig {
 
     fun memoryWordProvider(): WordProvider = MemoryWordProvider(words)
 
+    fun wordleGame(): WordleGame = WordleGame(memoryWordProvider(), memoryWordFinder())
+
     companion object {
         private const val BASE_DIRECTORY = ""
         private const val CLASS_PATH = "src/main/resources"

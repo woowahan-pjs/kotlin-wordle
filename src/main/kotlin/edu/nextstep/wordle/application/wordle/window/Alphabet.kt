@@ -3,7 +3,7 @@ package edu.nextstep.wordle.application.wordle.window
 class Alphabet(
     value: String,
 ) {
-    private val _value: String = value.lowercase()
+    val _value: String = value.lowercase()
 
     init {
         if (!alphabets.contains(_value)) {

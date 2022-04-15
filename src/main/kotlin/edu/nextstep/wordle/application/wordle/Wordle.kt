@@ -11,7 +11,7 @@ data class Wordle(
 
     fun input(word: Word): WordleAnswer {
         if (wordFinder.notContain(word)) {
-            return WordleAnswer.Retry(this, "사전에 없는 단어($word)입니다.")
+            return WordleAnswer.Retry(this, "사전에 없는 단어(${word.rawWord()})입니다.")
         }
 
         val result = this.target.match(word)
@@ -22,8 +22,20 @@ data class Wordle(
 
     private fun WordFinder.notContain(word: Word): Boolean = !this.contain(word)
 
+    private fun Word.rawWord(): String {
+        return windows.sortedBy { it.position }.joinToString(separator = "") { it.alphabet._value }
+    }
+
     fun isSuccess(): Boolean {
         return WordResults(this.wordResult)
             .isSuccess()
+    }
+
+    fun isEnd(): Boolean {
+        return round > MAX_ROUND || isSuccess()
+    }
+
+    companion object {
+        private const val MAX_ROUND: Int = 6
     }
 }
