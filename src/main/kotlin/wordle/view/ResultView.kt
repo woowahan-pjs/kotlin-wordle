@@ -6,6 +6,7 @@ import wordle.domain.Tile
 private const val MAX_TRY_COUNT = 6
 
 object ResultView {
+
     fun printInit() {
         println("WORDLE을 ${MAX_TRY_COUNT}번 만에 맞춰 보세요.")
         println("시도의 결과는 타일의 색 변화로 나타납니다.")
@@ -26,13 +27,16 @@ object ResultView {
 
     private fun printAllTiles(tiles: List<Tile>) {
         tiles.forEach { tile ->
-            print(viewTile(tile))
+            print(tile.viewTile())
         }
     }
 
-    private fun viewTile(tile: Tile) = when (tile) {
-        Tile.GREEN -> "\uD83D\uDFE9"
-        Tile.YELLOW -> "\uD83D\uDFE8"
-        Tile.GRAY -> "⬜"
-    }
+    private val Tile.viewTile: () -> String
+        get() = {
+            when (this) {
+                Tile.GREEN -> "\uD83D\uDFE9"
+                Tile.YELLOW -> "\uD83D\uDFE8"
+                Tile.GRAY -> "⬜"
+            }
+        }
 }
