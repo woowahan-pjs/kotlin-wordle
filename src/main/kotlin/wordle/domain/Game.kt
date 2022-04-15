@@ -6,13 +6,7 @@ class Game(private val answer: Word) {
         val inputChars = input.value.toCharArray()
         val wordMatcher = WordMatcher(answer)
 
-        val resultTiles = createResultTiles(inputChars, wordMatcher)
-
-        if (resultTiles.isWinner()) {
-            return resultTiles
-        }
-
-        return resultTiles
+        return createResultTiles(inputChars, wordMatcher)
     }
 
     private fun createResultTiles(inputChars: CharArray, wordMatcher: WordMatcher): Tiles {

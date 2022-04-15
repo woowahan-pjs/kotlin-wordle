@@ -25,12 +25,14 @@ private fun playGame(game: Game) {
     while (tryCount < LAST_PLAY_COUNT) {
         val inputWord = InputView.askWord(Answers.WORDS)
         val resultTiles = game.play(Word(inputWord))
+        
+        // 리펙토링 필요
         results.combine(resultTiles)
-
         ResultView.printAllResults(results)
 
         tryCount++
 
+        // 게임을 종료하는 부분인데
         if (game.isWinner(resultTiles)) {
             ResultView.printGamePlayCount(tryCount)
             break
