@@ -17,14 +17,14 @@ object ResultView {
         println()
     }
 
-    fun printAllResults(results: MutableList<Tiles>) {
+    fun printAllResults(results: List<Tiles>) {
         results.forEach {
-            printAllTiles(it)
+            printAllTiles(it.tiles)
             println()
         }
     }
 
-    private fun printAllTiles(tiles: Tiles) {
+    private fun printAllTiles(tiles: List<Tile>) {
         tiles.forEach { tile ->
             print(viewTile(tile))
         }
