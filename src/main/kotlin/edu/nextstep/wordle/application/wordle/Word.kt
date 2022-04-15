@@ -5,7 +5,7 @@ import edu.nextstep.wordle.application.wordle.window.Match
 import edu.nextstep.wordle.application.wordle.window.Window
 import edu.nextstep.wordle.application.wordle.window.WindowResult
 
-class Word(
+data class Word(
     private val windows: Set<Window>,
 ) {
     fun match(input: Word): List<WindowResult> {
