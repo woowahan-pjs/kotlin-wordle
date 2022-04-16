@@ -14,7 +14,7 @@ object DefaultOutput : Output {
         allResults.add(matchResults)
 
         if (matchResults.isCorrect()) {
-            println("${allResults.size}/${MAX_TRY_COUNT}")
+            println("${allResults.size}/$MAX_TRY_COUNT")
         }
 
         printAll()

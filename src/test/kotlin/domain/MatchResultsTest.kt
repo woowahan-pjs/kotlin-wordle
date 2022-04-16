@@ -1,6 +1,6 @@
 package domain
 
-import domain.MatchResult.*
+import domain.MatchResult.CORRECT
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 import org.junit.jupiter.api.Test
