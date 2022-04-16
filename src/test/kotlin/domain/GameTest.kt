@@ -58,13 +58,13 @@ class GameTest {
     }
 }
 
-class TestInput(val result: Queue<String>) : Input {
+class TestInput(private val result: Queue<String>) : Input {
     override fun read(): Tiles {
         return Tiles.of(result.poll())
     }
 }
 
-class TestWordsRepository(val answer: Tiles, val words: Set<Tiles>) : WordsRepository {
+class TestWordsRepository(val answer: Tiles, val words: Set<Tiles>) : Words {
     var tilesStack = mutableListOf<Tiles>()
     var calledTodayWords = false
 

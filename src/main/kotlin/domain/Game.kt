@@ -1,9 +1,7 @@
 package domain
 
-class Game(
-    private val wordsRepository: WordsRepository
-) {
-    private val answer: Answer = Answer(wordsRepository.getTodayWords())
+class Game(private val words: Words) {
+    private val answer: Answer = Answer(words.getTodayWords())
     private var tryCount = 0
 
     fun progress(input: Input): MatchResults {
@@ -15,7 +13,7 @@ class Game(
     }
 
     private fun checkWord(tiles: Tiles) {
-        if (!wordsRepository.exists(tiles)) {
+        if (!words.exists(tiles)) {
             throw IllegalArgumentException(NOT_FOUND_WORD)
         }
     }

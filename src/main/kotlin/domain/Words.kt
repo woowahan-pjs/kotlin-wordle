@@ -1,6 +1,6 @@
 package domain
 
-interface WordsRepository {
+interface Words {
     fun exists(tiles: Tiles): Boolean
 
     fun getTodayWords(): Tiles
