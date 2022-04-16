@@ -9,12 +9,11 @@ class WordsPool : WordsRepository {
     private val today: Tiles
 
     init {
-        val now = LocalDate.now()
-        val standard = LocalDate.of(2021, 6, 19)
+        val nowEpochDay = LocalDate.now().toEpochDay()
 
-        val values: List<String> = this.javaClass.classLoader.getResourceAsStream("words.txt").bufferedReader().readLines()
+        val values: List<String> = object {}.javaClass.getResourceAsStream("words.txt").bufferedReader().readLines()
 
-        val daysFromStandard = (now.toEpochDay() - standard.toEpochDay()).toInt()
+        val daysFromStandard = (nowEpochDay - BASE_TIME_EPOCH_DAY).toInt()
 
         this.words = values.map { Tiles.of(it) }.toSet()
         this.today = Tiles.of(values[daysFromStandard % this.words.size])
@@ -26,5 +25,9 @@ class WordsPool : WordsRepository {
 
     override fun getTodayWords(): Tiles {
         return today
+    }
+
+    companion object {
+        private val BASE_TIME_EPOCH_DAY = LocalDate.of(2021, 6, 19).toEpochDay()
     }
 }
