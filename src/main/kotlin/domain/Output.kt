@@ -1,5 +1,5 @@
 package domain
 
-interface Output {
+fun interface Output {
     fun write(matchResults: MatchResults)
 }

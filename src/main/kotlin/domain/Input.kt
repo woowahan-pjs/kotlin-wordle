@@ -1,5 +1,5 @@
 package domain
 
-interface Input {
+fun interface Input {
     fun read(): Tiles
 }
