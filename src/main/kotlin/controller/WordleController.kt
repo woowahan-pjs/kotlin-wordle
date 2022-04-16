@@ -19,7 +19,7 @@ class WordleController(
                 result = game.progress(input)
                 output.write(result)
             } catch (e: IllegalArgumentException) {
-                print(e.message)
+                println(e.message)
                 continue
             }
         } while (!result.isCorrect())
