@@ -1,58 +1,57 @@
 package domain
 
-import org.assertj.core.api.Assertions.assertThat
-import org.assertj.core.api.Assertions.assertThatIllegalArgumentException
-import org.junit.jupiter.api.Test
+import io.kotest.assertions.throwables.shouldThrow
+import io.kotest.core.spec.style.BehaviorSpec
+import io.kotest.inspectors.forAll
+import io.kotest.matchers.shouldBe
 
-class GameTest {
-    @Test
-    fun `답안에 정답이 있을 경우 게임이 종료된다`() {
-        // given
-        val answer = Tiles.of("hello")
+class GameTest : BehaviorSpec({
+    val answer = Tiles.of("hello")
+
+    Given("하나의 답안에") {
         val input = TestInput("hello")
         val repository = TestWordsRepository(answer, setOf(Tiles(answer)))
         val game = Game(repository)
 
-        // when
-        val result = game.progress(input)
+        When("정답이 있을 경우") {
+            val result = game.progress(input)
 
-        // then
-        assertThat(result.isCorrect()).isTrue
+            then("게임이 종료 된다") {
+                result.isCorrect() shouldBe true
+            }
+        }
     }
 
-    @Test
-    fun `답안을 7번 이상 적으면 더이상 시도할 수 없다`() {
-        // given
-        val answer = Tiles.of("hello")
+    Given("답안을 7번 이상") {
         val input = listOf("abcde", "abcde", "abcde", "abcde", "abcde", "abcde", "abcde").map { TestInput(it) }
         val repository = TestWordsRepository(answer, setOf(Tiles(answer), Tiles.of("abcde")))
         val game = Game(repository)
 
-        // when
-        input.forEach {
-            game.progress(it)
-        }
+        When("적으면") {
+            input.forEach {
+                game.progress(it)
+            }
 
-        // then
-        assertThat(game.checkToRetry()).isFalse
+            Then("더이상 시도할 수 없다") {
+                game.checkToRetry() shouldBe false
+            }
+        }
     }
 
-    @Test
-    fun `존재하지 않는 단어를 입력하면 예외를 발생시킨다`() {
-        // given
-        val answer = Tiles.of("hello")
+    Given("존재하지 않는 단어는") {
         val input = listOf("abcde", "abcde", "abcde", "abcde", "abcde", "abcde", "abcde").map { TestInput(it) }
         val repository = TestWordsRepository(answer, setOf(Tiles(answer)))
         val game = Game(repository)
 
-        // then
-        assertThatIllegalArgumentException().isThrownBy {
-            input.forEach {
-                game.progress(it)
+        Then("예외를 발생시킨다") {
+            input.forAll {
+                shouldThrow<IllegalArgumentException> {
+                    game.progress(it)
+                }
             }
         }
     }
-}
+})
 
 class TestInput(private val word: String) : Input {
     override fun read(): Tiles {
