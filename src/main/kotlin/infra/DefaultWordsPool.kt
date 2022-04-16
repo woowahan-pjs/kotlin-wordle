@@ -2,29 +2,32 @@ package infra
 
 import domain.Tiles
 import domain.WordsPool
+import java.io.File
 import java.time.LocalDate
 
 class DefaultWordsPool : WordsPool {
     private val words: Set<Tiles>
-    private val today: Tiles
+    private val todayWords: Tiles
 
     init {
-        val now = LocalDate.now()
-        val standard = LocalDate.of(2021, 6, 19)
+        val values: List<String> = WORDS_FILE.readLines()
 
-        val values: List<String> = this.javaClass.classLoader.getResourceAsStream("words.txt").bufferedReader().readLines()
-
-        val daysFromStandard = (now.toEpochDay() - standard.toEpochDay()).toInt()
+        val daysFromStandard = (LocalDate.now().toEpochDay() - BASE_DATE.toEpochDay()).toInt()
 
         this.words = values.map(::Tiles).toSet()
-        this.today = Tiles(values[daysFromStandard % this.words.size])
+        this.todayWords = Tiles(values[daysFromStandard % this.words.size])
     }
 
-    override fun exists(tiles: Tiles): Boolean {
+    override fun contains(tiles: Tiles): Boolean {
         return words.contains(tiles)
     }
 
     override fun getTodayWords(): Tiles {
-        return today
+        return todayWords
+    }
+
+    companion object {
+        private val BASE_DATE = LocalDate.of(2021, 6, 19)
+        private val WORDS_FILE = File(ClassLoader.getSystemResource("words.txt").file)
     }
 }

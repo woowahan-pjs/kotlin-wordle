@@ -73,7 +73,7 @@ class TestWordsRepository(val answer: Tiles, val words: Set<Tiles>) : WordsPool 
     var tilesStack = mutableListOf<Tiles>()
     var calledTodayWords = false
 
-    override fun exists(tiles: Tiles): Boolean {
+    override fun contains(tiles: Tiles): Boolean {
         tilesStack.add(tiles)
 
         return words.contains(tiles)

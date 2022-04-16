@@ -37,7 +37,7 @@ internal class MatchResultsTest {
         val result = MatchResults(listOf(GREEN, GREEN, GREEN, GREEN, GREEN))
 
         // then
-        assertThat(result.isCorrect()).isTrue
+        assertThat(result.isAllGreens()).isTrue
     }
 
     @ParameterizedTest
@@ -47,6 +47,6 @@ internal class MatchResultsTest {
         val result = MatchResults(listOf(GREEN, GREEN, GREEN, GREEN, result))
 
         // then
-        assertThat(result.isCorrect()).isFalse
+        assertThat(result.isAllGreens()).isFalse
     }
 }

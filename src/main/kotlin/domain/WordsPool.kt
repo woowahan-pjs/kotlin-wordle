@@ -1,7 +1,7 @@
 package domain
 
 interface WordsPool {
-    fun exists(tiles: Tiles): Boolean
+    fun contains(tiles: Tiles): Boolean
 
     fun getTodayWords(): Tiles
 }

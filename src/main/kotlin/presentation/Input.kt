@@ -12,9 +12,7 @@ private fun nextTiles(): Tiles? {
     try {
         println(INPUT_MESSAGE)
 
-        val text = System.`in`.bufferedReader().readLine()
-
-        return Tiles(text)
+        return Tiles(readln())
     } catch (e: Exception) {
         println(e.message)
     }
