@@ -9,10 +9,13 @@ fun printAll(game: Game) {
 }
 
 private fun printLine(matchResults: MatchResults) {
-    println(matchResults.results.joinToString(BLANK) { it.toBlock() })
+    println(matchResults.toView())
 }
 
-private fun MatchResult.toBlock(): String = when (this) {
+private fun MatchResults.toView(): String =
+    this.results.joinToString(BLANK) { it.toViewBlock() }
+
+private fun MatchResult.toViewBlock(): String = when (this) {
     MatchResult.GREEN -> "\uD83D\uDFE9"
     MatchResult.YELLOW -> "\uD83D\uDFE8"
     else -> "⬜"

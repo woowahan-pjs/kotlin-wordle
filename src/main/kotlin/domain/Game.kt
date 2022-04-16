@@ -10,16 +10,17 @@ class Game(
     private val _allMatchResults = mutableListOf<MatchResults>()
 
     fun play(tiles: Tiles): PlayResult {
-        if (!isPlaying() || !wordsPool.contains(tiles)) {
+        if (!isPlaying() || !this.wordsPool.contains(tiles)) {
             return PlayResult.FAILED
         }
 
-        _allMatchResults.add(answer.match(tiles))
+        this._allMatchResults.add(this.answer.match(tiles))
 
         return PlayResult.SUCCEEDED
     }
 
-    fun isPlaying(): Boolean = allMatchResults.size < MAX_TRY_COUNT && allMatchResults.none { it.isAllGreens() }
+    fun isPlaying(): Boolean =
+        this.allMatchResults.size < MAX_TRY_COUNT && this.allMatchResults.none { it.isAllGreens() }
 
     companion object {
         private const val MAX_TRY_COUNT = 6

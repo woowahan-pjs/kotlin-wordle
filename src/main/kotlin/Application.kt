@@ -7,9 +7,9 @@ import presentation.read
 fun main() {
     val game = Game(DefaultWordsPool())
 
-    do {
+    while (game.isPlaying()) {
         if (game.play(read()) == PlayResult.SUCCEEDED) {
             printAll(game)
         }
-    } while (game.isPlaying())
+    }
 }

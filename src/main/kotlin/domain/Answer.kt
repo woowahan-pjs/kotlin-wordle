@@ -14,7 +14,7 @@ class Answer(val tiles: Tiles) {
             MatchResult.GRAY, MatchResult.GRAY, MatchResult.GRAY, MatchResult.GRAY, MatchResult.GRAY
         )
 
-        val countOfTile: MutableMap<Tile, Int> = tiles.groupingBy { it }.eachCount().toMutableMap()
+        val countOfTile: MutableMap<Tile, Int> = this.tiles.groupingBy { it }.eachCount().toMutableMap()
 
         fillGreens(result, other, countOfTile)
         fillYellows(result, other, countOfTile)

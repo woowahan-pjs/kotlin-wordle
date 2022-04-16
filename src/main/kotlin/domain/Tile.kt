@@ -5,7 +5,7 @@ import domain.exception.checkTileCharacter
 @JvmInline
 value class Tile(val character: Char) {
     init {
-        checkTileCharacter(character in ALLOWED_CHARACTER) { ERROR_ALLOWED_CHARACTER_MSG }
+        checkTileCharacter(this.character in ALLOWED_CHARACTER) { ERROR_ALLOWED_CHARACTER_MSG }
     }
 
     companion object {
