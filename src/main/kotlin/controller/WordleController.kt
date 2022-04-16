@@ -14,14 +14,19 @@ class WordleController(
     fun start() {
         val game = Game(WordsPool())
         do {
-            var result = MatchResults()
+            var result: MatchResults
+
             try {
                 result = game.progress(input)
-                output.write(result)
             } catch (e: IllegalArgumentException) {
                 println(e.message)
                 continue
             }
-        } while (!result.isCorrect())
+            output.write(result)
+
+            if (result.isCorrect()) {
+                break
+            }
+        } while (!game.checkToRetry())
     }
 }

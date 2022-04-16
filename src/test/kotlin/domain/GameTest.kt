@@ -3,15 +3,13 @@ package domain
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 import org.junit.jupiter.api.Test
-import java.util.LinkedList
-import java.util.Queue
 
 class GameTest {
     @Test
     fun `답안에 정답이 있을 경우 게임이 종료된다`() {
         // given
         val answer = Tiles.of("hello")
-        val input = TestInput(LinkedList(listOf("hello")))
+        val input = TestInput("hello")
         val repository = TestWordsRepository(answer, setOf(Tiles(answer)))
         val game = Game(repository)
 
@@ -23,44 +21,42 @@ class GameTest {
     }
 
     @Test
-    fun `답안을 7번 이상 적으면 예외를 발생시킨다`() {
+    fun `답안을 7번 이상 적으면 더이상 시도할 수 없다`() {
         // given
         val answer = Tiles.of("hello")
-        val input = TestInput(LinkedList(listOf("abcde", "abcde", "abcde", "abcde", "abcde", "abcde", "abcde")))
+        val input = listOf("abcde", "abcde", "abcde", "abcde", "abcde", "abcde", "abcde").map { TestInput(it) }
         val repository = TestWordsRepository(answer, setOf(Tiles(answer), Tiles.of("abcde")))
         val game = Game(repository)
 
-        // then
-        assertThatIllegalArgumentException().isThrownBy {
-            game.progress(input)
-            game.progress(input)
-            game.progress(input)
-            game.progress(input)
-            game.progress(input)
-            game.progress(input)
-            game.progress(input)
+        // when
+        input.forEach {
+            game.progress(it)
         }
+
+        // then
+        assertThat(game.checkToRetry()).isFalse
     }
 
     @Test
     fun `존재하지 않는 단어를 입력하면 예외를 발생시킨다`() {
         // given
         val answer = Tiles.of("hello")
-        val input =
-            TestInput(LinkedList(listOf("abcde", "abcde", "abcde", "abcde", "abcde", "abcde", "abcde")))
+        val input = listOf("abcde", "abcde", "abcde", "abcde", "abcde", "abcde", "abcde").map { TestInput(it) }
         val repository = TestWordsRepository(answer, setOf(Tiles(answer)))
         val game = Game(repository)
 
         // then
         assertThatIllegalArgumentException().isThrownBy {
-            game.progress(input)
+            input.forEach {
+                game.progress(it)
+            }
         }
     }
 }
 
-class TestInput(private val result: Queue<String>) : Input {
+class TestInput(private val word: String) : Input {
     override fun read(): Tiles {
-        return Tiles.of(result.poll())
+        return Tiles.of(word)
     }
 }
 

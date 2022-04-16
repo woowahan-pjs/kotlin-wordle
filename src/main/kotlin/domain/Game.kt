@@ -6,11 +6,12 @@ class Game(private val words: Words) {
 
     fun progress(input: Input): MatchResults {
         val tiles = input.read()
-        checkTryCount()
         checkWord(tiles)
         tryCount++
         return answer.match(tiles)
     }
+
+    fun checkToRetry() = MAX_TRY_COUNT == tryCount
 
     private fun checkWord(tiles: Tiles) {
         if (!words.exists(tiles)) {
@@ -18,15 +19,8 @@ class Game(private val words: Words) {
         }
     }
 
-    private fun checkTryCount() {
-        if (tryCount == MAX_TRY_COUNT) {
-            throw IllegalArgumentException(EXHAUST_TRY_COUNT)
-        }
-    }
-
     companion object {
         private const val MAX_TRY_COUNT = 6
         private const val NOT_FOUND_WORD = "존재하지 않는 단어입니다"
-        private const val EXHAUST_TRY_COUNT = "기회 6번을 다 써버렸씁니다."
     }
 }

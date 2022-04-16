@@ -1,8 +1,6 @@
 package domain
 
-import domain.MatchResult.MISSING
-
-data class MatchResults(val results: List<MatchResult> = listOf(MISSING, MISSING, MISSING, MISSING, MISSING)) {
+data class MatchResults(val results: List<MatchResult>) {
     init {
         require(results.size == REQUIRE_RESULTS_SIZE) { ERROR_RESULTS_SIZE_MSG }
     }
