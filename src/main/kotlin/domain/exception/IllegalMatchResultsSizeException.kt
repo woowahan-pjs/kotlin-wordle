@@ -1,6 +1,6 @@
 package domain.exception
 
-class IllegalMatchResultsSizeException(message: String): RuntimeException(message)
+class IllegalMatchResultsSizeException(message: String) : RuntimeException(message)
 
 fun checkMatchResultsSize(value: Boolean, lazyMessage: () -> String) {
     if (!value) {

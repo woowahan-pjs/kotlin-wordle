@@ -5,7 +5,7 @@ import domain.MatchResult.YELLOW
 import domain.exception.checkTileSize
 
 class Answer(val tiles: Tiles) {
-    constructor(words: String): this(Tiles(words))
+    constructor(words: String) : this(Tiles(words))
 
     init {
         checkTileSize(tiles.size == REQUIRE_TILE_SIZE) { ERROR_TILE_SIZE_MSG }

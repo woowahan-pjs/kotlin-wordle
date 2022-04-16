@@ -1,11 +1,11 @@
 package domain
 
+import domain.MatchResult.GRAY
 import domain.MatchResult.GREEN
 import domain.MatchResult.YELLOW
-import domain.MatchResult.GRAY
 import domain.exception.IllegalTileSizeException
-import org.assertj.core.api.Assertions
-import org.assertj.core.api.Assertions.*
+import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource

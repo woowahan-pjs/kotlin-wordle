@@ -1,14 +1,15 @@
 import domain.Game
+import domain.PlayResult
 import infra.DefaultWordsPool
-import presentation.DefaultInput
-import presentation.DefaultOutput
+import presentation.printAll
+import presentation.read
 
 fun main() {
-    val input = DefaultInput()
-    val output = DefaultOutput()
-    val repository = DefaultWordsPool()
+    val game = Game(DefaultWordsPool())
 
-    val game = Game(input, output, repository)
-
-    game.start()
+    do {
+        if (game.play(read()) == PlayResult.SUCCEEDED) {
+            printAll(game)
+        }
+    } while (game.isPlaying())
 }

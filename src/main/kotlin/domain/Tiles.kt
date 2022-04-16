@@ -3,7 +3,7 @@ package domain
 import domain.exception.checkTileSize
 
 data class Tiles(val tiles: List<Tile>) : List<Tile> by tiles {
-    constructor(words: String): this(words.map(::Tile))
+    constructor(words: String) : this(words.map(::Tile))
 
     init {
         checkTileSize(tiles.size == REQUIRE_TILE_SIZE) { ERROR_TILE_SIZE_MSG }
