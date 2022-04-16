@@ -4,7 +4,8 @@ import domain.MatchResult.INCORRECT
 import domain.MatchResult.MISSING
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
-import java.util.*
+import java.util.LinkedList
+import java.util.Queue
 
 class GameTest {
     @Test
@@ -71,7 +72,8 @@ class GameTest {
     fun `존재하지 않는 단어를 입력하면 재입력 기회를 준다`() {
         // given
         val answer = Tiles.of("hello")
-        val input = TestInput(LinkedList(listOf("abcde", "abcde", "abcde", "abcde", "abcde", "abcde", "abcde", "hello")))
+        val input =
+            TestInput(LinkedList(listOf("abcde", "abcde", "abcde", "abcde", "abcde", "abcde", "abcde", "hello")))
         val output = TestOutput()
         val repository = TestWordsRepository(answer, setOf(Tiles(answer)))
         val game = Game(input, output, repository)
