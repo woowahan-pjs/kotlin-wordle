@@ -1,7 +1,5 @@
 package domain
 
-import domain.MatchResult.GRAY
-import domain.MatchResult.YELLOW
 import domain.exception.checkTileSize
 
 class Answer(val tiles: Tiles) {
@@ -12,7 +10,10 @@ class Answer(val tiles: Tiles) {
     }
 
     fun match(other: Tiles): MatchResults {
-        val result: Array<MatchResult> = arrayOf(GRAY, GRAY, GRAY, GRAY, GRAY)
+        val result: Array<MatchResult> = arrayOf(
+            MatchResult.GRAY, MatchResult.GRAY, MatchResult.GRAY, MatchResult.GRAY, MatchResult.GRAY
+        )
+
         val countOfTile: MutableMap<Tile, Int> = tiles.groupingBy { it }.eachCount().toMutableMap()
 
         fillGreens(result, other, countOfTile)
@@ -30,6 +31,7 @@ class Answer(val tiles: Tiles) {
             fillGreen(tile, index, result, countOfTile)
         }
     }
+
     private fun fillYellows(
         result: Array<MatchResult>,
         other: Tiles,
@@ -61,8 +63,8 @@ class Answer(val tiles: Tiles) {
     ) {
         val count = countOfTile[tile] ?: EMPTY
 
-        if (result[index] == GRAY && count > EMPTY) {
-            result[index] = YELLOW
+        if (result[index] == MatchResult.GRAY && count > EMPTY) {
+            result[index] = MatchResult.YELLOW
 
             countOfTile[tile] = count.dec()
         }
