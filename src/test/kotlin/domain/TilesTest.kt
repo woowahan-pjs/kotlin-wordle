@@ -1,5 +1,7 @@
 package domain
 
+import domain.exception.IllegalTileSizeException
+import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 import org.junit.jupiter.api.Test
@@ -21,21 +23,20 @@ internal class TilesTest {
     }
 
     @ParameterizedTest
-    @ValueSource(ints = [0, 1, 2, 3, 4, 6, 10])
-    fun `Tiles는 5개의 Tile로 구성이 안되면 실패한다`(size: Int) {
+    @ValueSource(strings = ["", "a", "ab", "abc", "abcd", "abcdef", "abcdefghijk"])
+    fun `Tiles는 5개의 Tile로 구성이 안되면 실패한다`(words: String) {
         // given
-        val elements: List<Tile> = (0 until size).map { Tile('a') }
+        val elements: List<Tile> = words.map(::Tile)
 
         // then
-        assertThatIllegalArgumentException()
-            .isThrownBy { Tiles(elements) }
-            .withMessage(Tiles.ERROR_TILE_SIZE_MSG)
+        Assertions.assertThatThrownBy { Tiles(elements) }
+            .isInstanceOf(IllegalTileSizeException::class.java)
     }
 
     @Test
     fun `Tiles는 문자열 5글자로 구성 할 수 있다`() {
         // given
-        val tiles = Tiles.of("hello")
+        val tiles = Tiles("hello")
 
         // then
         assertThat(tiles.tiles)
@@ -46,9 +47,8 @@ internal class TilesTest {
     @ValueSource(strings = ["", "h", "hell", "hellow"])
     fun `Tiles는 문자열 5글자로 구성이 안되면 실패한다`(words: String) {
         // then
-        assertThatIllegalArgumentException()
-            .isThrownBy { Tiles.of(words) }
-            .withMessage(Tiles.ERROR_TILE_SIZE_MSG)
+        Assertions.assertThatThrownBy { Tiles(words) }
+            .isInstanceOf(IllegalTileSizeException::class.java)
     }
 
     @ParameterizedTest
@@ -61,7 +61,7 @@ internal class TilesTest {
     fun `Tiles는 위치와 Tile을 받아서 해당 위치에 같은 타일이 있는지 확인할 수 있다`(tile: Char, index: Int, result: Boolean) {
         // given
         val tile = Tile(tile)
-        val tiles = Tiles.of("hello")
+        val tiles = Tiles("hello")
 
         // then
         assertThat(tiles.equals(tile, index)).isEqualTo(result)
@@ -71,7 +71,7 @@ internal class TilesTest {
     @CsvSource(value = ["h,1", "e,1", "l,2", "o,1", "z,0"])
     fun `Tiles에 Tile이 몇개 있는지 확인할 수 있다`(tile: Char, count: Int) {
         // given
-        val tiles = Tiles.of("hello")
+        val tiles = Tiles("hello")
         val tile = Tile(tile)
 
         // then

@@ -1,10 +1,10 @@
 package infra
 
 import domain.Tiles
-import domain.WordsRepository
+import domain.WordsPool
 import java.time.LocalDate
 
-class DefaultWordsRepository : WordsRepository {
+class DefaultWordsPool : WordsPool {
     private val words: Set<Tiles>
     private val today: Tiles
 
@@ -16,8 +16,8 @@ class DefaultWordsRepository : WordsRepository {
 
         val daysFromStandard = (now.toEpochDay() - standard.toEpochDay()).toInt()
 
-        this.words = values.map { Tiles.of(it) }.toSet()
-        this.today = Tiles.of(values[daysFromStandard % this.words.size])
+        this.words = values.map(::Tiles).toSet()
+        this.today = Tiles(values[daysFromStandard % this.words.size])
     }
 
     override fun exists(tiles: Tiles): Boolean {

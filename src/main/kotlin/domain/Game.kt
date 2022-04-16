@@ -3,7 +3,7 @@ package domain
 class Game(
     private val input: Input,
     private val output: Output,
-    private val wordsRepository: WordsRepository
+    private val wordsRepository: WordsPool
 ) {
     fun start() {
         val answer = Answer(wordsRepository.getTodayWords())

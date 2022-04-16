@@ -16,7 +16,7 @@ class DefaultInput : Input {
 
             val text = System.`in`.bufferedReader().readLine()
 
-            return Tiles.of(text)
+            return Tiles(text)
         } catch (e: Exception) {
             println(e.message)
         }

@@ -33,8 +33,8 @@ class DefaultOutput : Output {
     }
 
     private fun blockOf(matchResult: MatchResult): String = when (matchResult) {
-        MatchResult.CORRECT -> "\uD83D\uDFE9"
-        MatchResult.MISSING -> "\uD83D\uDFE8"
+        MatchResult.GREEN -> "\uD83D\uDFE9"
+        MatchResult.YELLOW -> "\uD83D\uDFE8"
         else -> "⬜"
     }
 
