@@ -1,7 +1,7 @@
 package domain
 
-import org.assertj.core.api.Assertions.assertThat
-import org.assertj.core.api.Assertions.assertThatIllegalArgumentException
+import domain.exception.IllegalTileCharacterException
+import org.assertj.core.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
@@ -19,9 +19,8 @@ internal class TileTest {
     @ParameterizedTest
     @ValueSource(chars = [' ', '0', '1', '5', '9', 'ㄱ', '⬜'])
     fun `타일은 알파벳만 입력이 가능하다`(character: Char) {
-        assertThatIllegalArgumentException()
-            .isThrownBy { Tile(character) }
-            .withMessage(Tile.ERROR_ALLOWED_CHARACTER_MSG)
+        assertThatThrownBy { Tile(character) }
+            .isInstanceOf(IllegalTileCharacterException::class.java)
     }
 
     @Test

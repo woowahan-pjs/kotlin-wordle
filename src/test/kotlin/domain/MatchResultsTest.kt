@@ -1,8 +1,8 @@
 package domain
 
-import domain.MatchResult.*
 import domain.exception.IllegalMatchResultsSizeException
-import org.assertj.core.api.Assertions.*
+import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.EnumSource
@@ -12,7 +12,9 @@ internal class MatchResultsTest {
     @Test
     fun `5개의 결과로 이뤄진다`() {
         // given
-        val matchResult = listOf(GREEN, GREEN, GREEN, GREEN, GREEN)
+        val matchResult = listOf(
+            MatchResult.GREEN, MatchResult.GREEN, MatchResult.GREEN, MatchResult.GREEN, MatchResult.GREEN
+        )
         val result = MatchResults(matchResult)
 
         // then
@@ -23,7 +25,7 @@ internal class MatchResultsTest {
     @ValueSource(ints = [0, 1, 2, 3, 4, 6, 7, 8])
     fun `5개의 결과가 아니면 실패한다`(size: Int) {
         // given
-        val matchResult = (0 until size).map { GREEN }
+        val matchResult = (0 until size).map { MatchResult.GREEN }
 
         // then
         assertThatThrownBy {
@@ -34,7 +36,9 @@ internal class MatchResultsTest {
     @Test
     fun `모든 MatchResult가 성공이면 MatchResults도 성공이다`() {
         // given
-        val result = MatchResults(listOf(GREEN, GREEN, GREEN, GREEN, GREEN))
+        val result = MatchResults(
+            listOf(MatchResult.GREEN, MatchResult.GREEN, MatchResult.GREEN, MatchResult.GREEN, MatchResult.GREEN)
+        )
 
         // then
         assertThat(result.isAllGreens()).isTrue
@@ -44,7 +48,9 @@ internal class MatchResultsTest {
     @EnumSource(value = MatchResult::class, names = ["YELLOW", "GRAY"])
     fun `모든 MatchResult가 성공이 아니면 MatchResults는 성공이 아니다`(result: MatchResult) {
         // given
-        val result = MatchResults(listOf(GREEN, GREEN, GREEN, GREEN, result))
+        val result = MatchResults(
+            listOf(MatchResult.GREEN, MatchResult.GREEN, MatchResult.GREEN, MatchResult.GREEN, result)
+        )
 
         // then
         assertThat(result.isAllGreens()).isFalse

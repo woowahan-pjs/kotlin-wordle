@@ -1,9 +1,11 @@
 package domain
 
+import domain.exception.checkTileCharacter
+
 @JvmInline
 value class Tile(val character: Char) {
     init {
-        require(character in ALLOWED_CHARACTER) { ERROR_ALLOWED_CHARACTER_MSG }
+        checkTileCharacter(character in ALLOWED_CHARACTER) { ERROR_ALLOWED_CHARACTER_MSG }
     }
 
     companion object {

@@ -1,7 +1,5 @@
 package domain
 
-import domain.PlayResult.*
-
 class Game(
     private val wordsPool: WordsPool
 ) {
@@ -13,12 +11,12 @@ class Game(
 
     fun play(tiles: Tiles): PlayResult {
         if (!isPlaying() || !wordsPool.contains(tiles)) {
-            return FAILED
+            return PlayResult.FAILED
         }
 
         _allMatchResults.add(answer.match(tiles))
 
-        return SUCCEEDED
+        return PlayResult.SUCCEEDED
     }
 
     fun isPlaying(): Boolean = allMatchResults.size < MAX_TRY_COUNT && allMatchResults.none { it.isAllGreens() }
