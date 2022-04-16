@@ -1,8 +1,8 @@
 package domain
 
 import domain.MatchResult.*
-import org.assertj.core.api.Assertions.assertThat
-import org.assertj.core.api.Assertions.assertThatIllegalArgumentException
+import domain.exception.IllegalMatchResultsSizeException
+import org.assertj.core.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.EnumSource
@@ -26,9 +26,9 @@ internal class MatchResultsTest {
         val matchResult = (0 until size).map { GREEN }
 
         // then
-        assertThatIllegalArgumentException().isThrownBy {
+        assertThatThrownBy {
             MatchResults(matchResult)
-        }.withMessage(MatchResults.ERROR_RESULTS_SIZE_MSG)
+        }.isInstanceOf(IllegalMatchResultsSizeException::class.java)
     }
 
     @Test
