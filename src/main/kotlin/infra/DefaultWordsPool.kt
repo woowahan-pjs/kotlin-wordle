@@ -12,10 +12,10 @@ class DefaultWordsPool : WordsPool {
     init {
         val values: List<String> = WORDS_FILE.readLines()
 
-        val daysFromStandard = (LocalDate.now().toEpochDay() - BASE_DATE.toEpochDay()).toInt()
+        val daysFromBaseDate = (LocalDate.now().toEpochDay() - BASE_DATE.toEpochDay()).toInt()
 
         this.words = values.map(::Tiles).toSet()
-        this.todayWords = Tiles(values[daysFromStandard % this.words.size])
+        this.todayWords = Tiles(values[daysFromBaseDate % values.size])
     }
 
     override fun contains(tiles: Tiles): Boolean {
