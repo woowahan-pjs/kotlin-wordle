@@ -1,6 +1,8 @@
 package domain
 
-import domain.MatchResult.*
+import domain.MatchResult.CORRECT
+import domain.MatchResult.INCORRECT
+import domain.MatchResult.MISSING
 import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test

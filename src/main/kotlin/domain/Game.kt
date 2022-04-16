@@ -1,33 +1,34 @@
 package domain
 
 class Game(
-    private val input: Input,
-    private val output: Output,
     private val wordsRepository: WordsRepository
 ) {
-    fun start() {
-        val answer = Answer(wordsRepository.getTodayWords())
-        var tryCount = 0
+    private val answer: Answer = Answer(wordsRepository.getTodayWords())
+    private var tryCount = 0
 
-        while (tryCount < MAX_TRY_COUNT) {
-            val tiles = input.read()
+    fun progress(input: Input): MatchResults {
+        val tiles = input.read()
+        checkTryCount()
+        checkWord(tiles)
+        tryCount++
+        return answer.match(tiles)
+    }
 
-            if (!wordsRepository.exists(tiles)) {
-                continue
-            }
+    private fun checkWord(tiles: Tiles) {
+        if (!wordsRepository.exists(tiles)) {
+            throw IllegalArgumentException(NOT_FOUND_WORD)
+        }
+    }
 
-            val match = answer.match(tiles)
-
-            output.write(match)
-            tryCount++
-
-            if (match.isCorrect()) {
-                return
-            }
+    private fun checkTryCount() {
+        if (tryCount == MAX_TRY_COUNT) {
+            throw IllegalArgumentException(EXHAUST_TRY_COUNT)
         }
     }
 
     companion object {
-        const val MAX_TRY_COUNT = 6
+        private const val MAX_TRY_COUNT = 6
+        private const val NOT_FOUND_WORD = "존재하지 않는 단어입니다"
+        private const val EXHAUST_TRY_COUNT = "기회 6번을 다 써버렸씁니다."
     }
 }

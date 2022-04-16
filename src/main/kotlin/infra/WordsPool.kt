@@ -4,7 +4,7 @@ import domain.Tiles
 import domain.WordsRepository
 import java.time.LocalDate
 
-class DefaultWordsRepository : WordsRepository {
+class WordsPool : WordsRepository {
     private val words: Set<Tiles>
     private val today: Tiles
 

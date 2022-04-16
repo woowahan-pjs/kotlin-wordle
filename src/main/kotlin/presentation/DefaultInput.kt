@@ -3,7 +3,9 @@ package presentation
 import domain.Input
 import domain.Tiles
 
-class DefaultInput : Input {
+object DefaultInput : Input {
+    private const val INPUT_MESSAGE = "정답을 입력해 주세요."
+
     override tailrec fun read(): Tiles {
         val tiles = nextTiles()
 
@@ -22,9 +24,5 @@ class DefaultInput : Input {
         }
 
         return null
-    }
-
-    companion object {
-        private const val INPUT_MESSAGE = "정답을 입력해 주세요."
     }
 }
