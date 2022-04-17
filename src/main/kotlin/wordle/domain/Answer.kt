@@ -4,7 +4,7 @@ import wordle.utils.Creator
 import java.time.LocalDate
 import java.time.temporal.ChronoUnit
 
-class Answer(private val creator: Creator, val position: Int) {
+class Answer(private val creator: Creator, private val position: Position) {
     val answer: Word
         get() = createAnswer()
 

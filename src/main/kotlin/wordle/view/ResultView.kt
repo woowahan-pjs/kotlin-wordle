@@ -1,7 +1,7 @@
 package wordle.view
 
-import wordle.domain.Results
 import wordle.domain.Tile
+import wordle.domain.Tiles
 
 private const val MAX_TRY_COUNT = 6
 
@@ -15,8 +15,8 @@ object ResultView {
         println("$index /$MAX_TRY_COUNT")
     }
 
-    fun printAllResults(results: Results) {
-        results.results.forEach {
+    fun printAllResults(results: List<Tiles>) {
+        results.forEach {
             printAllTiles(it.tiles)
             println()
         }
