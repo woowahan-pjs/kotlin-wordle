@@ -1,18 +1,17 @@
 package wordle.domain
 
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Test
-import wordle.domain.Answers.Companion.WORDS
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.CsvSource
 
 class WordsTest {
 
-    @Test
-    fun `오늘의 정답이 맞는지 확인한다`() {
-        val words = WORDS
-        val answer = words.findAnswer()
+    @ParameterizedTest
+    @CsvSource("0, queen", "1, chunk", "2, awake")
+    fun `오늘의 정답이 맞는지 확인한다`(position: Int, expected: String) {
+        val answers = Answer(MockingCreator(), position)
+        val answer = answers.createAnswer()
 
-        println(answer)
-
-        assertThat(answer).isNotNull
+        assertThat(answer).isEqualTo(Word(expected))
     }
 }
