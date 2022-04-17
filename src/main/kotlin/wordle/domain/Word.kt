@@ -12,7 +12,7 @@ value class Word(val value: String) {
     private fun isWordSizeAndAlphabet() = value.length == WORD_SIZE && ALPHABET_REGEX.matches(value)
 
     fun findAlphabet(index: Int): String {
-        require (index >= FIRST_INDEX && index <= value.length) { INDEX_OUT_RANGE_MESSAGE }
+        require(index >= FIRST_INDEX && index <= value.length) { INDEX_OUT_RANGE_MESSAGE }
 
         return value[index].toString()
     }

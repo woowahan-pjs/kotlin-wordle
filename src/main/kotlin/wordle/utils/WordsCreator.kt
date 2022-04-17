@@ -4,7 +4,7 @@ import wordle.domain.Word
 import wordle.domain.Words
 import java.io.File
 
-class WordsCreator: Creator {
+class WordsCreator : Creator {
 
     override fun createWords(): Words {
         val wordsFile = read().readLines()

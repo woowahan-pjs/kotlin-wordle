@@ -26,8 +26,6 @@ private fun playGame(game: Game) {
     while (tryCount < LAST_PLAY_COUNT) {
         val inputWord = InputView.askWord(WordsCreator.WORDS)
         val resultTiles = game.play(Word(inputWord))
-        
-        // 리펙토링 필요
         results.combine(resultTiles)
         ResultView.printAllResults(results)
 
