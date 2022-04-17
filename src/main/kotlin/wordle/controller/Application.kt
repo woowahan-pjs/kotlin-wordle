@@ -1,16 +1,17 @@
 package wordle.controller
 
-import wordle.domain.Answers
+import wordle.domain.Answer
 import wordle.domain.Game
 import wordle.domain.Results
 import wordle.domain.Word
+import wordle.utils.WordsCreator
 import wordle.view.InputView
 import wordle.view.ResultView
 
 private const val LAST_PLAY_COUNT = 6
 
 fun main() {
-    val game = Game(Answers().answer)
+    val game = Game(Answer(WordsCreator(), Answer.ANSWER_POSITION).answer)
 
     ResultView.printInit()
 
@@ -23,7 +24,7 @@ private fun playGame(game: Game) {
     var tryCount = 0
 
     while (tryCount < LAST_PLAY_COUNT) {
-        val inputWord = InputView.askWord(Answers.WORDS)
+        val inputWord = InputView.askWord(WordsCreator.WORDS)
         val resultTiles = game.play(Word(inputWord))
         
         // 리펙토링 필요
