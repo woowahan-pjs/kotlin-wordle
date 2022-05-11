@@ -4,15 +4,13 @@ import java.time.LocalDate
 
 data class Game(val words: Words, val date: LocalDate) {
 
-    private var _isOver: Boolean = false
-
-    val isOver: Boolean
-            get() = _isOver
-
     private var _count: Int = 0
+    private var _isOver: Boolean = false
 
     val count: Int
         get() = _count
+    val isOver: Boolean
+        get() = _isOver
 
     fun matchResult(playerWord: Word): Tiles {
         require(words.contains(playerWord)) { "[ERROR] words.txt에 있는 단어를 입력해주세요." }
