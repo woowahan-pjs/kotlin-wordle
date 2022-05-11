@@ -12,7 +12,7 @@ fun main() {
     val game = Game(words, LocalDate.now())
     val gameResult = GameResult()
 
-    OutputView.printInitMessage()
+    OutputView.printInitMessage(game.maxRound)
     play(game, gameResult)
 }
 
@@ -22,7 +22,7 @@ private fun play(game: Game, gameResult: GameResult) {
             val playerWord = Word(InputView.requestAnswer())
             val matchResult = game.matchResult(playerWord)
             gameResult.add(matchResult)
-            OutputView.printGameResult(game.isOver, game.count, gameResult)
+            OutputView.printGameResult(game.isOver, game.count, game.maxRound, gameResult)
         }
     } catch (exception: IllegalArgumentException) {
         OutputView.printErrorMessage(exception.message)

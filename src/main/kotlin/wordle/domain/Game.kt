@@ -11,6 +11,8 @@ data class Game(val words: Words, val date: LocalDate) {
         get() = _count
     val isOver: Boolean
         get() = _isOver
+    val maxRound: Int
+        get() = MAX_ROUND
 
     fun matchResult(playerWord: Word): Tiles {
         require(words.contains(playerWord)) { "[ERROR] words.txt에 있는 단어를 입력해주세요." }
