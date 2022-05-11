@@ -7,13 +7,13 @@ data class Word(val value: String) {
         require(isAlphabet()) { "[ERROR] 영어 단어를 입력하세요." }
     }
 
-    private fun isRightSize(): Boolean {
-        return value.length == SIZE
-    }
+    private fun isRightSize(): Boolean = value.length == SIZE
 
-    private fun isAlphabet(): Boolean {
-        return Regex("^[a-zA-Z]*$").matches(value);
-    }
+    private fun isAlphabet(): Boolean = Regex("^[a-zA-Z]*$").matches(value)
+
+    fun sameIndexAndSpell(index: Int, spell: Char): Boolean = value[index] == spell
+
+    fun contains(spell: Char): Boolean = value.contains(spell)
 
     companion object {
         private const val SIZE = 5
