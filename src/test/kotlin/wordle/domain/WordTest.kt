@@ -15,6 +15,12 @@ class WordTest {
     }
 
     @Test
+    @DisplayName("단어는 소문자로 이루어져야 한다.")
+    fun constructorWithLowercaseWord() {
+        shouldThrow<IllegalArgumentException> { Word("CIGAR") }
+    }
+
+    @Test
     @DisplayName("유효한 단어여야 한다.")
     fun constructorWithValidWord() {
         shouldNotThrow<IllegalArgumentException> { Word("cigar") }

@@ -4,11 +4,15 @@ import java.io.File
 
 private const val WORD_LENGTH = 5
 
-data class Word(private var word: String) {
+data class Word(val word: String) {
     init {
         require(word.length == WORD_LENGTH) { "단어는 5글자여야 합니다." }
+        require(isLowerCase(word)) { "단어는 소문자로 이루어져야 합니다." }
         require(contains(word)) { "유효하지 않은 단어입니다." }
-        word = word.lowercase()
+    }
+
+    private fun isLowerCase(value: String): Boolean {
+        return value.all { it.isLowerCase() }
     }
 
     fun compareByIndex(other: Word, myIndex: Int, otherIndex: Int = myIndex): Boolean {
