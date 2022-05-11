@@ -1,7 +1,6 @@
 package wordle.domain
 
 import io.kotest.assertions.throwables.shouldThrow
-
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -9,9 +8,9 @@ import org.junit.jupiter.api.assertAll
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
-
-import wordle.domain.Tile.*
-
+import wordle.domain.Tile.GRAY
+import wordle.domain.Tile.GREEN
+import wordle.domain.Tile.YELLOW
 import java.time.LocalDate
 
 internal class GameTest {
@@ -19,14 +18,14 @@ internal class GameTest {
     @Test
     @DisplayName("플레이의 단어가 words에 포함되어있지 않다면 예외를 던져야 한다.")
     fun containsWord() {
-        //given
+        // given
         val wordsResponse = WordsResponse("words.txt")
         val words = Words(wordsResponse.words)
         val game = Game(words, LocalDate.of(2021, 6, 19))
 
-        //when
+        // when
 
-        //then
+        // then
         shouldThrow<IllegalArgumentException> { game.matchResult(Word("xxxxx")) }
     }
 
@@ -34,30 +33,30 @@ internal class GameTest {
     @MethodSource("validParameters")
     @DisplayName("플레이어의 답과 정답을 매칭한다.")
     fun matchAnswer(word: Word, expectedTiles: Tiles) {
-        //given
+        // given
         val wordsResponse = WordsResponse("words.txt")
         val words = Words(wordsResponse.words)
         val game = Game(words, LocalDate.of(2021, 6, 19))
 
-        //when
+        // when
         val actualTiles = game.matchResult(word)
 
-        //then
+        // then
         assertThat(actualTiles).isEqualTo(expectedTiles)
     }
 
     @Test
     @DisplayName("정답 매칭을 6번 진행하면 게임은 종료되어야 한다.")
     fun gameOver() {
-        //given
+        // given
         val wordsResponse = WordsResponse("words.txt")
         val words = Words(wordsResponse.words)
         val game = Game(words, LocalDate.of(2021, 6, 19))
 
-        //when
+        // when
         repeat(6) { game.matchResult(Word("scare")) }
 
-        //then
+        // then
         assertAll(
             { assertThat(game.isOver).isTrue },
             { assertThat(game.count).isEqualTo(6) }
@@ -67,16 +66,16 @@ internal class GameTest {
     @Test
     @DisplayName("정답을 맞추면 게임은 종료되어야 한다.")
     fun gameOverMatch() {
-        //given
+        // given
         val wordsResponse = WordsResponse("words.txt")
         val words = Words(wordsResponse.words)
         val game = Game(words, LocalDate.of(2021, 6, 19))
 
-        //when
+        // when
         repeat(3) { game.matchResult(Word("scare")) }
         game.matchResult(Word("cigar"))
 
-        //then
+        // then
         assertAll(
             { assertThat(game.isOver).isTrue },
             { assertThat(game.count).isEqualTo(4) }
@@ -86,15 +85,15 @@ internal class GameTest {
     @Test
     @DisplayName("정답을 못 맞추면 게임은 종료되지 않는다.")
     fun gameOverMisMatch() {
-        //given
+        // given
         val wordsResponse = WordsResponse("words.txt")
         val words = Words(wordsResponse.words)
         val game = Game(words, LocalDate.of(2021, 6, 19))
 
-        //when
+        // when
         repeat(3) { game.matchResult(Word("scare")) }
 
-        //then
+        // then
         assertAll(
             { assertThat(game.isOver).isFalse },
             { assertThat(game.count).isEqualTo(3) }

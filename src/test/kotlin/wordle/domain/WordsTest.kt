@@ -18,27 +18,27 @@ internal class WordsTest {
 
     @Test
     @DisplayName("words에 포함된 단어이면 true 여야 한다.")
-    fun shouldContainsWords(){
-        //given
+    fun shouldContainsWords() {
+        // given
         val wordsResponse = WordsResponse("words.txt")
         val words = Words(wordsResponse.words)
         val value = "rebut"
-        //when
+        // when
         val hasWord = words.contains(Word(value))
-        //then
+        // then
         assertThat(hasWord).isTrue
     }
 
     @Test
     @DisplayName("words에 포함된 단어가 아니면 false 여야 한다.")
-    fun failShouldContainsWords(){
-        //given
+    fun failShouldContainsWords() {
+        // given
         val wordsResponse = WordsResponse("words.txt")
         val words = Words(wordsResponse.words)
         val value = "xxxxx"
-        //when
+        // when
         val hasWord = words.contains(Word(value))
-        //then
+        // then
         assertThat(hasWord).isFalse
     }
 }

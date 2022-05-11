@@ -1,6 +1,10 @@
 package wordle
 
-import wordle.domain.*
+import wordle.domain.Game
+import wordle.domain.GameResult
+import wordle.domain.Word
+import wordle.domain.Words
+import wordle.domain.WordsResponse
 import wordle.view.InputView
 import wordle.view.OutputView
 import java.time.LocalDate
