@@ -4,8 +4,8 @@ import java.io.File
 
 private const val WORD_LENGTH = 5
 
-class Word(val word: String) {
-    var letters: List<Letter>
+class Word(word: String) {
+    private var letters: List<Letter>
 
     init {
         require(word.length == WORD_LENGTH) { "단어는 5글자여야 합니다." }
