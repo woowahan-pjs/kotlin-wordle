@@ -3,5 +3,9 @@ package wordle.domain
 enum class Tile {
     GREEN,
     YELLOW,
-    GRAY
+    GRAY;
+
+    fun isGreen() : Boolean {
+        return this == GREEN
+    }
 }
