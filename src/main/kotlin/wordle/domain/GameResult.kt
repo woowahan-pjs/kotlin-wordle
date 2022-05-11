@@ -2,12 +2,12 @@ package wordle.domain
 
 class GameResult() {
 
-    private var gameResult = mutableListOf<Tiles>()
+    private val _gameResult = mutableListOf<Tiles>()
 
-    val getGameResult: List<Tiles>
-        get() = gameResult
+    val gameResult: List<Tiles>
+        get() = _gameResult
 
     fun add(tiles: Tiles) {
-        this.gameResult.add(tiles)
+        this._gameResult.add(tiles)
     }
 }

@@ -15,7 +15,7 @@ object OutputView {
             println("$count/6")
         }
         println()
-        gameResult.getGameResult
+        gameResult.gameResult
             .forEach {
                 printTiles(it)
                 println()

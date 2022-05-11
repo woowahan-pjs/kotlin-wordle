@@ -59,8 +59,8 @@ internal class GameTest {
 
         //then
         assertAll(
-            { assertThat(game.getIsOver).isTrue },
-            { assertThat(game.getCount).isEqualTo(6) }
+            { assertThat(game.isOver).isTrue },
+            { assertThat(game.count).isEqualTo(6) }
         )
     }
 
@@ -78,8 +78,8 @@ internal class GameTest {
 
         //then
         assertAll(
-            { assertThat(game.getIsOver).isTrue },
-            { assertThat(game.getCount).isEqualTo(4) }
+            { assertThat(game.isOver).isTrue },
+            { assertThat(game.count).isEqualTo(4) }
         )
     }
 
@@ -96,8 +96,8 @@ internal class GameTest {
 
         //then
         assertAll(
-            { assertThat(game.getIsOver).isFalse },
-            { assertThat(game.getCount).isEqualTo(3) }
+            { assertThat(game.isOver).isFalse },
+            { assertThat(game.count).isEqualTo(3) }
         )
     }
 

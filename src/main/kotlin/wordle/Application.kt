@@ -18,11 +18,11 @@ fun main() {
 
 private fun play(game: Game, gameResult: GameResult) {
     return try {
-        while (!game.getIsOver) {
+        while (!game.isOver) {
             val playerWord = Word(InputView.requestAnswer())
             val matchResult = game.matchResult(playerWord)
             gameResult.add(matchResult)
-            OutputView.printGameResult(game.getIsOver, game.getCount, gameResult)
+            OutputView.printGameResult(game.isOver, game.count, gameResult)
         }
     } catch (exception: IllegalArgumentException) {
         OutputView.printErrorMessage(exception.message)

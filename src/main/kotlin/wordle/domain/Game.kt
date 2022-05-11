@@ -4,15 +4,15 @@ import java.time.LocalDate
 
 data class Game(val words: Words, val date: LocalDate) {
 
-    private var isOver: Boolean = false
+    private var _isOver: Boolean = false
 
-    val getIsOver: Boolean
-            get() = isOver
+    val isOver: Boolean
+            get() = _isOver
 
-    private var count: Int = 0
+    private var _count: Int = 0
 
-    val getCount: Int
-        get() = count
+    val count: Int
+        get() = _count
 
     fun matchResult(playerWord: Word): Tiles {
         require(words.contains(playerWord)) { "[ERROR] words.txt에 있는 단어를 입력해주세요." }
@@ -20,15 +20,15 @@ data class Game(val words: Words, val date: LocalDate) {
         for ((index, spell) in playerWord.value.withIndex()) {
             tiles.add(matchSpell(spell, index))
         }
-        count++
+        _count++
         val newTiles = Tiles(tiles)
         updateIsOver(newTiles)
         return newTiles
     }
 
     private fun updateIsOver(newTiles: Tiles) {
-        if (count >= MAX_ROUND || newTiles.isAllGreen()) {
-            isOver = true
+        if (_count >= MAX_ROUND || newTiles.isAllGreen()) {
+            _isOver = true
         }
     }
 
