@@ -2,6 +2,7 @@ package wordle.domain
 
 import io.kotest.assertions.throwables.shouldNotThrow
 import io.kotest.assertions.throwables.shouldThrow
+import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 
@@ -23,5 +24,23 @@ class WordTest {
     @DisplayName("유효하지 않은 단어일 경우 예외를 발생시킨다.")
     fun constructorWithInvalidWord() {
         shouldThrow<IllegalArgumentException> { Word("abcde") }
+    }
+
+    @Test
+    @DisplayName("다른 단어와 같은 인덱스로 비교한다")
+    fun compareBySameIndex() {
+        val wordA = Word("cigar")
+        val wordB = Word("clear")
+
+        wordA.compareByIndex(wordB, 0) shouldBe true
+    }
+
+    @Test
+    @DisplayName("다른 단어와 다른 인덱스로 비교한다")
+    fun compareByDifferentIndex() {
+        val wordA = Word("cigar")
+        val wordB = Word("clear")
+
+        wordA.compareByIndex(wordB, 0, 1) shouldBe false
     }
 }
