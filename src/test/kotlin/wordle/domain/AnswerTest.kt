@@ -3,7 +3,6 @@ package wordle.domain
 import io.kotest.matchers.collections.shouldContainAll
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
-import wordle.domain.Color.*
 
 class AnswerTest {
 
@@ -12,7 +11,13 @@ class AnswerTest {
     fun compareWithGreenAndGray() {
         val answer = Answer(Word("cigar"))
 
-        answer.compare(Word("clear")) shouldContainAll listOf(GREEN, GRAY, GRAY, GREEN, GREEN)
+        answer.compare(Word("clear")) shouldContainAll listOf(
+            Color.GREEN,
+            Color.GRAY,
+            Color.GRAY,
+            Color.GREEN,
+            Color.GREEN
+        )
     }
 
     @Test
@@ -20,7 +25,8 @@ class AnswerTest {
     fun compareWithAllGreens() {
         val answer = Answer(Word("cigar"))
 
-        answer.compare(Word("cigar")) shouldContainAll listOf(GREEN, GREEN, GREEN, GREEN, GREEN)
+        answer.compare(Word("cigar")) shouldContainAll
+            listOf(Color.GREEN, Color.GREEN, Color.GREEN, Color.GREEN, Color.GREEN)
     }
 
     @Test
@@ -28,7 +34,8 @@ class AnswerTest {
     fun compareWithAllColors() {
         val answer = Answer(Word("spill"))
 
-        answer.compare(Word("hello")) shouldContainAll listOf(GRAY, GRAY, YELLOW, GREEN, GRAY)
+        answer.compare(Word("hello")) shouldContainAll
+            listOf(Color.GRAY, Color.GRAY, Color.YELLOW, Color.GREEN, Color.GRAY)
     }
 
     @Test
@@ -36,7 +43,8 @@ class AnswerTest {
     fun compareWithYellowAndGray1() {
         val answer = Answer(Word("front"))
 
-        answer.compare(Word("totem")) shouldContainAll listOf(YELLOW, YELLOW, GRAY, GRAY, GRAY)
+        answer.compare(Word("totem")) shouldContainAll
+            listOf(Color.YELLOW, Color.YELLOW, Color.GRAY, Color.GRAY, Color.GRAY)
     }
 
     @Test
@@ -44,7 +52,8 @@ class AnswerTest {
     fun compareWithYellowAndGray2() {
         val answer = Answer(Word("totem"))
 
-        answer.compare(Word("start")) shouldContainAll listOf(GRAY, YELLOW, GRAY, GRAY, YELLOW)
+        answer.compare(Word("start")) shouldContainAll
+            listOf(Color.GRAY, Color.YELLOW, Color.GRAY, Color.GRAY, Color.YELLOW)
     }
 
     @Test
@@ -52,7 +61,8 @@ class AnswerTest {
     fun compareWithAllGrays() {
         val answer = Answer(Word("parry"))
 
-        answer.compare(Word("biome")) shouldContainAll listOf(GRAY, GRAY, GRAY, GRAY, GRAY)
+        answer.compare(Word("biome")) shouldContainAll
+            listOf(Color.GRAY, Color.GRAY, Color.GRAY, Color.GRAY, Color.GRAY)
     }
 
     @Test
@@ -60,7 +70,8 @@ class AnswerTest {
     fun compareWithAllYellows() {
         val answer = Answer(Word("parse"))
 
-        answer.compare(Word("spear")) shouldContainAll listOf(YELLOW, YELLOW, YELLOW, YELLOW, YELLOW)
+        answer.compare(Word("spear")) shouldContainAll
+            listOf(Color.YELLOW, Color.YELLOW, Color.YELLOW, Color.YELLOW, Color.YELLOW)
     }
 
     @Test
@@ -68,6 +79,7 @@ class AnswerTest {
     fun test1() {
         val answer = Answer(Word("witch"))
 
-        answer.compare(Word("timid")) shouldContainAll listOf(YELLOW, GREEN, GRAY, GRAY, GRAY)
+        answer.compare(Word("timid")) shouldContainAll
+            listOf(Color.YELLOW, Color.GREEN, Color.GRAY, Color.GRAY, Color.GRAY)
     }
 }

@@ -36,7 +36,6 @@ private fun isAllGreen(result: List<Color>): Boolean {
     return result.all { it == GREEN }
 }
 
-
 fun guessAnswer(): Word {
     return try {
         Word(InputView.inputGuess())
