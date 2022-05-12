@@ -26,12 +26,6 @@ data class Game(val words: Words, val date: LocalDate) {
         return newTiles
     }
 
-    private fun updateIsOver(newTiles: Tiles) {
-        if (_count >= MAX_ROUND || newTiles.isAllGreen()) {
-            _isOver = true
-        }
-    }
-
     private fun matchSpell(spell: Char, index: Int): Tile {
         val answer = words.findAnswer(date)
         if (answer.sameIndexAndSpell(index, spell)) {
@@ -41,6 +35,12 @@ data class Game(val words: Words, val date: LocalDate) {
             return Tile.YELLOW
         }
         return Tile.GRAY
+    }
+
+    private fun updateIsOver(newTiles: Tiles) {
+        if (_count >= MAX_ROUND || newTiles.isAllGreen()) {
+            _isOver = true
+        }
     }
 
     companion object {
