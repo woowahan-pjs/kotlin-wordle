@@ -5,6 +5,8 @@ import java.nio.file.Paths
 import java.time.LocalDate
 import java.time.temporal.ChronoUnit
 
+const val WORD_SIZE = 5
+
 class Words {
     companion object {
         private val VALUE: List<String> = Files.readAllLines(Paths.get("src/main/resources/words.txt"))

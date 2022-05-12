@@ -1,7 +1,5 @@
 package wordle.domain
 
-private const val WORD_SIZE = 5
-
 class Answer(private val answer: String) {
 
     init {
@@ -10,8 +8,8 @@ class Answer(private val answer: String) {
     }
 
     fun match(word: String): MutableList<Mark> {
-        val wordTable = createWordTable(word)
         val result = MutableList(WORD_SIZE) { Mark.NONE }
+        val wordTable = createWordTable(word)
         matchExact(word, result, wordTable)
         matchExist(result, wordTable)
         return result
@@ -19,8 +17,8 @@ class Answer(private val answer: String) {
 
     private fun createWordTable(word: String): HashMap<Char, Int> {
         val wordTable = HashMap<Char, Int>()
-        for (it in word) {
-            wordTable[it] = wordTable.getOrDefault(it, 0) + 1
+        for (char in word) {
+            wordTable[char] = wordTable.getOrDefault(char, 0) + 1
         }
         return wordTable
     }
