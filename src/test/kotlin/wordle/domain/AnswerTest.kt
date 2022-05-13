@@ -1,8 +1,7 @@
 package wordle.domain
 
 import io.kotest.matchers.throwable.shouldHaveMessage
-import org.assertj.core.api.Assertions
-import org.assertj.core.api.Assertions.*
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import wordle.domain.Mark.*
@@ -22,10 +21,18 @@ internal class AnswerTest {
     }
 
     @Test
-    fun 답안과_정답을_비교() {
-        val answer = Answer("death")
+    fun 답안과_정답을_비교_CASE_중복되는_문자_중_하나만_일치_할_때() {
+        val answer = Answer("groom")
 
-        assertThat(answer.compareToWord("fresh"))
-            .isEqualTo(listOf(NONE, EXIST, NONE, NONE, EXACT))
+        assertThat(answer.compareToWord("goose"))
+            .isEqualTo(listOf(EXACT, NONE, EXACT, EXIST, NONE))
+    }
+
+    @Test
+    fun 답안과_정답을_비교_CASE_중복되는_문자가_존재하지만_정답의_개수가_더_많을_때() {
+        val answer = Answer("eerie")
+
+        assertThat(answer.compareToWord("sheen"))
+            .isEqualTo(listOf(EXIST, EXIST, NONE, NONE, NONE))
     }
 }
