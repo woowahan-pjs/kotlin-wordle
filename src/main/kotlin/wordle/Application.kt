@@ -32,10 +32,6 @@ private fun playWordle(answer: Answer): Boolean {
     return false
 }
 
-private fun isAllGreen(result: List<Color>): Boolean {
-    return result.all { it == GREEN }
-}
-
 fun guessAnswer(): Word {
     return try {
         Word(InputView.inputGuess())
@@ -43,4 +39,8 @@ fun guessAnswer(): Word {
         OutputView.printError(e.message)
         guessAnswer()
     }
+}
+
+private fun isAllGreen(result: List<Color>): Boolean {
+    return result.all { it == GREEN }
 }

@@ -11,6 +11,14 @@ class Answer(val word: Word) {
         return merge(exactIndices, anyIndices)
     }
 
+    private fun compareExact(word: Word): List<Int> {
+        return (RANGE_START..RANGE_END).filter { this.word.compareByIndex(word, it) }
+    }
+
+    private fun compareAny(word: Word): List<Int> {
+        return (RANGE_START..RANGE_END).filter { isAnyMatch(word, it) }
+    }
+
     private fun merge(greenIndices: List<Int>, yellowIndices: List<Int>): List<Color> {
         return (RANGE_START..RANGE_END).map { defineColor(it, greenIndices, yellowIndices) }
     }
@@ -23,14 +31,6 @@ class Answer(val word: Word) {
             return Color.YELLOW
         }
         return Color.GRAY
-    }
-
-    private fun compareExact(word: Word): List<Int> {
-        return (RANGE_START..RANGE_END).filter { this.word.compareByIndex(word, it) }
-    }
-
-    private fun compareAny(word: Word): List<Int> {
-        return (RANGE_START..RANGE_END).filter { isAnyMatch(word, it) }
     }
 
     private fun isAnyMatch(word: Word, outerIndex: Int): Boolean {
