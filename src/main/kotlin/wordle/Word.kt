@@ -1,6 +1,6 @@
 package wordle
 
-class Word(private val word: String) {
+data class Word(private val word: String) {
 
     init {
         require(word.length == 5) { "단어의 길이는 5글자여야 합니다." }
