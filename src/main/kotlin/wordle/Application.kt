@@ -1,5 +1,11 @@
 package wordle
 
+import wordle.domain.Game
+import wordle.domain.Word
+import wordle.util.WordsReader
+import wordle.view.InputView
+import wordle.view.OutputView
+
 fun main() {
     val game = Game(WordsReader.getWords())
     OutputView.printStartMessage()

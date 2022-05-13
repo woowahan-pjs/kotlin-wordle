@@ -1,5 +1,6 @@
-package wordle
+package wordle.util
 
+import wordle.domain.Word
 import java.io.FileReader
 
 object WordsReader {

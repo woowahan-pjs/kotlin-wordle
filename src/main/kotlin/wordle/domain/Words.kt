@@ -1,4 +1,4 @@
-package wordle
+package wordle.domain
 
 import java.time.LocalDate
 import java.time.temporal.ChronoUnit

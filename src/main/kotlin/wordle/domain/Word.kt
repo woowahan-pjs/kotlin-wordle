@@ -1,4 +1,4 @@
-package wordle
+package wordle.domain
 
 data class Word(val value: String) {
 

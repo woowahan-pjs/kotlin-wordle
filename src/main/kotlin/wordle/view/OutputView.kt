@@ -1,4 +1,6 @@
-package wordle
+package wordle.view
+
+import wordle.domain.Tile
 
 object OutputView {
 
