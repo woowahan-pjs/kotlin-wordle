@@ -8,6 +8,7 @@ import java.time.temporal.ChronoUnit
 const val WORD_SIZE = 5
 
 class Words {
+
     companion object {
         private val VALUE: List<String> = Files.readAllLines(Paths.get("src/main/resources/words.txt"))
         private val BASIC_DATE = LocalDate.of(2021, 6, 19)

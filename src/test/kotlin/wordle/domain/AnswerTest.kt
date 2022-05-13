@@ -2,6 +2,7 @@ package wordle.domain
 
 import io.kotest.matchers.throwable.shouldHaveMessage
 import org.assertj.core.api.Assertions
+import org.assertj.core.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import wordle.domain.Mark.*
@@ -24,7 +25,7 @@ internal class AnswerTest {
     fun 답안과_정답을_비교() {
         val answer = Answer("death")
 
-        Assertions.assertThat(answer.match("fresh"))
+        assertThat(answer.compareToWord("fresh"))
             .isEqualTo(listOf(NONE, EXIST, NONE, NONE, EXACT))
     }
 }

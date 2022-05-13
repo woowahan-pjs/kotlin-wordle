@@ -7,7 +7,7 @@ class Answer(private val answer: String) {
         require(Words.contains(answer)) { "[ERROR] 목록에 존재하지 않는 단어입니다." }
     }
 
-    fun match(word: String): MutableList<Mark> {
+    fun compareToWord(word: String): MutableList<Mark> {
         val result = MutableList(WORD_SIZE) { Mark.NONE }
         val wordTable = createWordTable(word)
         matchExact(word, result, wordTable)
@@ -23,54 +23,36 @@ class Answer(private val answer: String) {
         return wordTable
     }
 
-    private fun matchExact(
-        word: String,
-        result: MutableList<Mark>,
-        wordTable: HashMap<Char, Int>,
-    ) {
+    private fun matchExact(word: String, result: MutableList<Mark>, wordTable: HashMap<Char, Int>) {
         for (i in 0 until WORD_SIZE) {
-            markExact(word, i, result, wordTable)
+            markExact(i, word, result, wordTable)
         }
     }
 
-    private fun markExact(
-        word: String,
-        i: Int,
-        result: MutableList<Mark>,
-        wordTable: HashMap<Char, Int>,
-    ) {
-        val key = word[i]
-        if (key == answer[i]) {
+    private fun markExact(i: Int, word: String, result: MutableList<Mark>, wordTable: HashMap<Char, Int>) {
+        if (word[i] == answer[i]) {
             result[i] = Mark.EXACT
-            wordTable.computeIfPresent(key) { _, v -> v - 1 }
+            wordTable.computeIfPresent(word[i]) { _, v -> v - 1 }
         }
     }
 
-    private fun matchExist(
-        result: MutableList<Mark>,
-        wordTable: HashMap<Char, Int>,
-    ) {
+    private fun matchExist(result: MutableList<Mark>, wordTable: HashMap<Char, Int>) {
         for (i in 0 until WORD_SIZE) {
             markExist(i, result, wordTable)
         }
     }
 
-    private fun markExist(
-        i: Int,
-        result: MutableList<Mark>,
-        wordTable: HashMap<Char, Int>,
-    ) {
-        val key = answer[i]
-        if (isExist(result, i, wordTable, key)) {
+    private fun markExist(i: Int, result: MutableList<Mark>, wordTable: HashMap<Char, Int>) {
+        if (isExist(i, result, wordTable, answer[i])) {
             result[i] = Mark.EXIST
-            wordTable.computeIfPresent(key) { _, v -> v - 1 }
+            wordTable.computeIfPresent(answer[i]) { _, v -> v - 1 }
         }
     }
 
     private fun isExist(
-        result: MutableList<Mark>,
         i: Int,
+        result: MutableList<Mark>,
         wordTable: HashMap<Char, Int>,
-        key: Char,
-    ) = result[i] == Mark.NONE && wordTable.containsKey(key) && wordTable[key] != 0
+        charOfAnswer: Char,
+    ) = result[i] == Mark.NONE && wordTable.containsKey(charOfAnswer) && wordTable[charOfAnswer] != 0
 }

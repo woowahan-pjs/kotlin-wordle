@@ -1,12 +1,13 @@
 package wordle.domain
 
-class Game(private val word: String, val results: Results) {
+class Game(private val word: String) {
 
+    val results: Results = Results()
     var isPlaying: Boolean = true
         private set
 
     fun playRound(answer: Answer) {
-        val result = answer.match(word)
+        val result = answer.compareToWord(word)
         results.add(result)
         if (isOver(result)) {
             isPlaying = false
