@@ -24,4 +24,12 @@ class WordTest {
             exception.message shouldBe "단어에 영어가 아닌 글자나 공백이 포함될 수 없습니다."
         }
     }
+
+    @Test
+    fun `해당 글자가 단어의 특정 인덱스와 일치하는지 확인한다`() {
+        val word = Word("style")
+        val other = Word("soooo")
+        word.isSameChar(other, 0) shouldBe true
+        word.isSameChar(other, 1) shouldBe false
+    }
 }

@@ -23,4 +23,14 @@ class WordsTest {
         words.isCorrect(Word("apple")) shouldBe true
         words.isCorrect(Word("happy")) shouldBe false
     }
+
+    @Test
+    fun `단어를 정답과 비교하여 결과 타일을 반환한다`() {
+        val words = Words(listOf(Word("apple")))
+        val word = Word("hello")
+
+        val checkList = words.check(word)
+
+        checkList shouldBe listOf(Tile.GRAY, Tile.YELLOW, Tile.GRAY, Tile.GREEN, Tile.GRAY)
+    }
 }
