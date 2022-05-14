@@ -1,4 +1,4 @@
-package wordle
+package wordle.domain
 
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.inspectors.forAll

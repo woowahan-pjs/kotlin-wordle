@@ -1,4 +1,4 @@
-package wordle
+package wordle.view
 
 object InputView {
 

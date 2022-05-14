@@ -1,4 +1,4 @@
-package wordle
+package wordle.domain
 
 enum class Tile(val symbol: String) {
 

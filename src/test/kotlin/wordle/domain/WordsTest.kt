@@ -1,4 +1,4 @@
-package wordle
+package wordle.domain
 
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test

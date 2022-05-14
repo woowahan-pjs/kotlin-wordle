@@ -1,4 +1,4 @@
-package wordle
+package wordle.utils
 
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test

@@ -1,4 +1,4 @@
-package wordle
+package wordle.domain
 
 class Game(private val words: Words) {
 

@@ -1,4 +1,4 @@
-package wordle
+package wordle.domain
 
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
@@ -20,6 +20,6 @@ class GameTest {
     internal fun `게임 종료여부를 확인한다`() {
         val game = Game(listOf(Word("apple"), Word("hello"), Word("spicy")))
         repeat(6) { game.match(Word("apple")) }
-        game.isGameOver() shouldBe true
+        game.isGameOver(Word("apple")) shouldBe true
     }
 }
