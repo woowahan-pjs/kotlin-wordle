@@ -3,8 +3,6 @@ package wordle.domain
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
-import wordle.domain.Game
-import wordle.domain.Word
 
 class GameTest {
 

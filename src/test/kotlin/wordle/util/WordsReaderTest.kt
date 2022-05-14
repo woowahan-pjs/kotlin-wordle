@@ -2,7 +2,6 @@ package wordle.util
 
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
-import wordle.util.WordsReader
 
 class WordsReaderTest {
 

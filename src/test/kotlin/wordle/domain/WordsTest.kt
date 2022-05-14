@@ -2,9 +2,6 @@ package wordle.domain
 
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
-import wordle.domain.Tile
-import wordle.domain.Word
-import wordle.domain.Words
 
 class WordsTest {
 
