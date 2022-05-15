@@ -13,7 +13,7 @@ data class Game(val words: Words, val date: LocalDate) {
     fun matchResult(playerWord: Word): Tiles {
         require(words.contains(playerWord)) { "[ERROR] words.txt에 있는 단어를 입력해주세요." }
         val tiles = playerWord.value.withIndex()
-            .mapIndexedNotNull{index, tile -> matchSpell(tile.value, index)}
+            .mapIndexedNotNull { index, tile -> matchSpell(tile.value, index) }
         count++
         val newTiles = Tiles(tiles)
         updateIsOver(newTiles)
