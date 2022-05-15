@@ -8,10 +8,13 @@ class Words(private val values: List<Word>) {
     private val answer: Word = findAnswer()
     private var answerMap: MutableMap<Char, Int> = HashMap()
 
+    companion object {
+        private val STANDARD_DATE = LocalDate.of(2021, 6, 19)
+    }
+
     private fun findAnswer(): Word {
-        val date: LocalDate = LocalDate.now()
-        val standardDate: LocalDate = LocalDate.of(2021, 6, 19)
-        val days: Int = ChronoUnit.DAYS.between(standardDate, date).toInt()
+        val nowDate: LocalDate = LocalDate.now()
+        val days: Int = ChronoUnit.DAYS.between(STANDARD_DATE, nowDate).toInt()
         return values[days % values.size]
     }
 
@@ -25,7 +28,7 @@ class Words(private val values: List<Word>) {
 
     fun check(word: Word): List<Tile> {
         answerMap = initAnswerMap()
-        val result: ArrayList<Tile> = ArrayList()
+        val result: MutableList<Tile> = ArrayList()
         repeat(5) { result.add(Tile.GRAY) }
 
         repeat(5) { i -> result[i] = findTileBySameCheck(word, i) }
