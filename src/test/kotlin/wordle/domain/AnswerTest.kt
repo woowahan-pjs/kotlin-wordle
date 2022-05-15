@@ -11,13 +11,8 @@ class AnswerTest {
     fun compareWithGreenAndGray() {
         val answer = Answer(Word("cigar"))
 
-        answer.compare(Word("clear")) shouldContainAll listOf(
-            Color.GREEN,
-            Color.GRAY,
-            Color.GRAY,
-            Color.GREEN,
-            Color.GREEN
-        )
+        answer.compare(Word("clear")) shouldContainAll
+            listOf(Color.GREEN, Color.GRAY, Color.GRAY, Color.GREEN, Color.GREEN)
     }
 
     @Test
