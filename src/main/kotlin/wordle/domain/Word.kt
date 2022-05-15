@@ -16,7 +16,9 @@ data class Word(private val word: String) {
     }
 
     fun compareByIndex(
-        other: Word, myIndex: Int, otherIndex: Int = myIndex,
+        other: Word,
+        myIndex: Int,
+        otherIndex: Int = myIndex,
         consumedLetterIndex: MutableList<Int> = mutableListOf()
     ): Boolean {
         return !consumedLetterIndex.contains(myIndex) && word[myIndex] == other.word[otherIndex]
