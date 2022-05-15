@@ -4,13 +4,13 @@ private const val TOTAL_ROUNDS_NUM = 6
 
 class Game(private val words: Words) {
 
-    constructor(words: List<Word>) : this(Words(words))
-
     var count: Int = 0
         private set
 
     var results: MutableList<List<Tile>> = ArrayList()
         private set
+
+    constructor(words: List<Word>) : this(Words(words))
 
     fun isGameOver(answer: Word): Boolean {
         return count >= TOTAL_ROUNDS_NUM || words.isCorrect(answer)

@@ -8,10 +8,6 @@ class Words(private val values: List<Word>) {
     private val answer: Word = findAnswer()
     private var answerMap: MutableMap<Char, Int> = HashMap()
 
-    companion object {
-        private val STANDARD_DATE = LocalDate.of(2021, 6, 19)
-    }
-
     private fun findAnswer(): Word {
         val nowDate: LocalDate = LocalDate.now()
         val days: Int = ChronoUnit.DAYS.between(STANDARD_DATE, nowDate).toInt()
@@ -69,5 +65,9 @@ class Words(private val values: List<Word>) {
         if (answerMap[key] == 0) {
             answerMap.remove(key)
         }
+    }
+
+    companion object {
+        private val STANDARD_DATE = LocalDate.of(2021, 6, 19)
     }
 }
