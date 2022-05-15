@@ -7,7 +7,7 @@ class Words(private val words: List<Word>) {
 
     fun findAnswer(current: LocalDate): Word {
         val answerIndex = ChronoUnit.DAYS.between(BASE_DATE, current)
-        return words[answerIndex.toInt()]
+        return words[answerIndex.toInt() % words.size]
     }
 
     fun contains(word: Word): Boolean {
