@@ -4,15 +4,15 @@ import wordle.domain.Game
 import wordle.domain.GameResult
 import wordle.domain.Word
 import wordle.domain.Words
-import wordle.domain.WordsResponse
+import wordle.domain.WordsReader
 import wordle.view.InputView
 import wordle.view.OutputView
 import java.time.LocalDate
 
 fun main() {
 
-    val wordsResponse = WordsResponse("words.txt")
-    val words = Words(wordsResponse.words)
+    val wordsReader = WordsReader("words.txt")
+    val words = Words(wordsReader.words)
     val game = Game(words, LocalDate.now())
     val gameResult = GameResult()
 

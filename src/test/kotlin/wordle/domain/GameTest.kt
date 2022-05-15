@@ -19,8 +19,8 @@ internal class GameTest {
     @DisplayName("플레이의 단어가 words에 포함되어있지 않다면 예외를 던져야 한다.")
     fun containsWord() {
         // given
-        val wordsResponse = WordsResponse("words.txt")
-        val words = Words(wordsResponse.words)
+        val wordsReader = WordsReader("words.txt")
+        val words = Words(wordsReader.words)
         val game = Game(words, LocalDate.of(2021, 6, 19))
 
         // when
@@ -34,8 +34,8 @@ internal class GameTest {
     @DisplayName("플레이어의 답과 정답을 매칭한다.")
     fun matchAnswer(word: Word, expectedTiles: Tiles) {
         // given
-        val wordsResponse = WordsResponse("words.txt")
-        val words = Words(wordsResponse.words)
+        val wordsReader = WordsReader("words.txt")
+        val words = Words(wordsReader.words)
         val game = Game(words, LocalDate.of(2021, 6, 19))
 
         // when
@@ -49,8 +49,8 @@ internal class GameTest {
     @DisplayName("정답 매칭을 6번 진행하면 게임은 종료되어야 한다.")
     fun gameOver() {
         // given
-        val wordsResponse = WordsResponse("words.txt")
-        val words = Words(wordsResponse.words)
+        val wordsReader = WordsReader("words.txt")
+        val words = Words(wordsReader.words)
         val game = Game(words, LocalDate.of(2021, 6, 19))
 
         // when
@@ -67,8 +67,8 @@ internal class GameTest {
     @DisplayName("정답을 맞추면 게임은 종료되어야 한다.")
     fun gameOverMatch() {
         // given
-        val wordsResponse = WordsResponse("words.txt")
-        val words = Words(wordsResponse.words)
+        val wordsReader = WordsReader("words.txt")
+        val words = Words(wordsReader.words)
         val game = Game(words, LocalDate.of(2021, 6, 19))
 
         // when
@@ -86,8 +86,8 @@ internal class GameTest {
     @DisplayName("정답을 못 맞추면 게임은 종료되지 않는다.")
     fun gameOverMisMatch() {
         // given
-        val wordsResponse = WordsResponse("words.txt")
-        val words = Words(wordsResponse.words)
+        val wordsReader = WordsReader("words.txt")
+        val words = Words(wordsReader.words)
         val game = Game(words, LocalDate.of(2021, 6, 19))
 
         // when
