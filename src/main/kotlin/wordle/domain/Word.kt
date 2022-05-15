@@ -15,8 +15,11 @@ data class Word(private val word: String) {
         return value.all { it.isLowerCase() }
     }
 
-    fun compareByIndex(other: Word, myIndex: Int, otherIndex: Int = myIndex): Boolean {
-        return word[myIndex] == other.word[otherIndex]
+    fun compareByIndex(
+        other: Word, myIndex: Int, otherIndex: Int = myIndex,
+        consumedLetterIndex: MutableList<Int> = mutableListOf()
+    ): Boolean {
+        return !consumedLetterIndex.contains(myIndex) && word[myIndex] == other.word[otherIndex]
     }
 
     fun getWord(): String {

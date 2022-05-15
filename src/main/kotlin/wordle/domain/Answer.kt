@@ -29,11 +29,15 @@ class Answer(private val word: Word) {
     }
 
     private fun compareAny(word: Word): List<Int> {
-        return (RANGE_START..RANGE_END).filter { isAnyMatch(word, it) }
+        val consumedLetterIndex: MutableList<Int> = mutableListOf()
+        return (RANGE_START..RANGE_END).filter { isAnyMatch(word, it, consumedLetterIndex) }
     }
 
-    private fun isAnyMatch(word: Word, outerIndex: Int): Boolean {
-        return (RANGE_START..RANGE_END).any { this.word.compareByIndex(word, it, outerIndex) }
+    private fun isAnyMatch(word: Word, outerIndex: Int, consumedLetterIndex: MutableList<Int>): Boolean {
+        val anyMatchIndex = (RANGE_START..RANGE_END)
+            .findLast { this.word.compareByIndex(word, it, outerIndex, consumedLetterIndex) } ?: return false
+        consumedLetterIndex.add(anyMatchIndex)
+        return true
     }
 
     fun getAnswer(): String {
