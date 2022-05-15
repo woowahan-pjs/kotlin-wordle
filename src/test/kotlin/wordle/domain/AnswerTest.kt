@@ -61,20 +61,20 @@ class AnswerTest {
     }
 
     @Test
+    @DisplayName("위치만 일치하는 글자가 입력과 정답에 서로 다른 개수로 존재할 때 예측을 비교한다.")
+    fun compareWithYellowWhenDifferentCounts() {
+        val answer = Answer(Word("witch"))
+
+        answer.compare(Word("timid")) shouldContainAll
+            listOf(Color.YELLOW, Color.GREEN, Color.GRAY, Color.GRAY, Color.GRAY)
+    }
+
+    @Test
     @DisplayName("전부 위치만 일치하는 글자들이 존재하는 예측을 비교한다.")
     fun compareWithAllYellows() {
         val answer = Answer(Word("parse"))
 
         answer.compare(Word("spear")) shouldContainAll
             listOf(Color.YELLOW, Color.YELLOW, Color.YELLOW, Color.YELLOW, Color.YELLOW)
-    }
-
-    @Test
-    @DisplayName("test.")
-    fun test1() {
-        val answer = Answer(Word("witch"))
-
-        answer.compare(Word("timid")) shouldContainAll
-            listOf(Color.YELLOW, Color.GREEN, Color.GRAY, Color.GRAY, Color.GRAY)
     }
 }
