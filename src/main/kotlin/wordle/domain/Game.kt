@@ -21,6 +21,6 @@ class Game(private val words: Words) {
     }
 
     companion object {
-        private const val MAX_GAME_COUNT = 6
+        const val MAX_GAME_COUNT = 6
     }
 }
