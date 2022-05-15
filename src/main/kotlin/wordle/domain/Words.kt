@@ -3,8 +3,6 @@ package wordle.domain
 import java.time.LocalDate
 import java.time.temporal.ChronoUnit
 
-private const val WORD_SIZE = 5
-
 class Words(private val values: List<Word>) {
 
     private val answer: Word = findAnswer()
@@ -61,5 +59,9 @@ class Words(private val values: List<Word>) {
         if (answerMap[key] == 0) {
             answerMap.remove(key)
         }
+    }
+
+    companion object {
+        private const val WORD_SIZE = 5
     }
 }
