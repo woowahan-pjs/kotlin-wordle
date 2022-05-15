@@ -4,21 +4,17 @@ import java.time.LocalDate
 
 data class Game(val words: Words, val date: LocalDate) {
 
-    private var _count: Int = 0
-    private var _isOver: Boolean = false
-
-    val count: Int
-        get() = _count
-    val isOver: Boolean
-        get() = _isOver
-    val maxRound: Int
-        get() = MAX_ROUND
+    var count: Int = 0
+        private set
+    var isOver: Boolean = false
+        private set
+    val maxRound: Int = MAX_ROUND
 
     fun matchResult(playerWord: Word): Tiles {
         require(words.contains(playerWord)) { "[ERROR] words.txt에 있는 단어를 입력해주세요." }
         val tiles = playerWord.value.withIndex()
             .mapIndexedNotNull{index, tile -> matchSpell(tile.value, index)}
-        _count++
+        count++
         val newTiles = Tiles(tiles)
         updateIsOver(newTiles)
         return newTiles
@@ -36,12 +32,12 @@ data class Game(val words: Words, val date: LocalDate) {
     }
 
     private fun updateIsOver(newTiles: Tiles) {
-        if (_count >= MAX_ROUND || newTiles.isAllGreen()) {
-            _isOver = true
+        if (count >= MAX_ROUND || newTiles.isAllGreen()) {
+            isOver = true
         }
     }
 
     companion object {
-        private const val MAX_ROUND = 6
+        const val MAX_ROUND = 6
     }
 }
