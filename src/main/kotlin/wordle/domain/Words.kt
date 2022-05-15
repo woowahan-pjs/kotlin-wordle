@@ -3,6 +3,8 @@ package wordle.domain
 import java.time.LocalDate
 import java.time.temporal.ChronoUnit
 
+private const val WORD_SIZE = 5
+
 class Words(private val values: List<Word>) {
 
     private val answer: Word = findAnswer()
@@ -25,40 +27,33 @@ class Words(private val values: List<Word>) {
 
     fun check(word: Word): List<Tile> {
         answerMap = initAnswerMap()
-        val result: ArrayList<Tile> = ArrayList()
-        repeat(5) { result.add(Tile.GRAY) }
+        val result = MutableList(WORD_SIZE) { Tile.GRAY }
 
-        repeat(5) { i -> result[i] = findTileBySameCheck(word, i) }
-        repeat(5) { i -> result[i] = findTileByContainCheck(result, word, i) }
+        repeat(WORD_SIZE) { putTileIfSame(result, word, it) }
+        repeat(WORD_SIZE) { putTileIfContains(result, word, it) }
         return result
     }
 
     private fun initAnswerMap(): MutableMap<Char, Int> {
         val answerMap: MutableMap<Char, Int> = HashMap()
         answer.value.forEach {
-            answerMap.putIfAbsent(it, 0)
-            answerMap.computeIfPresent(it) { _, v -> v + 1 }
+            answerMap[it] = answerMap.getOrDefault(it, 0) + 1
         }
         return answerMap
     }
 
-    private fun findTileBySameCheck(word: Word, index: Int): Tile {
+    private fun putTileIfSame(result: MutableList<Tile>, word: Word, index: Int) {
         if (answer.isSameChar(word, index)) {
             calculateAnswerMap(word.value[index])
-            return Tile.GREEN
+            result[index] = Tile.GREEN
         }
-        return Tile.GRAY
     }
 
-    private fun findTileByContainCheck(result: List<Tile>, word: Word, index: Int): Tile {
-        if (result[index] == Tile.GREEN) {
-            return Tile.GREEN
-        }
-        if (answerMap.keys.contains(word.value[index])) {
+    private fun putTileIfContains(result: MutableList<Tile>, word: Word, index: Int) {
+        if (result[index] != Tile.GREEN && answerMap.containsKey(word.value[index])) {
             calculateAnswerMap(word.value[index])
-            return Tile.YELLOW
+            result[index] = Tile.YELLOW
         }
-        return Tile.GRAY
     }
 
     private fun calculateAnswerMap(key: Char) {
