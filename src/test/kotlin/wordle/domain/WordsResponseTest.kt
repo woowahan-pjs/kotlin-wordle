@@ -9,8 +9,8 @@ internal class WordsResponseTest {
     @Test
     @DisplayName("/words.txt의 단어를 받아온다.")
     fun getWordsResponse() {
-        val wordsResponse = WordsResponse("words.txt")
-        val words = wordsResponse.words
+        val wordsReader = WordsReader("words.txt")
+        val words = wordsReader.words
         assertThat(words.size).isEqualTo(WORDS_SIZE)
     }
 

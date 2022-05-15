@@ -10,8 +10,8 @@ internal class WordsTest {
     @Test
     @DisplayName("정답단어를 가져와야 한다.")
     fun getAnswerWord() {
-        val wordsResponse = WordsResponse("words.txt")
-        val words = Words(wordsResponse.words)
+        val wordsReader = WordsReader("words.txt")
+        val words = Words(wordsReader.words)
         val answerWord = words.findAnswer(LocalDate.of(2021, 6, 19))
         assertThat(answerWord).isEqualTo(Word("cigar"))
     }
@@ -20,8 +20,8 @@ internal class WordsTest {
     @DisplayName("words에 포함된 단어이면 true 여야 한다.")
     fun shouldContainsWords() {
         // given
-        val wordsResponse = WordsResponse("words.txt")
-        val words = Words(wordsResponse.words)
+        val wordsReader = WordsReader("words.txt")
+        val words = Words(wordsReader.words)
         val value = "rebut"
         // when
         val hasWord = words.contains(Word(value))
@@ -33,8 +33,8 @@ internal class WordsTest {
     @DisplayName("words에 포함된 단어가 아니면 false 여야 한다.")
     fun failShouldContainsWords() {
         // given
-        val wordsResponse = WordsResponse("words.txt")
-        val words = Words(wordsResponse.words)
+        val wordsReader = WordsReader("words.txt")
+        val words = Words(wordsReader.words)
         val value = "xxxxx"
         // when
         val hasWord = words.contains(Word(value))

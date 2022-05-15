@@ -2,7 +2,7 @@ package wordle.domain
 
 import java.io.File
 
-class WordsResponse(val path: String) {
+class WordsReader(private val path: String) {
 
     val words: List<Word>
         get() = getWords(path)
