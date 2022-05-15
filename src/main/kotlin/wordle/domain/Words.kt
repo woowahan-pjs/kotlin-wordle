@@ -15,9 +15,7 @@ class Words(private val values: List<Word>) {
         return values[days % values.size]
     }
 
-    fun contains(word: Word): Boolean {
-        return values.contains(word)
-    }
+    fun contains(word: Word): Boolean = values.contains(word)
 
     fun isCorrect(word: Word): Boolean {
         return word == answer
