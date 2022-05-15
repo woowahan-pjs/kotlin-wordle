@@ -3,6 +3,7 @@ package wordle.domain
 import io.kotest.assertions.throwables.shouldNotThrow
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
+import io.kotest.matchers.throwable.shouldHaveMessage
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 
@@ -12,12 +13,14 @@ class WordTest {
     @DisplayName("단어는 5글자여야 한다.")
     fun constructor() {
         shouldThrow<IllegalArgumentException> { (Word("word")) }
+            .shouldHaveMessage("단어는 5글자여야 합니다.")
     }
 
     @Test
     @DisplayName("단어는 소문자로 이루어져야 한다.")
     fun constructorWithLowercaseWord() {
         shouldThrow<IllegalArgumentException> { Word("CIGAR") }
+            .shouldHaveMessage("단어는 소문자로 이루어져야 합니다.")
     }
 
     @Test
@@ -30,6 +33,7 @@ class WordTest {
     @DisplayName("유효하지 않은 단어일 경우 예외를 발생시킨다.")
     fun constructorWithInvalidWord() {
         shouldThrow<IllegalArgumentException> { Word("abcde") }
+            .shouldHaveMessage("유효하지 않은 단어입니다.")
     }
 
     @Test
