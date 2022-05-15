@@ -16,10 +16,8 @@ data class Game(val words: Words, val date: LocalDate) {
 
     fun matchResult(playerWord: Word): Tiles {
         require(words.contains(playerWord)) { "[ERROR] words.txt에 있는 단어를 입력해주세요." }
-        val tiles = mutableListOf<Tile>()
-        for ((index, spell) in playerWord.value.withIndex()) {
-            tiles.add(matchSpell(spell, index))
-        }
+        val tiles = playerWord.value.withIndex()
+            .mapIndexedNotNull{index, tile -> matchSpell(tile.value, index)}
         _count++
         val newTiles = Tiles(tiles)
         updateIsOver(newTiles)
