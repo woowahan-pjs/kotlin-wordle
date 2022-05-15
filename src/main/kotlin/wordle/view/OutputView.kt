@@ -21,7 +21,7 @@ object OutputView {
     }
 
     fun printAnswer(answer: Answer) {
-        println("아쉽습니다! 정답은 ${answer.word.word}입니다.")
+        println("아쉽습니다! 정답은 ${answer.getAnswer()}입니다.")
     }
 
     fun printCount(tryCount: Int) {

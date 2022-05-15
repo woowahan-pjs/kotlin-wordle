@@ -3,8 +3,7 @@ package wordle.domain
 private const val RANGE_START = 0
 private const val RANGE_END = 4
 
-class Answer(val word: Word) {
-
+class Answer(private val word: Word) {
     fun compare(word: Word): List<Color> {
         val exactIndices = compareExact(word)
         val anyIndices = compareAny(word)
@@ -35,5 +34,9 @@ class Answer(val word: Word) {
 
     private fun isAnyMatch(word: Word, outerIndex: Int): Boolean {
         return (RANGE_START..RANGE_END).any { this.word.compareByIndex(word, it, outerIndex) }
+    }
+
+    fun getAnswer(): String {
+        return word.getWord()
     }
 }
