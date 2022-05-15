@@ -1,28 +1,25 @@
 package wordle.domain
 
 import io.kotest.assertions.throwables.shouldThrow
-import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.DisplayName
+import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
 
 internal class WordTest {
 
     @Test
-    @DisplayName("단어를 정상 생성해야 한다.")
-    fun createWord() {
+    fun `단어를 정상 생성해야 한다`() {
         val word = Word("model")
-        assertThat(word.value).isEqualTo("model")
+
+        word.value shouldBe "model"
     }
 
     @Test
-    @DisplayName("단어가 5글자가 아니라면 예외를 던진다.")
-    fun validateSize() {
+    fun `단어가 5글자가 아니라면 예외를 던진다`() {
         shouldThrow<IllegalArgumentException> { Word("models") }
     }
 
     @Test
-    @DisplayName("단어가 알파벳이 아니라면 예외를 던진다.")
-    fun validateAlphabet() {
+    fun `단어가 알파벳이 아니라면 예외를 던진다`() {
         shouldThrow<IllegalArgumentException> { Word("모델입니다") }
     }
 }

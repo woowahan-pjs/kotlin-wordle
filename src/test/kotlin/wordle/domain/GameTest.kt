@@ -1,8 +1,7 @@
 package wordle.domain
 
 import io.kotest.assertions.throwables.shouldThrow
-import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.DisplayName
+import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
 import org.junit.jupiter.params.ParameterizedTest
@@ -16,8 +15,7 @@ import java.time.LocalDate
 internal class GameTest {
 
     @Test
-    @DisplayName("플레이의 단어가 words에 포함되어있지 않다면 예외를 던져야 한다.")
-    fun containsWord() {
+    fun `플레이어의 단어가 words에 포함되어있지 않다면 예외를 던져야 한다`() {
         // given
         val wordsReader = WordsReader("words.txt")
         val words = Words(wordsReader.words)
@@ -31,8 +29,7 @@ internal class GameTest {
 
     @ParameterizedTest
     @MethodSource("validParameters")
-    @DisplayName("플레이어의 답과 정답을 매칭한다.")
-    fun matchAnswer(word: Word, expectedTiles: Tiles) {
+    fun `플레이어의 답과 정답을 매칭한다`(word: Word, expectedTiles: Tiles) {
         // given
         val wordsReader = WordsReader("words.txt")
         val words = Words(wordsReader.words)
@@ -42,12 +39,11 @@ internal class GameTest {
         val actualTiles = game.matchResult(word)
 
         // then
-        assertThat(actualTiles).isEqualTo(expectedTiles)
+        actualTiles shouldBe expectedTiles
     }
 
     @Test
-    @DisplayName("정답 매칭을 6번 진행하면 게임은 종료되어야 한다.")
-    fun gameOver() {
+    fun `정답 매칭을 6번 진행하면 게임은 종료되어야 한다`() {
         // given
         val wordsReader = WordsReader("words.txt")
         val words = Words(wordsReader.words)
@@ -58,14 +54,13 @@ internal class GameTest {
 
         // then
         assertAll(
-            { assertThat(game.isOver).isTrue },
-            { assertThat(game.count).isEqualTo(6) }
+            { game.isOver shouldBe true },
+            { game.count shouldBe 6 }
         )
     }
 
     @Test
-    @DisplayName("정답을 맞추면 게임은 종료되어야 한다.")
-    fun gameOverMatch() {
+    fun `정답을 맞추면 게임은 종료되어야 한다`() {
         // given
         val wordsReader = WordsReader("words.txt")
         val words = Words(wordsReader.words)
@@ -77,14 +72,13 @@ internal class GameTest {
 
         // then
         assertAll(
-            { assertThat(game.isOver).isTrue },
-            { assertThat(game.count).isEqualTo(4) }
+            { game.isOver shouldBe true },
+            { game.count shouldBe 4 }
         )
     }
 
     @Test
-    @DisplayName("정답을 못 맞추면 게임은 종료되지 않는다.")
-    fun gameOverMisMatch() {
+    fun `정답을 못 맞추면 게임은 종료되지 않는다`() {
         // given
         val wordsReader = WordsReader("words.txt")
         val words = Words(wordsReader.words)
@@ -95,8 +89,8 @@ internal class GameTest {
 
         // then
         assertAll(
-            { assertThat(game.isOver).isFalse },
-            { assertThat(game.count).isEqualTo(3) }
+            { game.isOver shouldBe false },
+            { game.count shouldBe 3 }
         )
     }
 

@@ -1,6 +1,6 @@
 package wordle.domain
 
-import org.assertj.core.api.Assertions.assertThat
+import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 
@@ -11,7 +11,7 @@ internal class WordsResponseTest {
     fun getWordsResponse() {
         val wordsReader = WordsReader("words.txt")
         val words = wordsReader.words
-        assertThat(words.size).isEqualTo(WORDS_SIZE)
+        words.size shouldBe WORDS_SIZE
     }
 
     companion object {
