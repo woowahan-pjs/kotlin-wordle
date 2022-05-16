@@ -4,8 +4,8 @@ import wordle.domain.Tile
 
 object OutputView {
 
-    fun printStartMessage() {
-        println("WORDLE을 6번 만에 맞춰 보세요.")
+    fun printStartMessage(round: Int) {
+        println("WORDLE을 {$round}번 만에 맞춰 보세요.")
         println("시도의 결과는 타일의 색 변화로 나타납니다.")
     }
 

@@ -27,8 +27,8 @@ class Words(private val values: List<Word>) {
         val result: MutableList<Tile> = ArrayList()
         repeat(5) { result.add(Tile.GRAY) }
 
-        repeat(5) { i -> result[i] = findTileBySameCheck(word, i) }
-        repeat(5) { i -> result[i] = findTileByContainCheck(result, word, i) }
+        repeat(5) { result[it] = findTileBySameCheck(word, it) }
+        repeat(5) { result[it] = findTileByContainCheck(result, word, it) }
         return result
     }
 

@@ -1,6 +1,7 @@
 package wordle
 
 import wordle.domain.Game
+import wordle.domain.TOTAL_ROUNDS_NUM
 import wordle.domain.Word
 import wordle.utils.WordsReader
 import wordle.view.InputView
@@ -8,7 +9,7 @@ import wordle.view.OutputView
 
 fun main() {
     val game = Game(WordsReader.getWords())
-    OutputView.printStartMessage()
+    OutputView.printStartMessage(TOTAL_ROUNDS_NUM)
     doGame(game)
     OutputView.printCount(game.count)
     OutputView.printResults(game.results)

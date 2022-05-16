@@ -1,6 +1,6 @@
 package wordle.domain
 
-private const val TOTAL_ROUNDS_NUM = 6
+const val TOTAL_ROUNDS_NUM = 6
 
 class Game(private val words: Words) {
 
