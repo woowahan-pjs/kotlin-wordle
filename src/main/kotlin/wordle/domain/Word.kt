@@ -29,5 +29,4 @@ class Word(_value: String) {
     override fun hashCode(): Int {
         return value.hashCode()
     }
-
 }
