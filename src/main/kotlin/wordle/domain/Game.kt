@@ -17,8 +17,8 @@ class Game(private val words: Words) {
     }
 
     fun match(answer: Word) {
-        count++
         require(words.contains(answer)) { "등록된 단어가 아닙니다." }
         results.add(words.check(answer))
+        count++
     }
 }
