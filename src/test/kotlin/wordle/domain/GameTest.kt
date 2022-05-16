@@ -2,6 +2,7 @@ package wordle.domain
 
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
+import io.kotest.matchers.throwable.shouldHaveMessage
 import org.junit.jupiter.api.Test
 
 class GameTest {
@@ -10,10 +11,9 @@ class GameTest {
     fun `등록된 단어가 아닌 경우 예외가 발생한다`() {
         val game = Game(listOf(Word("apple"), Word("hello"), Word("spicy")))
 
-        val exception = shouldThrow<IllegalArgumentException> {
+        shouldThrow<IllegalArgumentException> {
             game.match(Word("spell"))
-        }
-        exception.message shouldBe "등록된 단어가 아닙니다."
+        }.shouldHaveMessage("등록된 단어가 아닙니다.")
     }
 
     @Test
