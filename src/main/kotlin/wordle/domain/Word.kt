@@ -4,7 +4,7 @@ import java.io.File
 
 private const val WORD_LENGTH = 5
 
-data class Word(private val word: String) {
+data class Word(val word: String) {
     init {
         require(word.length == WORD_LENGTH) { "단어는 5글자여야 합니다." }
         require(isLowerCase(word)) { "단어는 소문자로 이루어져야 합니다." }
@@ -22,10 +22,6 @@ data class Word(private val word: String) {
         consumedLetterIndex: MutableList<Int> = mutableListOf()
     ): Boolean {
         return !consumedLetterIndex.contains(myIndex) && word[myIndex] == other.word[otherIndex]
-    }
-
-    fun getWord(): String {
-        return word
     }
 
     companion object {

@@ -41,6 +41,6 @@ class Answer(private val word: Word) {
     }
 
     fun getAnswer(): String {
-        return word.getWord()
+        return word.word
     }
 }
