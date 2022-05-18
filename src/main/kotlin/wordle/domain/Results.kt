@@ -4,15 +4,18 @@ private const val LIMIT_SIZE = 6
 
 class Results {
 
-    val value: MutableList<List<Mark>> = mutableListOf()
+    private val results: MutableList<List<Mark>> = mutableListOf()
 
-    fun add(result: MutableList<Mark>) {
-        value.add(result)
+    fun add(result: List<Mark>) {
+        results.add(result)
     }
 
     fun findTryCount() =
-        value.size
+        results.size
 
     fun isLimit() =
-        value.size >= LIMIT_SIZE
+        results.size >= LIMIT_SIZE
+
+    fun getReadOnlyResults(): List<List<Mark>> =
+        results
 }
