@@ -12,7 +12,7 @@ class WordTest {
     @Test
     @DisplayName("단어는 5글자여야 한다.")
     fun constructor() {
-        shouldThrow<IllegalArgumentException> { (Word("word")) }
+        shouldThrow<IllegalArgumentException> { Word("word") }
             .shouldHaveMessage("단어는 5글자여야 합니다.")
     }
 
