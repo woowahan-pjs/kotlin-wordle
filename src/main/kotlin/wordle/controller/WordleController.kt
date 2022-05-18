@@ -2,7 +2,7 @@ package wordle.controller
 
 import wordle.domain.Answer
 import wordle.domain.Game
-import wordle.domain.Words
+import wordle.domain.pickTodayWord
 import wordle.view.inputAnswer
 import wordle.view.printResults
 import wordle.view.printStartMessage
@@ -12,7 +12,7 @@ class WordleController {
 
     fun run() {
         printStartMessage()
-        val game = Game(Words.pick(LocalDate.now()))
+        val game = Game(LocalDate.now().pickTodayWord())
         while (game.isPlaying) {
             game.playRound(Answer(inputAnswer()))
             printResults(game)

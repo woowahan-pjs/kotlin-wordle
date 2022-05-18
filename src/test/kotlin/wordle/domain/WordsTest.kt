@@ -10,6 +10,6 @@ internal class WordsTest {
     fun 오늘의_단어를_선택() {
         val date = LocalDate.of(2022, 5, 12)
 
-        assertThat(Words.pick(date)).isEqualTo("fetus")
+        assertThat(date.pickTodayWord()).isEqualTo("fetus")
     }
 }

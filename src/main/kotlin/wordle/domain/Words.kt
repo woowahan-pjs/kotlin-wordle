@@ -6,20 +6,12 @@ import java.time.temporal.ChronoUnit
 
 const val WORD_SIZE = 5
 
-class Words {
+val BASIC_DATE = LocalDate.of(2021, 6, 19)!!
 
-    companion object {
-        private val VALUE: List<String> = FileReader("src/main/resources/words.txt").readLines()
-        private val BASIC_DATE = LocalDate.of(2021, 6, 19)
+val WORDS: List<String> = FileReader("src/main/resources/words.txt").readLines()
 
-        fun contains(word: String): Boolean =
-            VALUE.contains(word)
+fun LocalDate.pickTodayWord() =
+    WORDS[(ChronoUnit.DAYS.between(BASIC_DATE, this) % WORDS.size).toInt()]
 
-        fun pick(date: LocalDate): String {
-            val index = ChronoUnit.DAYS.between(BASIC_DATE, date) % VALUE.size
-            return VALUE[index.toInt()]
-        }
-    }
-}
-
-fun LocalDate.pick6() = this.toString()
+fun String.isInWords() =
+    WORDS.contains(this)
