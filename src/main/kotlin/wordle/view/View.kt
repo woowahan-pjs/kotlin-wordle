@@ -34,7 +34,7 @@ fun printTryCount(tryCount: Int) {
 
 fun printTiles(results: Results) {
     println()
-    results.getReadOnlyResults().forEach {
+    results.results.forEach {
         printTile(it)
     }
     println()
