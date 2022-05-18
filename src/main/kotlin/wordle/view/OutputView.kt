@@ -6,8 +6,8 @@ import wordle.domain.Color
 object OutputView {
     private val results: MutableList<List<Color>> = mutableListOf()
 
-    fun printIntroduction() {
-        println("WORDLE을 6번 만에 맞춰 보세요.")
+    fun printIntroduction(round: Int) {
+        println("WORDLE을 ${round}번 만에 맞춰 보세요.")
         println("시도의 결과는 타일의 색 변화로 나타납니다.")
     }
 

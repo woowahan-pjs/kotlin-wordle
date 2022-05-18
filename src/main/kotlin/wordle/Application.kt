@@ -8,10 +8,12 @@ import wordle.domain.WordPicker
 import wordle.view.InputView
 import wordle.view.OutputView
 
+private const val ROUND = 6
+
 fun main() {
     val wordPicker = WordPicker()
     val answer = Answer(wordPicker.pickTodayAnswer())
-    OutputView.printIntroduction()
+    OutputView.printIntroduction(ROUND)
 
     if (playWordle(answer)) {
         return
@@ -20,7 +22,7 @@ fun main() {
 }
 
 private fun playWordle(answer: Answer): Boolean {
-    repeat(6) {
+    repeat(ROUND) {
         val guessWord = guessAnswer()
         val result = answer.compare(guessWord)
         OutputView.printResult(result)
