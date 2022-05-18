@@ -3,9 +3,7 @@ package wordle.controller
 import wordle.domain.Answer
 import wordle.domain.Game
 import wordle.domain.Words
-import wordle.view.printInputMessage
-import wordle.view.printResults
-import wordle.view.printStartMessage
+import wordle.view.*
 import java.time.LocalDate
 
 class WordleController {
@@ -14,9 +12,15 @@ class WordleController {
         printStartMessage()
         val game = Game(Words.pick(LocalDate.now()))
         while (game.isPlaying) {
-            val answer = Answer(printInputMessage())
-            game.playRound(answer)
-            printResults(game.results, game.isPlaying, game.findTryCount())
+            game.playRound(Answer(inputAnswer()))
+            printResults(game)
         }
+    }
+
+    private fun printResults(game: Game) {
+        if (!game.isPlaying) {
+            printTryCount(game.findTryCount())
+        }
+        printResults(game.results)
     }
 }
