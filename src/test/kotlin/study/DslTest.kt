@@ -93,5 +93,3 @@ data class Person(val name: String, val company: String, val skills: Skills, val
 data class Skills(val softSkills: List<String>, val hardSkills: List<String>)
 
 data class Languages(val languages: List<String>)
-
-
