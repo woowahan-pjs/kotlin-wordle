@@ -33,10 +33,10 @@ fun introduce(builder: PersonBuilder.() -> Unit): Person {
 }
 
 class PersonBuilder {
-    lateinit var name: String
-    lateinit var company: String
-    lateinit var skills: Skills
-    lateinit var languages: Languages
+    private lateinit var name: String
+    private lateinit var company: String
+    private lateinit var skills: Skills
+    private lateinit var languages: Languages
 
     fun name(input: String) {
         name = input
@@ -77,7 +77,7 @@ class SkillsBuilder {
 }
 
 class LanguagesBuilder {
-    var languages: MutableList<String> = mutableListOf()
+    private var languages: MutableList<String> = mutableListOf()
 
     infix fun String.level(value: Int) {
         languages.add(plus(" level : ") + value)
