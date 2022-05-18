@@ -1,5 +1,7 @@
 package wordle.domain
 
+import wordle.domain.Mark.*
+
 class Answer(private val answer: String) {
 
     init {
@@ -8,7 +10,7 @@ class Answer(private val answer: String) {
     }
 
     fun compareToWord(word: String): MutableList<Mark> {
-        val result = MutableList(WORD_SIZE) { Mark.NONE }
+        val result = MutableList(WORD_SIZE) { NONE }
         val wordTable = createWordTable(word)
         matchExact(word, result, wordTable)
         matchExist(result, wordTable)
@@ -31,28 +33,28 @@ class Answer(private val answer: String) {
 
     private fun markExact(i: Int, word: String, result: MutableList<Mark>, wordTable: HashMap<Char, Int>) {
         if (word[i] == answer[i]) {
-            result[i] = Mark.EXACT
+            result[i] = EXACT
             wordTable.computeIfPresent(word[i]) { _, v -> v - 1 }
         }
     }
 
     private fun matchExist(result: MutableList<Mark>, wordTable: HashMap<Char, Int>) {
-        for (i in 0 until WORD_SIZE) {
-            markExist(i, result, wordTable)
+        for (index in 0 until WORD_SIZE) {
+            markExist(index, result, wordTable)
         }
     }
 
-    private fun markExist(i: Int, result: MutableList<Mark>, wordTable: HashMap<Char, Int>) {
-        if (isExist(i, result, wordTable, answer[i])) {
-            result[i] = Mark.EXIST
-            wordTable.computeIfPresent(answer[i]) { _, v -> v - 1 }
+    private fun markExist(index: Int, result: MutableList<Mark>, wordTable: HashMap<Char, Int>) {
+        if (isExist(index, result, wordTable, answer[index])) {
+            result[index] = EXIST
+            wordTable.computeIfPresent(answer[index]) { _, v -> v - 1 }
         }
     }
 
     private fun isExist(
-        i: Int,
+        index: Int,
         result: MutableList<Mark>,
         wordTable: HashMap<Char, Int>,
         charOfAnswer: Char,
-    ) = result[i] == Mark.NONE && wordTable.containsKey(charOfAnswer) && wordTable[charOfAnswer] != 0
+    ) = result[index] == NONE && wordTable.containsKey(charOfAnswer) && wordTable[charOfAnswer] != 0
 }
