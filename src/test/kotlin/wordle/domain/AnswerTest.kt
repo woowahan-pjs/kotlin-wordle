@@ -1,10 +1,12 @@
 package wordle.domain
 
+import org.junit.jupiter.api.assertThrows
+import wordle.domain.Mark.EXACT
+import wordle.domain.Mark.NONE
+import wordle.domain.Mark.EXIST
 import io.kotest.matchers.throwable.shouldHaveMessage
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.assertThrows
-import wordle.domain.Mark.*
 
 internal class AnswerTest {
 

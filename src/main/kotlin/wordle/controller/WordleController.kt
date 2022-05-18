@@ -3,7 +3,9 @@ package wordle.controller
 import wordle.domain.Answer
 import wordle.domain.Game
 import wordle.domain.Words
-import wordle.view.*
+import wordle.view.inputAnswer
+import wordle.view.printResults
+import wordle.view.printStartMessage
 import java.time.LocalDate
 
 class WordleController {

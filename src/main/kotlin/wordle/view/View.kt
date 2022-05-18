@@ -1,9 +1,11 @@
 package wordle.view
 
+import wordle.domain.Mark.EXACT
+import wordle.domain.Mark.NONE
+import wordle.domain.Mark.EXIST
+import wordle.domain.Results
 import wordle.domain.Game
 import wordle.domain.Mark
-import wordle.domain.Mark.*
-import wordle.domain.Results
 
 fun printStartMessage() {
     println("WORDLE 을 6번 만에 맞춰 보세요.\n시도의 결과는 타일의 색 변화로 나타납니다.")

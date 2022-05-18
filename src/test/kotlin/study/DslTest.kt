@@ -21,10 +21,7 @@ class DslTest {
             }
         }
 
-        assertThat(person.toString()).isEqualTo(
-            "Person(name=조조그린, company=우아한테크코스, " +
-                    "skills=Skills(softSkills=[A passion for problem solving, Good communication skills], hardSkills=[Java]), " +
-                    "languages=Languages(languages=[Korean level : 5, English level : 3]))")
+        assertThat(person.toString()).isEqualTo("Person(name=조조그린, company=우아한테크코스, skills=Skills(softSkills=[A passion for problem solving, Good communication skills], hardSkills=[Java]), languages=Languages(languages=[Korean level : 5, English level : 3]))")
     }
 }
 

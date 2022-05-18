@@ -12,8 +12,8 @@ internal class GameTest {
         repeat(3) { game.playRound(Answer("apple")) }
 
         assertAll(
-            {assertThat(game.findTryCount()).isEqualTo(3)},
-            {assertThat(game.isPlaying).isTrue()}
+            { assertThat(game.findTryCount()).isEqualTo(3) },
+            { assertThat(game.isPlaying).isTrue() }
         )
     }
 
@@ -23,8 +23,8 @@ internal class GameTest {
         repeat(6) { game.playRound(Answer("apple")) }
 
         assertAll(
-            {assertThat(game.findTryCount()).isEqualTo(6)},
-            {assertThat(game.isPlaying).isFalse()}
+            { assertThat(game.findTryCount()).isEqualTo(6) },
+            { assertThat(game.isPlaying).isFalse() }
         )
     }
 
@@ -34,8 +34,8 @@ internal class GameTest {
         repeat(3) { game.playRound(Answer("fetus")) }
 
         assertAll(
-            {assertThat(game.findTryCount()).isEqualTo(3)},
-            {assertThat(game.isPlaying).isFalse()}
+            { assertThat(game.findTryCount()).isEqualTo(3) },
+            { assertThat(game.isPlaying).isFalse() }
         )
     }
 
