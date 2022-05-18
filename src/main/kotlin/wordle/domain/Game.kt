@@ -14,10 +14,9 @@ class Game(private val word: String) {
         }
     }
 
-    private fun isOver(result: MutableList<Mark>) =
+    private fun isOver(result: List<Mark>) =
         results.isLimit() || result.all { it == Mark.EXACT }
 
-    fun findTryCount(): Int {
-        return results.value.size
-    }
+    fun findTryCount() =
+        results.findTryCount()
 }

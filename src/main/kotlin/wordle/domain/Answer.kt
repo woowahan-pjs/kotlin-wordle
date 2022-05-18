@@ -9,7 +9,7 @@ class Answer(private val answer: String) {
         require(answer.isInWords()) { "[ERROR] 목록에 존재하지 않는 단어입니다." }
     }
 
-    fun compareToWord(word: String): MutableList<Mark> {
+    fun compareToWord(word: String): List<Mark> {
         val result = MutableList(WORD_SIZE) { NONE }
         val wordTable = createWordTable(word)
         matchExact(word, result, wordTable)
