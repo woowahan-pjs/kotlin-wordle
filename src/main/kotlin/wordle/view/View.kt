@@ -1,6 +1,8 @@
 package wordle.view
 
+import wordle.domain.Game
 import wordle.domain.Mark
+import wordle.domain.Mark.*
 import wordle.domain.Results
 
 fun printStartMessage() {
@@ -16,27 +18,35 @@ fun inputAnswer(): String {
     return readln()
 }
 
-fun printTryCount(tryCount: Int) {
-    println("$tryCount/6\n")
+fun printResults(game: Game) {
+    if (!game.isPlaying) {
+        printTryCount(game.findTryCount())
+    }
+    printTiles(game.results)
 }
 
-fun printResults(results: Results) {
+fun printTryCount(tryCount: Int) {
+    println()
+    println("$tryCount/6")
+}
+
+fun printTiles(results: Results) {
     println()
     results.value.forEach {
-        printResult(it)
+        printTile(it)
     }
     println()
 }
 
-// 수정 가능 할 지도?
-private fun printResult(result: List<Mark>) {
-    val stringBuilder = StringBuilder()
-    result.forEach {
-        when (it) {
-            Mark.NONE -> stringBuilder.append("⬜")
-            Mark.EXIST -> stringBuilder.append("\uD83D\uDFE8")
-            Mark.EXACT -> stringBuilder.append("\uD83D\uDFE9")
+private fun printTile(result: List<Mark>) {
+    StringBuilder().apply {
+        result.forEach {
+            when (it) {
+                NONE -> append("⬜")
+                EXIST -> append("\uD83D\uDFE8")
+                EXACT -> append("\uD83D\uDFE9")
+            }
         }
+        println(toString())
     }
-    println(stringBuilder.toString())
 }

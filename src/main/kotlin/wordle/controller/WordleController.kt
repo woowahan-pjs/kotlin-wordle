@@ -16,11 +16,4 @@ class WordleController {
             printResults(game)
         }
     }
-
-    private fun printResults(game: Game) {
-        if (!game.isPlaying) {
-            printTryCount(game.findTryCount())
-        }
-        printResults(game.results)
-    }
 }
