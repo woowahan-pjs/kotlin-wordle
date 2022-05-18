@@ -8,12 +8,12 @@ class DslTest {
     @Test
     fun introduce() {
         val person = introduce {
-            name("박재성")
-            company("우아한형제들")
+            name("조조그린")
+            company("우아한테크코스")
             skills {
                 soft("A passion for problem solving")
                 soft("Good communication skills")
-                hard("Kotlin")
+                hard("Java")
             }
             languages {
                 "Korean" level 5
@@ -22,8 +22,8 @@ class DslTest {
         }
 
         assertThat(person.toString()).isEqualTo(
-            "Person(name=박재성, company=우아한형제들, " +
-                    "skills=Skills(softSkills=[A passion for problem solving, Good communication skills], hardSkills=[Kotlin]), " +
+            "Person(name=조조그린, company=우아한테크코스, " +
+                    "skills=Skills(softSkills=[A passion for problem solving, Good communication skills], hardSkills=[Java]), " +
                     "languages=Languages(languages=[Korean level : 5, English level : 3]))")
     }
 }
