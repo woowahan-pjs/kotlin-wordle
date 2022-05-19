@@ -16,7 +16,18 @@ class Answer(val word: Word) {
     }
 
     private fun compareAny(word: Word): List<Int> {
-        return (RANGE_START..RANGE_END).filter { isAnyMatch(word, it) }
+        val consumed = mutableListOf<Int>()
+        return (RANGE_START..RANGE_END).filter { isAnyMatch(word, it, consumed) }
+    }
+
+    private fun isAnyMatch(word: Word, outerIndex: Int, consumed: MutableList<Int>): Boolean {
+        return (RANGE_START..RANGE_END).any {
+            if (this.word.compareByIndex(word, it, outerIndex) && !consumed.contains(it)) {
+                consumed.add(it)
+                return true
+            }
+            return@any false
+        }
     }
 
     private fun merge(greenIndices: List<Int>, yellowIndices: List<Int>): List<Color> {
@@ -31,9 +42,5 @@ class Answer(val word: Word) {
             return Color.YELLOW
         }
         return Color.GRAY
-    }
-
-    private fun isAnyMatch(word: Word, outerIndex: Int): Boolean {
-        return (RANGE_START..RANGE_END).any { this.word.compareByIndex(word, it, outerIndex) }
     }
 }
