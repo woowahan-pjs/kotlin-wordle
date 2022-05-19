@@ -35,7 +35,7 @@ class AnswerTest {
 
     @Test
     @DisplayName("위치만 일치하는 글자가 정답에 더 많은 경우 예측을 비교한다.")
-    fun compareWithYellowAndGray1() {
+    fun compareWithAnswerMoreIncludeYellow() {
         val answer = Answer(Word("front"))
 
         answer.compare(Word("totem")) shouldContainExactly
@@ -44,7 +44,7 @@ class AnswerTest {
 
     @Test
     @DisplayName("위치만 일치하는 글자가 여러 개이면서 입력과 정답에 개수가 같은 경우 예측을 비교한다.")
-    fun compareWithYellowAndGray2() {
+    fun compareWithAnswerSameIncludeYellow() {
         val answer = Answer(Word("totem"))
 
         answer.compare(Word("start")) shouldContainExactly
@@ -53,11 +53,20 @@ class AnswerTest {
 
     @Test
     @DisplayName("위치만 일치하는 글자가 입력에 더 많은 경우 예측을 비교한다.")
-    fun compareWithYellowWhenDifferentCounts() {
+    fun compareWithInputMoreIncludeYellow() {
         val answer = Answer(Word("witch"))
 
         answer.compare(Word("timid")) shouldContainExactly
             listOf(Color.YELLOW, Color.GREEN, Color.GRAY, Color.GRAY, Color.GRAY)
+    }
+
+    @Test
+    @DisplayName("정답 글자가 먼저 존재하면서, 위치만 일치하는 글자가 그 뒤에 존재하는 경우 예측을 비교한다.")
+    fun compareWithGreenFirstSoNotYellow() {
+        val answer = Answer(Word("marry"))
+
+        answer.compare(Word("mimic")) shouldContainExactly
+            listOf(Color.GREEN, Color.GRAY, Color.GRAY, Color.GRAY, Color.GRAY)
     }
 
     @Test
