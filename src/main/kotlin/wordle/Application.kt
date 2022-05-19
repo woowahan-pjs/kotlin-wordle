@@ -10,8 +10,8 @@ fun main() {
     OutputView.printIntroduction(Game.maxCount)
     while (!game.isOver()) {
         val word = inputGuessWord()
-        val results = game.playWordle(word)
-        OutputView.printResult(results)
+        game.playWordle(word)
+        OutputView.printResult(game.guessResults)
     }
     OutputView.printCount(game.count)
 }

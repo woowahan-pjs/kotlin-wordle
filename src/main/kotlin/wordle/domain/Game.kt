@@ -5,16 +5,17 @@ class Game {
     var count = 0
         private set
 
-    val answer: Answer = Answer(WordPicker().pickTodayAnswer())
+    private val answer: Answer = Answer(WordPicker().pickTodayAnswer())
 
     private val _guessResults: MutableList<Colors> = mutableListOf()
+    val guessResults: List<Colors>
+        get() = _guessResults
 
-    fun playWordle(word: Word): List<Colors> {
+    fun playWordle(word: Word) {
         if (!isOver()) {
             _guessResults.add(Colors(answer.compare(word)))
-            ++count
+            count++
         }
-        return _guessResults
     }
 
     fun isOver(): Boolean {

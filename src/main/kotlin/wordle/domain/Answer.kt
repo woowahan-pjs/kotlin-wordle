@@ -3,7 +3,7 @@ package wordle.domain
 private const val RANGE_START = 0
 private const val RANGE_END = 4
 
-class Answer(val word: Word) {
+class Answer(private val word: Word) {
 
     fun compare(word: Word): List<Color> {
         val exactIndices = compareExact(word)
