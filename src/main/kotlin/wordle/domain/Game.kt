@@ -4,13 +4,10 @@ import java.time.LocalDate
 
 data class Game(val words: Words, val date: LocalDate) {
 
-    private var _count: Int = 0
-    private var _isOver: Boolean = false
-
-    val count: Int
-        get() = _count
-    val isOver: Boolean
-        get() = _isOver
+    var count: Int = 0
+        private set
+    var isOver: Boolean = false
+        private set
     val maxRound: Int
         get() = MAX_ROUND
 
@@ -21,15 +18,15 @@ data class Game(val words: Words, val date: LocalDate) {
             .mapIndexedNotNull { index, value ->
                 matchSpell(value.value, index, answer)
             }
-        _count++
+        count++
         val newTiles = Tiles(tiles)
         updateIsOver(newTiles)
         return newTiles
     }
 
     private fun updateIsOver(newTiles: Tiles) {
-        if (_count >= MAX_ROUND || newTiles.isAllGreen()) {
-            _isOver = true
+        if (count >= MAX_ROUND || newTiles.isAllGreen()) {
+            isOver = true
         }
     }
 
