@@ -1,4 +1,4 @@
-package wordle.study
+package study
 
 import io.kotest.matchers.collections.shouldContainExactly
 import io.kotest.matchers.shouldBe
