@@ -53,7 +53,6 @@ class PersonBuilder {
     }
 }
 
-
 class SkillsBuilder {
     var skills: MutableList<Skill> = mutableListOf()
 
@@ -81,7 +80,6 @@ class LanguagesBuilder {
         return languages
     }
 }
-
 
 data class Person(val name: String, val company: String, val skills: List<Skill>, val languages: List<Language>)
 

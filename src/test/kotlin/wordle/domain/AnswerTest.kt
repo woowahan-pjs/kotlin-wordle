@@ -1,6 +1,5 @@
 package wordle.domain
 
-import io.kotest.matchers.collections.shouldContainAll
 import io.kotest.matchers.collections.shouldContainExactly
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
