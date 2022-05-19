@@ -1,31 +1,28 @@
 package wordle.view
 
-import wordle.domain.Answer
-import wordle.domain.Color
+import wordle.domain.Colors
+import wordle.domain.Game
 
 object OutputView {
-    private val results: MutableList<List<Color>> = mutableListOf()
 
-    fun printIntroduction() {
-        println("WORDLE을 6번 만에 맞춰 보세요.")
+    fun printIntroduction(maxCount: Int) {
+        println("WORDLE을 $maxCount 번 만에 맞춰 보세요.")
         println("시도의 결과는 타일의 색 변화로 나타납니다.")
     }
 
-    fun printResult(newResult: List<Color>) {
-        results.add(newResult)
-        for (result in results) {
-            result.forEach { print(it.representation) }
+    fun printResult(colorResults: List<Colors>) {
+        for (colorResult in colorResults) {
+            colorResult.printColors()
             println()
         }
-        println()
     }
 
-    fun printAnswer(answer: Answer) {
-        println("아쉽습니다! 정답은 ${answer.word.word}입니다.")
+    private fun Colors.printColors() {
+        this.values.forEach { print(it.representation) }
     }
 
     fun printCount(tryCount: Int) {
-        println("$tryCount/6")
+        println("$tryCount/${Game.maxCount}")
     }
 
     fun printError(message: String?) {
