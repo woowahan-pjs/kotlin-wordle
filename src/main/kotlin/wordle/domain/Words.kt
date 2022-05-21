@@ -3,13 +3,12 @@ package wordle.domain
 import java.time.LocalDate
 import java.time.temporal.ChronoUnit
 
-class Words(private val values: List<Word>) {
+class Words(private val values: List<Word>, today: LocalDate = LocalDate.now()) {
 
-    private val answer: Word = findAnswer()
+    private val answer: Word = findAnswer(today)
     private var answerMap: MutableMap<Char, Int> = HashMap()
 
-    private fun findAnswer(): Word {
-        val date: LocalDate = LocalDate.now()
+    private fun findAnswer(date: LocalDate): Word {
         val standardDate: LocalDate = LocalDate.of(2021, 6, 19)
         val days: Int = ChronoUnit.DAYS.between(standardDate, date).toInt()
         return values[days % values.size]

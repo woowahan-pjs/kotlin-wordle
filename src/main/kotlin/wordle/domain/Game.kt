@@ -1,13 +1,14 @@
 package wordle.domain
 
-class Game(private val words: Words) {
+import java.time.LocalDate
 
 class Game(private val words: Words, private val maxGameCount: Int) {
 
     constructor(
         words: List<Word>,
+        date: LocalDate = LocalDate.now(),
         maxGameCount: Int = DEFAULT_MAX_GAME_COUNT
-    ) : this(Words(words), maxGameCount)
+    ) : this(Words(words, date), maxGameCount)
 
     private var _count: Int = 0
     private var _results: MutableList<List<Tile>> = mutableListOf()
