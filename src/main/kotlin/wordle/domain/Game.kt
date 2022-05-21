@@ -4,14 +4,17 @@ class Game(private val words: Words) {
 
     constructor(words: List<Word>) : this(Words(words))
 
-    var count: Int = 0
-        private set
+    private var _count: Int = 0
+    private var _results: MutableList<List<Tile>> = mutableListOf()
 
-    var results: MutableList<List<Tile>> = ArrayList()
-        private set
+    val count: Int
+        get() = _count
+
+    val results: List<List<Tile>>
+        get() = _results
 
     fun isGameOver(answer: Word): Boolean {
-        return count == MAX_GAME_COUNT || words.isCorrect(answer)
+        return _count == MAX_GAME_COUNT || words.isCorrect(answer)
     }
 
     fun match(answer: Word) {
