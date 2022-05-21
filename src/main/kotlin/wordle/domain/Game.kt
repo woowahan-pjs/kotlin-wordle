@@ -25,8 +25,8 @@ class Game(private val words: Words, private val maxGameCount: Int) {
 
     fun match(answer: Word) {
         require(words.contains(answer)) { "등록된 단어가 아닙니다." }
-        results.add(words.check(answer))
-        count++
+        _results.add(words.check(answer))
+        _count++
     }
 
     companion object {

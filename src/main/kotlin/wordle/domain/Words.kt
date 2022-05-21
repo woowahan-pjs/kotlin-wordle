@@ -30,11 +30,9 @@ class Words(private val values: List<Word>, today: LocalDate = LocalDate.now()) 
     }
 
     private fun initAnswerMap(): MutableMap<Char, Int> {
-        val answerMap: MutableMap<Char, Int> = HashMap()
-        answer.value.forEach {
-            answerMap[it] = answerMap.getOrDefault(it, 0) + 1
-        }
-        return answerMap
+        return answer.value
+            .groupBy { it }
+            .mapValues { it.value.count() } as MutableMap<Char, Int>
     }
 
     private fun putTileIfSame(result: MutableList<Tile>, word: Word, index: Int) {
