@@ -16,9 +16,16 @@ class GameTest {
     }
 
     @Test
-    fun `게임 종료여부를 확인한다`() {
-        val game = Game(listOf(Word("apple"), Word("hello"), Word("spicy")))
-        repeat(6) { game.match(Word("apple")) }
-        game.isGameOver(Word("apple")) shouldBe true
+    fun `게임 종료시 true를 반환한다`() {
+        val game = Game(listOf(Word("apple"), Word("hello"), Word("spicy")), 0)
+
+        game.isGameOver(Word("hello")) shouldBe true
+    }
+
+    @Test
+    fun `게임 종료시 false를 반환한다`() {
+        val game = Game(listOf(Word("apple"), Word("hello"), Word("spicy")), 1)
+
+        game.isGameOver(Word("hello")) shouldBe false
     }
 }

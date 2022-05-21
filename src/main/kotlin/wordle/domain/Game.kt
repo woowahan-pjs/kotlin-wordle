@@ -2,7 +2,12 @@ package wordle.domain
 
 class Game(private val words: Words) {
 
-    constructor(words: List<Word>) : this(Words(words))
+class Game(private val words: Words, private val maxGameCount: Int) {
+
+    constructor(
+        words: List<Word>,
+        maxGameCount: Int = DEFAULT_MAX_GAME_COUNT
+    ) : this(Words(words), maxGameCount)
 
     private var _count: Int = 0
     private var _results: MutableList<List<Tile>> = mutableListOf()
@@ -14,7 +19,7 @@ class Game(private val words: Words) {
         get() = _results
 
     fun isGameOver(answer: Word): Boolean {
-        return _count == MAX_GAME_COUNT || words.isCorrect(answer)
+        return _count == maxGameCount || words.isCorrect(answer)
     }
 
     fun match(answer: Word) {
@@ -24,6 +29,6 @@ class Game(private val words: Words) {
     }
 
     companion object {
-        const val MAX_GAME_COUNT = 6
+        const val DEFAULT_MAX_GAME_COUNT = 6
     }
 }
