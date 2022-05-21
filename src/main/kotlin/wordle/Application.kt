@@ -4,9 +4,10 @@ import wordle.domain.Game
 import wordle.domain.Word
 import wordle.view.InputView
 import wordle.view.OutputView
+import java.time.LocalDate
 
 fun main() {
-    val game = Game()
+    val game = Game(LocalDate.now())
     OutputView.printIntroduction(Game.maxCount)
     while (!game.isOver()) {
         val word = inputGuessWord()

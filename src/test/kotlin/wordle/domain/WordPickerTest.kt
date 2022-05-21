@@ -10,9 +10,9 @@ class WordPickerTest {
     @Test
     @DisplayName("오늘의 단어를 가져온다.")
     fun pickTodayAnswer() {
-        val wordPicker = WordPicker(LocalDate.of(2021, 6, 20))
+        val wordPicker = WordPicker()
 
-        val todayAnswer = wordPicker.pickTodayAnswer()
+        val todayAnswer = wordPicker.pickAnswer(LocalDate.of(2021, 6, 20))
 
         todayAnswer shouldBe Word("rebut")
     }
