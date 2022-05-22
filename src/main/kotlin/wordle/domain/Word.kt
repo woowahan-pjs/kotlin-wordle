@@ -21,12 +21,8 @@ data class Word(private val word: String) {
         private val CACHE: List<String> = File("src/main/resources/words.txt")
             .readLines()
 
-        fun String.containsInWord(): Boolean {
-            return CACHE.contains(this)
-        }
+        fun String.containsInWord(): Boolean = CACHE.contains(this)
 
-        fun findWordByDay(day: Int): Word {
-            return Word(CACHE[day % CACHE.size])
-        }
+        fun findWordByDay(day: Int): Word = Word(CACHE[day % CACHE.size])
     }
 }

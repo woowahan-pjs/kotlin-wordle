@@ -24,15 +24,13 @@ class Answer(private val word: Word) {
         }
     }
 
-    private fun isExactMatch(word: Word, index: Int, consumedIndices: MutableList<Int>): Boolean {
-        return this.word.compareByIndex(word, index) && consumeIfMatched(consumedIndices, index)
-    }
+    private fun isExactMatch(word: Word, index: Int, consumedIndices: MutableList<Int>): Boolean =
+        this.word.compareByIndex(word, index) && consumeIfMatched(consumedIndices, index)
 
-    private fun isAnyMatch(word: Word, outerIndex: Int, consumedIndices: MutableList<Int>): Boolean {
-        return (RANGE_START..RANGE_END).any {
+    private fun isAnyMatch(word: Word, outerIndex: Int, consumedIndices: MutableList<Int>): Boolean =
+        (RANGE_START..RANGE_END).any {
             this.word.compareByIndex(word, it, outerIndex) && consumeIfMatched(consumedIndices, it)
         }
-    }
 
     private fun consumeIfMatched(consumedIndices: MutableList<Int>, index: Int): Boolean {
         if (!consumedIndices.contains(index)) {

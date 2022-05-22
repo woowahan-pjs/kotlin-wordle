@@ -30,11 +30,7 @@ object OutputView {
         }
     }
 
-    fun printCount(tryCount: Int) {
-        println("$tryCount/${Game.maxCount}")
-    }
+    fun printCount(tryCount: Int) = println("$tryCount/${Game.maxCount}")
 
-    fun printError(message: String?) {
-        println(message)
-    }
+    fun printError(message: String?) = println(message)
 }

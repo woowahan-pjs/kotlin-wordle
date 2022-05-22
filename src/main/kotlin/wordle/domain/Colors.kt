@@ -5,9 +5,7 @@ class Colors(val values: MutableList<Color>) {
     companion object {
         private const val SIZE = 5
 
-        fun createEmpty(): Colors {
-            return Colors(mutableListOf(Color.GRAY, Color.GRAY, Color.GRAY, Color.GRAY, Color.GRAY))
-        }
+        fun createEmpty(): Colors = Colors(mutableListOf(Color.GRAY, Color.GRAY, Color.GRAY, Color.GRAY, Color.GRAY))
     }
 
     init {

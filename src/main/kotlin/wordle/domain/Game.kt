@@ -20,9 +20,7 @@ class Game(today: LocalDate) {
         }
     }
 
-    fun isOver(): Boolean {
-        return count >= maxCount || _guessResults.any { it.isCorrect() }
-    }
+    fun isOver(): Boolean = count >= maxCount || _guessResults.any { it.isCorrect() }
 
     companion object {
         const val maxCount = 6
