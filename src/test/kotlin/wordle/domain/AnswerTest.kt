@@ -9,19 +9,19 @@ import wordle.domain.Mark.*
 internal class AnswerTest {
 
     @Test
-    fun 글자길이가_5가_아닌_경우_예외발생() {
+    fun `글자길이가 5가 아닌 경우 예외발생`() {
         assertThrows<IllegalArgumentException> { Answer("abcdef") }
             .shouldHaveMessage("[ERROR] 부적절한 글자 길이입니다.")
     }
 
     @Test
-    fun 주어진_단어목록에_존재하지_않는_경우_예외발생() {
+    fun `주어진 단어목록에 존재하지 않는 경우 예외발생`() {
         assertThrows<IllegalArgumentException> { Answer("abcde") }
             .shouldHaveMessage("[ERROR] 목록에 존재하지 않는 단어입니다.")
     }
 
     @Test
-    fun 답안과_정답을_비교_CASE_중복되는_문자_중_하나만_일치_할_때() {
+    fun `답안과 정답을 비교-중복되는 문자 중 하나만 일치할 때`() {
         val answer = Answer("groom")
 
         assertThat(answer.compareToWord("goose"))
@@ -29,7 +29,7 @@ internal class AnswerTest {
     }
 
     @Test
-    fun 답안과_정답을_비교_CASE_중복되는_문자가_존재하지만_정답의_개수가_더_많을_때() {
+    fun `답안과 정답을 비교-중복되는 문자가 존재하지만 정답의 개수가 더 많을 때`() {
         val answer = Answer("eerie")
 
         assertThat(answer.compareToWord("sheen"))

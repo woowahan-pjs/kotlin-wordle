@@ -7,7 +7,7 @@ import org.junit.jupiter.api.assertAll
 internal class GameTest {
 
     @Test
-    fun 게임을_한_라운드씩_진행() {
+    fun `게임을 한 라운드씩 진행`() {
         val game = Game("fetus")
         repeat(3) { game.playRound(Answer("apple")) }
 
@@ -18,7 +18,7 @@ internal class GameTest {
     }
 
     @Test
-    fun 게임을_한_라운드씩_진행하다_6라운드에_도달하면_게임종료() {
+    fun `게임을 한 라운드씩 진행하다 6라운드에 도달하면 게임종료`() {
         val game = Game("fetus")
         repeat(6) { game.playRound(Answer("apple")) }
 
@@ -29,7 +29,7 @@ internal class GameTest {
     }
 
     @Test
-    fun 게임을_한_라운드씩_진행하다_정답을_맞추면_게임종료() {
+    fun `게임을 한 라운드씩 진행하다 정답을 맞추면 게임종료`() {
         val game = Game("fetus")
         repeat(3) { game.playRound(Answer("fetus")) }
 
@@ -40,7 +40,7 @@ internal class GameTest {
     }
 
     @Test
-    fun 몇_번째_시도인지_계산() {
+    fun `몇번째 시도인지 계산`() {
         val game = Game("fetus")
         repeat(6) { game.playRound(Answer("apple")) }
 
