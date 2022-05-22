@@ -10,10 +10,10 @@ internal class GameTest {
     @Test
     fun `정답을 6번 미만으로 입력한 경우 게임 진행 가능`() {
         val game = Game("fetus")
-        repeat(3) { game.playRound(Answer("apple")) }
+        repeat(5) { game.playRound(Answer("apple")) }
 
         assertSoftly(game) {
-            findTryCount() shouldBeExactly 3
+            findTryCount() shouldBeExactly 5
             isPlaying shouldBe true
         }
     }
