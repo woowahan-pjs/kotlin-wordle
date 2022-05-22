@@ -26,9 +26,9 @@ class DslTest {
         assertThat(profile.skills.hard).contains("Kotlin")
         assertThat(profile.languages.languages).extracting("type", "level")
             .contains(
-            Tuple.tuple("Korean", 5),
-            Tuple.tuple("English", 3)
-        )
+                Tuple.tuple("Korean", 5),
+                Tuple.tuple("English", 3)
+            )
     }
 }
 

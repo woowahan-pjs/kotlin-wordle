@@ -42,4 +42,3 @@ private fun printResult(result: List<Mark>) {
 fun printErrorMessage(message: String?) {
     println(message)
 }
-
