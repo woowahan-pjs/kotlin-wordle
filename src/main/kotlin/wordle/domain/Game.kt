@@ -7,9 +7,7 @@ class Game(today: LocalDate) {
     var count = 0
         private set
 
-    // private val answer: Answer = Answer(WordPicker().pickAnswer(today))
-    private val answer: Answer = Answer(Word("marry"))
-
+    private val answer: Answer = Answer(WordPicker().pickAnswer(today))
 
     private val _guessResults: MutableList<Colors> = mutableListOf()
     val guessResults: List<Colors>

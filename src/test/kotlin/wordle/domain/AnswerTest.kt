@@ -11,7 +11,7 @@ class AnswerTest {
     fun compareWithGreenAndGray() {
         val answer = Answer(Word("cigar"))
 
-        answer.compare(Word("clear")) shouldContainExactly
+        answer.compare(Word("clear")).values shouldContainExactly
             listOf(Color.GREEN, Color.GRAY, Color.GRAY, Color.GREEN, Color.GREEN)
     }
 
@@ -20,7 +20,7 @@ class AnswerTest {
     fun compareWithAllGreens() {
         val answer = Answer(Word("cigar"))
 
-        answer.compare(Word("cigar")) shouldContainExactly
+        answer.compare(Word("cigar")).values shouldContainExactly
             listOf(Color.GREEN, Color.GREEN, Color.GREEN, Color.GREEN, Color.GREEN)
     }
 
@@ -29,7 +29,7 @@ class AnswerTest {
     fun compareWithAllColors() {
         val answer = Answer(Word("spill"))
 
-        answer.compare(Word("hello")) shouldContainExactly
+        answer.compare(Word("hello")).values shouldContainExactly
             listOf(Color.GRAY, Color.GRAY, Color.YELLOW, Color.GREEN, Color.GRAY)
     }
 
@@ -38,7 +38,7 @@ class AnswerTest {
     fun compareWithYellowAndGray1() {
         val answer = Answer(Word("front"))
 
-        answer.compare(Word("totem")) shouldContainExactly
+        answer.compare(Word("totem")).values shouldContainExactly
             listOf(Color.YELLOW, Color.YELLOW, Color.GRAY, Color.GRAY, Color.GRAY)
     }
 
@@ -47,7 +47,7 @@ class AnswerTest {
     fun compareWithYellowAndGray2() {
         val answer = Answer(Word("totem"))
 
-        answer.compare(Word("start")) shouldContainExactly
+        answer.compare(Word("start")).values shouldContainExactly
             listOf(Color.GRAY, Color.YELLOW, Color.GRAY, Color.GRAY, Color.YELLOW)
     }
 
@@ -56,7 +56,7 @@ class AnswerTest {
     fun compareWithYellowAndGray3() {
         val answer = Answer(Word("witch"))
 
-        answer.compare(Word("timid")) shouldContainExactly
+        answer.compare(Word("timid")).values shouldContainExactly
             listOf(Color.YELLOW, Color.GREEN, Color.GRAY, Color.GRAY, Color.GRAY)
     }
 
@@ -65,7 +65,7 @@ class AnswerTest {
     fun compareWithAllGrays() {
         val answer = Answer(Word("parry"))
 
-        answer.compare(Word("biome")) shouldContainExactly
+        answer.compare(Word("biome")).values shouldContainExactly
             listOf(Color.GRAY, Color.GRAY, Color.GRAY, Color.GRAY, Color.GRAY)
     }
 
@@ -74,7 +74,7 @@ class AnswerTest {
     fun compareWithAllYellows() {
         val answer = Answer(Word("parse"))
 
-        answer.compare(Word("spear")) shouldContainExactly
+        answer.compare(Word("spear")).values shouldContainExactly
             listOf(Color.YELLOW, Color.YELLOW, Color.YELLOW, Color.YELLOW, Color.YELLOW)
     }
 }
