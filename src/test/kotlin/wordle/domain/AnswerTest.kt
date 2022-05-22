@@ -1,6 +1,10 @@
 package wordle.domain
 
 import io.kotest.assertions.throwables.shouldThrow
+import io.kotest.data.forAll
+import io.kotest.data.headers
+import io.kotest.data.row
+import io.kotest.data.table
 import io.kotest.matchers.collections.shouldContainExactly
 import io.kotest.matchers.throwable.shouldHaveMessage
 import org.junit.jupiter.api.Test
@@ -10,8 +14,16 @@ internal class AnswerTest {
 
     @Test
     fun `글자길이가 5가 아닌 경우 예외발생`() {
-        shouldThrow<IllegalArgumentException> { Answer("abcdef") }
-            .shouldHaveMessage("[ERROR] 부적절한 글자 길이입니다.")
+        forAll(
+            table(
+                headers("answer"),
+                row("abcd"),
+                row("abcdef")
+            )
+        ) {
+            shouldThrow<IllegalArgumentException> { Answer(it) }
+                .shouldHaveMessage("[ERROR] 부적절한 글자 길이입니다.")
+        }
     }
 
     @Test
