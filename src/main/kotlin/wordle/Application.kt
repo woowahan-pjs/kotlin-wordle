@@ -8,18 +8,13 @@ import wordle.view.OutputView
 
 fun main() {
     val game = Game(WordsReader.getWords())
-    OutputView.printStartMessage()
-    playGame(game)
-    OutputView.printCount(game.count)
-    OutputView.printResults(game.results)
-}
+    var isGameOver = false
+    OutputView.printStartMessage(game.maxGameCount)
 
-private fun playGame(game: Game) {
-    val answer = Word(InputView.inputAnswer())
-    game.match(answer)
-    if (game.isGameOver(answer)) {
-        return
+    while (!isGameOver) {
+        val answer = Word(InputView.inputAnswer())
+        game.match(answer)
+        isGameOver = game.isGameOver(answer)
+        OutputView.printResults(game, isGameOver)
     }
-    OutputView.printResults(game.results)
-    playGame(game)
 }

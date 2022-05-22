@@ -2,7 +2,7 @@ package wordle.domain
 
 import java.time.LocalDate
 
-class Game(private val words: Words, private val maxGameCount: Int) {
+class Game(private val words: Words, val maxGameCount: Int) {
 
     constructor(
         words: List<Word>,
