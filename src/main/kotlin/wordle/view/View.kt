@@ -3,8 +3,8 @@ package wordle.view
 import wordle.domain.Mark
 import wordle.domain.Results
 
-fun printStartMessage() {
-    println("WORDLE 을 6번 만에 맞춰 보세요.\n시도의 결과는 타일의 색 변화로 나타납니다.")
+fun printStartMessage(fixedCount: Int) {
+    println("WORDLE 을 $fixedCount 번 만에 맞춰 보세요.\n시도의 결과는 타일의 색 변화로 나타납니다.")
 }
 
 fun requestInput(): String {
@@ -12,10 +12,10 @@ fun requestInput(): String {
     return readln()
 }
 
-fun printResults(results: Results, isPlaying: Boolean, tryCount: Int) {
+fun printResults(results: Results, isPlaying: Boolean, tryCount: Int, fixedCount: Int) {
     println()
     if (!isPlaying) {
-        printTryCount(tryCount)
+        printTryCount(tryCount, fixedCount)
     }
     results.value.forEach {
         printResult(it)
@@ -23,8 +23,8 @@ fun printResults(results: Results, isPlaying: Boolean, tryCount: Int) {
     println()
 }
 
-fun printTryCount(tryCount: Int) {
-    println("$tryCount/6\n")
+fun printTryCount(tryCount: Int, fixedCount: Int) {
+    println("$tryCount/$fixedCount\n")
 }
 
 private fun printResult(result: List<Mark>) {

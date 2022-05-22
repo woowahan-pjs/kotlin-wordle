@@ -12,13 +12,13 @@ import java.time.LocalDate
 class WordleController {
 
     fun run() {
-        printStartMessage()
         val game = Game(Words.pick(LocalDate.now()))
+        printStartMessage(game.fixedCount)
 
         while (game.isPlaying) {
             val answer = requestAnswer()
             game.playRound(answer)
-            printResults(game.results, game.isPlaying, game.findTryCount())
+            printResults(game.results, game.isPlaying, game.findTryCount(), game.fixedCount)
         }
     }
 

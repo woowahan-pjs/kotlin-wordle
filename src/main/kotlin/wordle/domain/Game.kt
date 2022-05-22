@@ -1,7 +1,7 @@
 package wordle.domain
 
 class Game(private val word: String) {
-
+    val fixedCount = 6
     val results: Results = Results()
     var isPlaying: Boolean = true
         private set
