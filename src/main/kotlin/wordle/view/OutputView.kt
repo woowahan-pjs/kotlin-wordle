@@ -20,11 +20,13 @@ object OutputView {
 
     private fun Colors.printColors() {
         this.values.forEach {
-            print(when (it) {
-                Color.GREEN -> "🟩"
-                Color.YELLOW -> "🟨"
-                Color.GRAY -> "⬜"
-            })
+            print(
+                when (it) {
+                    Color.GREEN -> "🟩"
+                    Color.YELLOW -> "🟨"
+                    Color.GRAY -> "⬜"
+                }
+            )
         }
     }
 
