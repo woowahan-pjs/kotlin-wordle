@@ -1,5 +1,7 @@
 package wordle.domain
 
+import java.util.regex.Pattern
+
 data class Word(val value: String) {
 
     init {
@@ -9,7 +11,7 @@ data class Word(val value: String) {
 
     private fun isRightSize(): Boolean = value.length == SIZE
 
-    private fun isAlphabet(): Boolean = Regex("^[a-zA-Z]*$").matches(value)
+    private fun isAlphabet(): Boolean = Pattern.matches("^[a-zA-Z]*$", value)
 
     fun sameIndexAndSpell(index: Int, spell: Char): Boolean = value[index] == spell
 
