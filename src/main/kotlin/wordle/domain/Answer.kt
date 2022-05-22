@@ -6,7 +6,9 @@ private const val RANGE_END = 4
 class Answer(private val word: Word) {
     fun compare(word: Word): List<Color> {
         val exactIndices = compareExact(word)
-        val anyIndices = compareAny(word)
+        val copyOfExactIndices: MutableList<Int> = mutableListOf()
+        copyOfExactIndices.addAll(exactIndices)
+        val anyIndices = compareAny(word, copyOfExactIndices)
         return merge(exactIndices, anyIndices)
     }
 
@@ -28,8 +30,8 @@ class Answer(private val word: Word) {
         return (RANGE_START..RANGE_END).filter { this.word.compareByIndex(word, it) }
     }
 
-    private fun compareAny(word: Word): List<Int> {
-        val consumedLetterIndex: MutableList<Int> = mutableListOf()
+    private fun compareAny(word: Word, exactIndices: MutableList<Int>): List<Int> {
+        val consumedLetterIndex: MutableList<Int> = exactIndices
         return (RANGE_START..RANGE_END).filter { isAnyMatch(word, it, consumedLetterIndex) }
     }
 

@@ -52,6 +52,15 @@ class AnswerTest {
     }
 
     @Test
+    @DisplayName("위치만 일치하는 글자가 여러 종류에 여러 개이면서 입력과 정답에 개수가 같은 경우 예측을 비교한다.")
+    fun compareWithAnswerSameIncludeYellows() {
+        val answer = Answer(Word("humph"))
+
+        answer.compare(Word("hippy")) shouldContainExactly
+            listOf(Color.GREEN, Color.GRAY, Color.GRAY, Color.GREEN, Color.GRAY)
+    }
+
+    @Test
     @DisplayName("위치만 일치하는 글자가 입력에 더 많은 경우 예측을 비교한다.")
     fun compareWithInputMoreIncludeYellow() {
         val answer = Answer(Word("witch"))
