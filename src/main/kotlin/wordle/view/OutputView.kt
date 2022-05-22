@@ -1,5 +1,6 @@
 package wordle.view
 
+import wordle.domain.Color
 import wordle.domain.Colors
 import wordle.domain.Game
 
@@ -18,7 +19,13 @@ object OutputView {
     }
 
     private fun Colors.printColors() {
-        this.values.forEach { print(it.representation) }
+        this.values.forEach {
+            print(when (it) {
+                Color.GREEN -> "🟩"
+                Color.YELLOW -> "🟨"
+                Color.GRAY -> "⬜"
+            })
+        }
     }
 
     fun printCount(tryCount: Int) {

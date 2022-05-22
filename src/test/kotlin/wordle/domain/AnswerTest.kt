@@ -52,7 +52,7 @@ class AnswerTest {
     }
 
     @Test
-    @DisplayName("위치만 일치하는 글자들과 틀린 글자들이 존재하는 예측을 비교한다..")
+    @DisplayName("위치만 일치하는 글자들과 틀린 글자들이 존재하는 예측을 비교한다.")
     fun compareWithYellowAndGray3() {
         val answer = Answer(Word("witch"))
 
