@@ -8,7 +8,9 @@ import io.kotest.data.table
 import io.kotest.matchers.collections.shouldContainExactly
 import io.kotest.matchers.throwable.shouldHaveMessage
 import org.junit.jupiter.api.Test
-import wordle.domain.Mark.*
+import wordle.domain.Mark.NONE
+import wordle.domain.Mark.EXIST
+import wordle.domain.Mark.EXACT
 
 internal class AnswerTest {
 
