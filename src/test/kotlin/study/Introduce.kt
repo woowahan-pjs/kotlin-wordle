@@ -3,7 +3,6 @@ package study
 import io.kotest.matchers.collections.shouldContainExactly
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
-import study.introduce
 import study.language.Language
 import study.skill.HardSkill
 import study.skill.SoftSkill
