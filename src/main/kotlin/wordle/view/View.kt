@@ -32,8 +32,8 @@ private fun printResult(result: List<Mark>) {
     result.forEach {
         when (it) {
             Mark.NONE -> stringBuilder.append("⬜")
-            Mark.EXIST -> stringBuilder.append("\uD83D\uDFE8")
-            Mark.EXACT -> stringBuilder.append("\uD83D\uDFE9")
+            Mark.EXIST -> stringBuilder.append("🟨")
+            Mark.EXACT -> stringBuilder.append("🟩")
         }
     }
     println(stringBuilder.toString())
