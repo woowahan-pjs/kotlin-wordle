@@ -12,13 +12,10 @@ data class Word(private val word: String) {
         require(word.containsInWord()) { "유효하지 않은 단어입니다." }
     }
 
-    private fun String.isLowerCase(): Boolean {
-        return this.all { it.isLowerCase() }
-    }
+    private fun String.isLowerCase(): Boolean = this.all { it.isLowerCase() }
 
-    fun compareByIndex(other: Word, myIndex: Int, otherIndex: Int = myIndex): Boolean {
-        return word[myIndex] == other.word[otherIndex]
-    }
+    fun compareByIndex(other: Word, myIndex: Int, otherIndex: Int = myIndex): Boolean =
+        word[myIndex] == other.word[otherIndex]
 
     companion object {
         private val CACHE: List<String> = File("src/main/resources/words.txt")

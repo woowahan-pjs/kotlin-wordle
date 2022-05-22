@@ -5,42 +5,40 @@ private const val RANGE_END = 4
 
 class Answer(private val word: Word) {
 
-    fun compare(word: Word): List<Color> {
-        val exactIndices = compareExact(word)
-        val anyIndices = compareAny(word)
-        return merge(exactIndices, anyIndices)
+    fun compare(word: Word): Colors {
+        val colors = Colors.createEmpty()
+        val paint = createPainter(colors, mutableListOf())
+        paint({ index: Int, consumed: MutableList<Int> -> isExactMatch(word, index, consumed) }, Color.GREEN)
+        paint({ index: Int, consumed: MutableList<Int> -> isAnyMatch(word, index, consumed) }, Color.YELLOW)
+        return colors
     }
 
-    private fun compareExact(word: Word): List<Int> {
-        return (RANGE_START..RANGE_END).filter { this.word.compareByIndex(word, it) }
-    }
-
-    private fun compareAny(word: Word): List<Int> {
-        val consumed = mutableListOf<Int>()
-        return (RANGE_START..RANGE_END).filter { isAnyMatch(word, it, consumed) }
-    }
-
-    private fun isAnyMatch(word: Word, outerIndex: Int, consumed: MutableList<Int>): Boolean {
-        return (RANGE_START..RANGE_END).any {
-            if (this.word.compareByIndex(word, it, outerIndex) && !consumed.contains(it)) {
-                consumed.add(it)
-                return true
+    private fun createPainter(
+        colors: Colors,
+        consumedIndices: MutableList<Int>,
+    ): ((Int, MutableList<Int>) -> Boolean, Color) -> Unit {
+        return fun(predicate: (Int, MutableList<Int>) -> Boolean, color: Color) {
+            for (index in (RANGE_START..RANGE_END).filter { predicate.invoke(it, consumedIndices) }) {
+                colors.paint(color, index)
             }
-            return@any false
         }
     }
 
-    private fun merge(greenIndices: List<Int>, yellowIndices: List<Int>): List<Color> {
-        return (RANGE_START..RANGE_END).map { defineColor(it, greenIndices, yellowIndices) }
+    private fun isExactMatch(word: Word, index: Int, consumedIndices: MutableList<Int>): Boolean {
+        return this.word.compareByIndex(word, index) && consumeIfMatched(consumedIndices, index)
     }
 
-    private fun defineColor(index: Int, greenIndices: List<Int>, yellowIndices: List<Int>): Color {
-        if (greenIndices.contains(index)) {
-            return Color.GREEN
+    private fun isAnyMatch(word: Word, outerIndex: Int, consumedIndices: MutableList<Int>): Boolean {
+        return (RANGE_START..RANGE_END).any {
+            this.word.compareByIndex(word, it, outerIndex) && consumeIfMatched(consumedIndices, it)
         }
-        if (yellowIndices.contains(index)) {
-            return Color.YELLOW
+    }
+
+    private fun consumeIfMatched(consumedIndices: MutableList<Int>, index: Int): Boolean {
+        if (!consumedIndices.contains(index)) {
+            consumedIndices.add(index)
+            return true
         }
-        return Color.GRAY
+        return false
     }
 }
