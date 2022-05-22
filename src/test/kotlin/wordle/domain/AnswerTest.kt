@@ -33,16 +33,58 @@ internal class AnswerTest {
     }
 
     @Test
-    fun `답안과 정답을 비교-중복되는 입력 문자 중 하나만 정답과 일치`() {
-        val answer = Answer("groom")
+    fun `답안과 정답이 일치`() {
+        val answer = Answer("apple")
 
-        answer.compareToWord("goose") shouldContainExactly listOf(EXACT, NONE, EXACT, EXIST, NONE)
+        answer.compareToWord("apple") shouldContainExactly listOf(EXACT, EXACT, EXACT, EXACT, EXACT)
     }
 
     @Test
-    fun `답안과 정답을 비교-입력의 중복되는 문자가 정답에 포함된 개수보다 많음`() {
-        val answer = Answer("eerie")
+    fun `정답과 답안의 문자가 모두 불일치`() {
+        val answer = Answer("madam")
 
-        answer.compareToWord("sheen") shouldContainExactly listOf(EXIST, EXIST, NONE, NONE, NONE)
+        answer.compareToWord("rerun") shouldContainExactly listOf(NONE, NONE, NONE, NONE, NONE)
+    }
+
+    @Test
+    fun `정답의 문자가 답안에 모두 존재하지만 위치가 모두 불일치`() {
+        val answer = Answer("rebut")
+
+        answer.compareToWord("brute") shouldContainExactly listOf(EXIST, EXIST, EXIST, EXIST, EXIST)
+    }
+
+    @Test
+    fun `정답이 rebut이고 답안이 speed일 때 첫번째 e만 EXIST, 나머지는 NONE`() {
+        val answer = Answer("speed")
+
+        answer.compareToWord("rebut") shouldContainExactly listOf(NONE, NONE, EXIST, NONE, NONE)
+    }
+
+    @Test
+    fun `정답이 erase이고 답안이 speed일 때 e와 s는 모두 EXIST, 나머지는 NONE`() {
+        val answer = Answer("speed")
+
+        answer.compareToWord("erase") shouldContainExactly listOf(EXIST, NONE, EXIST, EXIST, NONE)
+    }
+
+    @Test
+    fun `정답이 spill이고 답안이 label일 때 첫번째 l은 EXIST, 두번째 l은 EXACT, 나머지는 NONE`() {
+        val answer = Answer("label")
+
+        answer.compareToWord("spill") shouldContainExactly listOf(EXIST, NONE, NONE, NONE, EXACT)
+    }
+
+    @Test
+    fun `정답이 spill이고 답안이 hello일 때 첫번째 l은 EXIST, 두번째 l은 EXACT, 나머지는 NONE`() {
+        val answer = Answer("hello")
+
+        answer.compareToWord("spill") shouldContainExactly listOf(NONE, NONE, EXIST, EXACT, NONE)
+    }
+
+    @Test
+    fun `정답이 mourn이고 답안이 sorry일 때 o와 두번째 r은 EXACT, 나머지는 NONE`() {
+        val answer = Answer("sorry")
+
+        answer.compareToWord("mourn") shouldContainExactly listOf(NONE, EXACT, NONE, EXACT, NONE)
     }
 }

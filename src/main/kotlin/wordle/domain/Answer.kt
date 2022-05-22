@@ -10,8 +10,6 @@ class Answer(private val answer: String) {
     fun compareToWord(word: String): MutableList<Mark> {
         val result = MutableList(WORD_SIZE) { Mark.NONE }
         val wordTable = createWordTable(word)
-//        matchExact(word, result, wordTable)
-//        matchExist(result, wordTable)
         (0 until WORD_SIZE).map { markExact(it, word, result, wordTable) }
         (0 until WORD_SIZE).map { markExist(it, result, wordTable) }
         return result
