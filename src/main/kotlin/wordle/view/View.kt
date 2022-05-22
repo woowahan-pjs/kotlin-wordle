@@ -7,7 +7,7 @@ fun printStartMessage() {
     println("WORDLE 을 6번 만에 맞춰 보세요.\n시도의 결과는 타일의 색 변화로 나타납니다.")
 }
 
-fun printInputMessage(): String {
+fun requestInput(): String {
     println("정답을 입력해 주세요.")
     return readln()
 }
@@ -37,5 +37,9 @@ private fun printResult(result: List<Mark>) {
         }
     }
     println(stringBuilder.toString())
+}
+
+fun printErrorMessage(message: String?) {
+    println(message)
 }
 
