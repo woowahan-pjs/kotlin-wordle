@@ -1,7 +1,6 @@
 package wordle.domain
 
-import java.nio.file.Files
-import java.nio.file.Paths
+import java.io.File
 import java.time.LocalDate
 import java.time.temporal.ChronoUnit
 
@@ -10,7 +9,7 @@ const val WORD_SIZE = 5
 class Words {
 
     companion object {
-        private val VALUE: List<String> = Files.readAllLines(Paths.get("src/main/resources/words.txt"))
+        private val VALUE: List<String> = File("src/main/resources/words.txt").readLines()
         private val BASIC_DATE = LocalDate.of(2021, 6, 19)
 
         fun contains(word: String): Boolean {

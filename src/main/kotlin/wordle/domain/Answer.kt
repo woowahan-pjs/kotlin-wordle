@@ -10,8 +10,10 @@ class Answer(private val answer: String) {
     fun compareToWord(word: String): MutableList<Mark> {
         val result = MutableList(WORD_SIZE) { Mark.NONE }
         val wordTable = createWordTable(word)
-        matchExact(word, result, wordTable)
-        matchExist(result, wordTable)
+//        matchExact(word, result, wordTable)
+//        matchExist(result, wordTable)
+        (0 until WORD_SIZE).map { markExact(it, word, result, wordTable) }
+        (0 until WORD_SIZE).map { markExist(it, result, wordTable) }
         return result
     }
 
@@ -23,22 +25,10 @@ class Answer(private val answer: String) {
         return wordTable
     }
 
-    private fun matchExact(word: String, result: MutableList<Mark>, wordTable: HashMap<Char, Int>) {
-        for (i in 0 until WORD_SIZE) {
-            markExact(i, word, result, wordTable)
-        }
-    }
-
     private fun markExact(i: Int, word: String, result: MutableList<Mark>, wordTable: HashMap<Char, Int>) {
         if (word[i] == answer[i]) {
             result[i] = Mark.EXACT
             wordTable.computeIfPresent(word[i]) { _, v -> v - 1 }
-        }
-    }
-
-    private fun matchExist(result: MutableList<Mark>, wordTable: HashMap<Char, Int>) {
-        for (i in 0 until WORD_SIZE) {
-            markExist(i, result, wordTable)
         }
     }
 
