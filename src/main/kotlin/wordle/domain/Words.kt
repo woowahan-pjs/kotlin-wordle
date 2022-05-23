@@ -21,7 +21,7 @@ class Words(private val values: List<Word>, today: LocalDate = LocalDate.now()) 
     }
 
     fun check(word: Word): List<Tile> {
-        answerMap = initAnswerMap()
+        answerMap = initAnswerMap().toMutableMap()
         val result = MutableList(WORD_SIZE) { Tile.GRAY }
 
         repeat(WORD_SIZE) { putTileIfSame(result, word, it) }
@@ -29,10 +29,10 @@ class Words(private val values: List<Word>, today: LocalDate = LocalDate.now()) 
         return result
     }
 
-    private fun initAnswerMap(): MutableMap<Char, Int> {
+    private fun initAnswerMap(): Map<Char, Int> {
         return answer.value
             .groupBy { it }
-            .mapValues { it.value.count() } as MutableMap<Char, Int>
+            .mapValues { it.value.count() }
     }
 
     private fun putTileIfSame(result: MutableList<Tile>, word: Word, index: Int) {
