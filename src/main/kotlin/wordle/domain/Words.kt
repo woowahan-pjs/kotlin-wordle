@@ -1,7 +1,6 @@
 package wordle.domain
 
 import java.time.LocalDate
-import java.time.temporal.ChronoUnit
 
 class Words(private val values: List<Word>, today: LocalDate = LocalDate.now()) {
 
@@ -9,8 +8,7 @@ class Words(private val values: List<Word>, today: LocalDate = LocalDate.now()) 
     private var answerMap: MutableMap<Char, Int> = mutableMapOf()
 
     private fun findAnswer(date: LocalDate): Word {
-        val standardDate: LocalDate = LocalDate.of(2021, 6, 19)
-        val days: Int = ChronoUnit.DAYS.between(standardDate, date).toInt()
+        val days = date.compareTo(STANDARD_DATE)
         return values[days % values.size]
     }
 
@@ -22,11 +20,7 @@ class Words(private val values: List<Word>, today: LocalDate = LocalDate.now()) 
 
     fun check(word: Word): List<Tile> {
         answerMap = initAnswerMap().toMutableMap()
-        val result = MutableList(WORD_SIZE) { Tile.GRAY }
-
-        repeat(WORD_SIZE) { result.putTileIfSame(word, it) }
-        repeat(WORD_SIZE) { result.putTileIfContains(word, it) }
-        return result
+        return DEFAULT_RESULT.markGreen(word).markYellow(word)
     }
 
     private fun initAnswerMap(): Map<Char, Int> {
@@ -35,17 +29,29 @@ class Words(private val values: List<Word>, today: LocalDate = LocalDate.now()) 
             .mapValues { it.value.count() }
     }
 
-    private fun MutableList<Tile>.putTileIfSame(word: Word, index: Int) {
-        if (answer.isSameChar(word, index)) {
+    private fun List<Tile>.markGreen(word: Word): List<Tile> {
+        return List(size) { index -> grayOrGreen(word, index) }
+    }
+
+    private fun grayOrGreen(word: Word, index: Int): Tile {
+        return if (answer.isSameChar(word, index)) {
             calculateAnswerMap(word.value[index])
-            this[index] = Tile.GREEN
+            Tile.GREEN
+        } else {
+            Tile.GRAY
         }
     }
 
-    private fun MutableList<Tile>.putTileIfContains(word: Word, index: Int) {
-        if (this[index] != Tile.GREEN && answerMap.containsKey(word.value[index])) {
+    private fun List<Tile>.markYellow(word: Word): List<Tile> {
+        return mapIndexed { index, tile -> existOrYellow(tile, word, index) }
+    }
+
+    private fun existOrYellow(tile: Tile, word: Word, index: Int): Tile {
+        return if (tile != Tile.GREEN && answerMap.containsKey(word.value[index])) {
             calculateAnswerMap(word.value[index])
-            this[index] = Tile.YELLOW
+            Tile.YELLOW
+        } else {
+            tile
         }
     }
 
@@ -58,5 +64,7 @@ class Words(private val values: List<Word>, today: LocalDate = LocalDate.now()) 
 
     companion object {
         private const val WORD_SIZE = 5
+        private val DEFAULT_RESULT = List(WORD_SIZE) { Tile.GRAY }
+        private val STANDARD_DATE = LocalDate.of(2021, 6, 19)
     }
 }
