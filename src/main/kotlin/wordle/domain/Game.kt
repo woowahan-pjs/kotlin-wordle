@@ -10,23 +10,22 @@ class Game(private val words: Words, val maxGameCount: Int) {
         maxGameCount: Int = DEFAULT_MAX_GAME_COUNT
     ) : this(Words(words, date), maxGameCount)
 
-    private var _count: Int = 0
-    private var _results: MutableList<List<Tile>> = mutableListOf()
+    var count: Int = 0
+        private set
 
-    val count: Int
-        get() = _count
+    private var _results: MutableList<List<Tile>> = mutableListOf()
 
     val results: List<List<Tile>>
         get() = _results
 
     fun isGameOver(answer: Word): Boolean {
-        return _count == maxGameCount || words.isCorrect(answer)
+        return count == maxGameCount || words.isCorrect(answer)
     }
 
     fun match(answer: Word) {
         require(words.contains(answer)) { "등록된 단어가 아닙니다." }
         _results.add(words.check(answer))
-        _count++
+        count++
     }
 
     companion object {
