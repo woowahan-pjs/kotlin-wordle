@@ -24,8 +24,8 @@ class Words(private val values: List<Word>, today: LocalDate = LocalDate.now()) 
         answerMap = initAnswerMap().toMutableMap()
         val result = MutableList(WORD_SIZE) { Tile.GRAY }
 
-        repeat(WORD_SIZE) { putTileIfSame(result, word, it) }
-        repeat(WORD_SIZE) { putTileIfContains(result, word, it) }
+        repeat(WORD_SIZE) { result.putTileIfSame(word, it) }
+        repeat(WORD_SIZE) { result.putTileIfContains(word, it) }
         return result
     }
 
@@ -35,17 +35,17 @@ class Words(private val values: List<Word>, today: LocalDate = LocalDate.now()) 
             .mapValues { it.value.count() }
     }
 
-    private fun putTileIfSame(result: MutableList<Tile>, word: Word, index: Int) {
+    private fun MutableList<Tile>.putTileIfSame(word: Word, index: Int) {
         if (answer.isSameChar(word, index)) {
             calculateAnswerMap(word.value[index])
-            result[index] = Tile.GREEN
+            this[index] = Tile.GREEN
         }
     }
 
-    private fun putTileIfContains(result: MutableList<Tile>, word: Word, index: Int) {
-        if (result[index] != Tile.GREEN && answerMap.containsKey(word.value[index])) {
+    private fun MutableList<Tile>.putTileIfContains(word: Word, index: Int) {
+        if (this[index] != Tile.GREEN && answerMap.containsKey(word.value[index])) {
             calculateAnswerMap(word.value[index])
-            result[index] = Tile.YELLOW
+            this[index] = Tile.YELLOW
         }
     }
 

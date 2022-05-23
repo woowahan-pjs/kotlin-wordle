@@ -6,22 +6,20 @@ import wordle.domain.Tile
 object OutputView {
 
     fun printStartMessage(maxGameCount: Int) = println(
-        "WORDLE을 ${maxGameCount}번 만에 맞춰 보세요.\n시도의 결과는 타일의 색 변화로 나타납니다."
+        """
+            |WORDLE을 ${maxGameCount}번 만에 맞춰 보세요.
+            |시도의 결과는 타일의 색 변화로 나타납니다.
+        """.trimMargin()
     )
 
     fun printResults(game: Game, isGameOver: Boolean) {
-        println()
         if (isGameOver) {
             printCount(game.count, game.maxGameCount)
         }
-        game.results.forEach { printResult(it) }
-        println()
+        println(game.results.joinToString(separator = "\n", prefix = "\n") { it.toSymbols() })
     }
 
-    private fun printResult(result: List<Tile>) {
-        result.forEach { print(it.symbol) }
-        println()
-    }
+    private fun List<Tile>.toSymbols() = joinToString(separator = "") { it.symbol }
 
-    private fun printCount(count: Int, maxGameCount: Int) = println("$count/$maxGameCount\n")
+    private fun printCount(count: Int, maxGameCount: Int) = println("\n$count/$maxGameCount")
 }
