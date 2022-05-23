@@ -6,7 +6,7 @@ import java.time.temporal.ChronoUnit
 class Words(private val values: List<Word>, today: LocalDate = LocalDate.now()) {
 
     private val answer: Word = findAnswer(today)
-    private var answerMap: MutableMap<Char, Int> = HashMap()
+    private var answerMap: MutableMap<Char, Int> = mutableMapOf()
 
     private fun findAnswer(date: LocalDate): Word {
         val standardDate: LocalDate = LocalDate.of(2021, 6, 19)
