@@ -1,9 +1,9 @@
-package wordle.study.person
+package wordle.study.dsl.person
 
-import wordle.study.person.language.Languages
-import wordle.study.person.language.LanguagesBuilder
-import wordle.study.person.skill.Skills
-import wordle.study.person.skill.SkillsBuilder
+import wordle.study.dsl.person.language.Languages
+import wordle.study.dsl.person.language.LanguagesBuilder
+import wordle.study.dsl.person.skill.Skills
+import wordle.study.dsl.person.skill.SkillsBuilder
 
 class PersonBuilder {
     private lateinit var name: String

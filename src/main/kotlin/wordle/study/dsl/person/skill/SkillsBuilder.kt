@@ -1,4 +1,4 @@
-package wordle.study.person.skill
+package wordle.study.dsl.person.skill
 
 class SkillsBuilder {
     private var skills: MutableList<Skill> = mutableListOf()

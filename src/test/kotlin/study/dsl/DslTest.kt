@@ -1,12 +1,12 @@
-package study
+package study.dsl
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
-import wordle.study.person.Person
-import wordle.study.person.PersonBuilder
-import wordle.study.person.language.Language
-import wordle.study.person.skill.Hard
-import wordle.study.person.skill.Soft
+import wordle.study.dsl.person.Person
+import wordle.study.dsl.person.PersonBuilder
+import wordle.study.dsl.person.language.Language
+import wordle.study.dsl.person.skill.Hard
+import wordle.study.dsl.person.skill.Soft
 
 class DslTest {
     @Test

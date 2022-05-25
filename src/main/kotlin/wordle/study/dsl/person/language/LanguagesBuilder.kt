@@ -1,4 +1,4 @@
-package wordle.study.person.language
+package wordle.study.dsl.person.language
 
 class LanguagesBuilder {
     private var languages: MutableList<Language> = mutableListOf()
