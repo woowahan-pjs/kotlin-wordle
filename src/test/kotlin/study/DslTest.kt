@@ -104,6 +104,3 @@ class Languages(val values: MutableList<Language>) {
 }
 
 data class Language(val value: String, val level: Int)
-
-
-
