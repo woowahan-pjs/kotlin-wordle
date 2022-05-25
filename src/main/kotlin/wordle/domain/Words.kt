@@ -1,16 +1,14 @@
 package wordle.domain
 
 import java.time.LocalDate
-import java.time.temporal.ChronoUnit
 
 class Words(private val values: List<Word>) {
 
     private val answer: Word = findAnswer()
-    private var answerMap: MutableMap<Char, Int> = HashMap()
+    private var answerMap: MutableMap<Char, Int> = mutableMapOf()
 
     private fun findAnswer(): Word {
-        val nowDate: LocalDate = LocalDate.now()
-        val days: Int = ChronoUnit.DAYS.between(STANDARD_DATE, nowDate).toInt()
+        val days = TODAY.compareTo(STANDARD_DATE)
         return values[days % values.size]
     }
 
@@ -24,7 +22,7 @@ class Words(private val values: List<Word>) {
 
     fun check(word: Word): List<Tile> {
         answerMap = initAnswerMap()
-        val result: MutableList<Tile> = ArrayList()
+        val result: MutableList<Tile> = mutableListOf()
         repeat(5) { result.add(Tile.GRAY) }
 
         repeat(5) { result[it] = findTileBySameCheck(word, it) }
@@ -68,6 +66,7 @@ class Words(private val values: List<Word>) {
     }
 
     companion object {
+        private val TODAY = LocalDate.now()
         private val STANDARD_DATE = LocalDate.of(2021, 6, 19)
     }
 }
