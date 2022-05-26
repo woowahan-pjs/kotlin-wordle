@@ -9,7 +9,7 @@ data class Word(val value: String) {
 
     private fun String.isRightSize(): Boolean = value.length == SIZE
 
-    private fun String.isAlphabet(): Boolean = Regex("^[a-zA-Z]*$").matches(value)
+    private fun String.isAlphabet(): Boolean = PATTERN.matches(value)
 
     fun isSameIndexAndSpell(index: Int, spell: Char): Boolean = value[index] == spell
 
@@ -17,5 +17,6 @@ data class Word(val value: String) {
 
     companion object {
         const val SIZE = 5
+        private val PATTERN = Regex("^[a-zA-Z]*$")
     }
 }
