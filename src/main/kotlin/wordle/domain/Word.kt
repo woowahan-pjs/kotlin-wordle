@@ -11,7 +11,7 @@ data class Word(val value: String) {
 
     private fun String.isAlphabet(): Boolean = Regex("^[a-zA-Z]*$").matches(value)
 
-    fun sameIndexAndSpell(index: Int, spell: Char): Boolean = value[index] == spell
+    fun isSameIndexAndSpell(index: Int, spell: Char): Boolean = value[index] == spell
 
     fun contains(spell: Char): Boolean = value.contains(spell)
 

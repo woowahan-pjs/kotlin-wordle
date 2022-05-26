@@ -21,7 +21,7 @@ data class Game(val words: Words, val date: LocalDate) {
 
     private fun matchSpell(spell: Char, index: Int): Tile {
         val answer = words.findAnswer(date)
-        if (answer.sameIndexAndSpell(index, spell)) {
+        if (answer.isSameIndexAndSpell(index, spell)) {
             return Tile.GREEN
         }
         if (answer.contains(spell)) {
