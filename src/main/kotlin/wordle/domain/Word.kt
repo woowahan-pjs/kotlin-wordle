@@ -3,7 +3,7 @@ package wordle.domain
 data class Word(val value: String) {
 
     init {
-        require(isRightSize()) { "[ERROR] 5글자의 단어를 입력하세요." }
+        require(isRightSize()) { "[ERROR] ${SIZE}글자의 단어를 입력하세요." }
         require(isAlphabet()) { "[ERROR] 영어 단어를 입력하세요." }
     }
 
@@ -16,6 +16,6 @@ data class Word(val value: String) {
     fun contains(spell: Char): Boolean = value.contains(spell)
 
     companion object {
-        private const val SIZE = 5
+        const val SIZE = 5
     }
 }

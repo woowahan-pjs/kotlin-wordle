@@ -1,15 +1,11 @@
 package wordle.domain
 
-class GameResult() {
+class GameResult(size: Int) {
 
-    var gameResult: MutableList<Tiles> = ArrayList(SIZE)
+    var gameResult: MutableList<Tiles> = ArrayList(size)
         private set
 
     fun add(tiles: Tiles) {
         this.gameResult.add(tiles)
-    }
-
-    companion object {
-        private const val SIZE = 5
     }
 }

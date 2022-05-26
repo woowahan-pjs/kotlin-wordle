@@ -14,7 +14,7 @@ fun main() {
     val wordsReader = WordsReader("words.txt")
     val words = Words(wordsReader.words)
     val game = Game(words, LocalDate.now())
-    val gameResult = GameResult()
+    val gameResult = GameResult(Word.SIZE)
 
     OutputView.printInitMessage(Game.MAX_ROUND)
     play(game, gameResult)
