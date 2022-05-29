@@ -1,6 +1,7 @@
 package wordle.domain
 
 private const val WORD_SIZE = 5
+private val ALPHABET_REGEX = Regex("[a-zA-Z]*")
 
 class Word(_value: String) {
 
@@ -20,7 +21,7 @@ class Word(_value: String) {
     }
 
     private fun String.isAlphabet(): Boolean {
-        return Regex("[a-zA-Z]*").matches(this)
+        return ALPHABET_REGEX.matches(this)
     }
 
     override fun equals(other: Any?): Boolean {
