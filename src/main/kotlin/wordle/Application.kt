@@ -11,7 +11,7 @@ fun main() {
     val game = Game(WordsReader.getWords())
     OutputView.printStartMessage(TOTAL_ROUNDS_NUM)
     doGame(game)
-    OutputView.printCount(game.count)
+    OutputView.printCount(game.count, TOTAL_ROUNDS_NUM)
     OutputView.printResults(game.results)
 }
 

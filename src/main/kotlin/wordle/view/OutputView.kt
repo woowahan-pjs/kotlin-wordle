@@ -20,8 +20,8 @@ object OutputView {
         println()
     }
 
-    fun printCount(count: Int) {
+    fun printCount(count: Int, round: Int) {
         println()
-        println("$count/6")
+        println("$count/$round")
     }
 }
