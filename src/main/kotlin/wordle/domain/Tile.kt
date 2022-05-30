@@ -1,8 +1,6 @@
 package wordle.domain
 
-enum class Tile(val symbol: String) {
+enum class Tile() {
 
-    YELLOW("🟨"),
-    GREEN("🟩"),
-    GRAY("⬜")
+    YELLOW, GREEN, GRAY
 }

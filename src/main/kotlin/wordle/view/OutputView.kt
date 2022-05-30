@@ -22,7 +22,7 @@ object OutputView {
     }
 
     private fun printResult(result: List<Tile>) {
-        result.forEach { print(it.symbol) }
+        result.forEach { printTile(it) }
         println()
     }
 
@@ -35,5 +35,13 @@ object OutputView {
 
     fun printErrorMessage(exception: RuntimeException) {
         println(exception.message)
+    }
+
+    private fun printTile(tile: Tile) {
+        when (tile) {
+            Tile.GREEN -> print("🟩")
+            Tile.YELLOW -> print("🟨")
+            Tile.GRAY -> print("⬜")
+        }
     }
 }
