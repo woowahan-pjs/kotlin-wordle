@@ -5,7 +5,7 @@ import java.time.LocalDate
 class Words(private val values: List<Word>, today: LocalDate = LocalDate.now()) {
 
     private val answer: Word = findAnswer(today)
-    private var answerMap: MutableMap<Char, Int> = mutableMapOf()
+    private var answerMap: Map<Char, Int> = mapOf()
 
     private fun findAnswer(date: LocalDate): Word {
         val days = date.compareTo(STANDARD_DATE)
@@ -19,7 +19,7 @@ class Words(private val values: List<Word>, today: LocalDate = LocalDate.now()) 
     }
 
     fun check(word: Word): List<Tile> {
-        answerMap = initAnswerMap().toMutableMap()
+        answerMap = initAnswerMap()
         return DEFAULT_RESULT.markGreen(word).markYellow(word)
     }
 
@@ -35,7 +35,7 @@ class Words(private val values: List<Word>, today: LocalDate = LocalDate.now()) 
 
     private fun grayOrGreen(tile: Tile, word: Word, index: Int): Tile {
         return if (answer.isSameChar(word, index)) {
-            calculateAnswerMap(word.value[index])
+            updateAnswerMap(word.value[index])
             Tile.GREEN
         } else {
             tile
@@ -48,19 +48,20 @@ class Words(private val values: List<Word>, today: LocalDate = LocalDate.now()) 
 
     private fun existOrYellow(tile: Tile, word: Word, index: Int): Tile {
         return if (tile != Tile.GREEN && answerMap.containsKey(word.value[index])) {
-            calculateAnswerMap(word.value[index])
+            updateAnswerMap(word.value[index])
             Tile.YELLOW
         } else {
             tile
         }
     }
 
-    private fun calculateAnswerMap(key: Char) {
-        answerMap.computeIfPresent(key) { _, v -> v - 1 }
-        if (answerMap[key] == 0) {
-            answerMap.remove(key)
-        }
+    private fun updateAnswerMap(letter: Char) {
+        answerMap = answerMap
+            .mapValues { it.reduceIfSame(letter) }
+            .filter { it.value != 0 }
     }
+
+    private fun Map.Entry<Char, Int>.reduceIfSame(letter: Char) = if (key == letter) value - 1 else value
 
     companion object {
         const val WORD_SIZE = 5
