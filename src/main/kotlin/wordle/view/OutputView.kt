@@ -22,4 +22,6 @@ object OutputView {
     private fun printCount(count: Int, maxGameCount: Int) = println("\n$count/$maxGameCount")
 
     private fun List<Tile>.toSymbols() = joinToString(separator = "") { it.symbol }
+
+    fun printErrorMessage(message: String) = println(message)
 }

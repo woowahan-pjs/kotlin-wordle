@@ -11,8 +11,17 @@ fun main() {
     OutputView.printStartMessage(game.maxGameCount)
 
     while (!game.isGameOver) {
+        play(game)
+        OutputView.printResults(game)
+    }
+}
+
+private fun play(game: Game) {
+    return try {
         val answer = Word(InputView.inputAnswer())
         game.match(answer)
-        OutputView.printResults(game)
+    } catch (e: IllegalArgumentException) {
+        OutputView.printErrorMessage(e.message.orEmpty())
+        play(game)
     }
 }
