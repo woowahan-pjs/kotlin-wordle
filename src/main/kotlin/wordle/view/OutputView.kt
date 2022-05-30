@@ -32,4 +32,8 @@ object OutputView {
             |$count/$totalRound
         """.trimMargin()
     )
+
+    fun printErrorMessage(exception: RuntimeException) {
+        println(exception.message)
+    }
 }
