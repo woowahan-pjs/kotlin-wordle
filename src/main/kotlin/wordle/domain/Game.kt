@@ -2,7 +2,7 @@ package wordle.domain
 
 import java.time.LocalDate
 
-data class Game(val words: Words, val date: LocalDate) {
+class Game(val words: Words, val date: LocalDate) {
 
     var count: Int = 0
         private set
