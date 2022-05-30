@@ -1,6 +1,9 @@
 package wordle.domain
 
-data class GameResult(val gameResult: MutableList<Tiles> = mutableListOf()) {
+class GameResult(size: Int) {
+
+    var gameResult: MutableList<Tiles> = ArrayList(size)
+        private set
 
     fun add(tiles: Tiles) {
         this.gameResult.add(tiles)
