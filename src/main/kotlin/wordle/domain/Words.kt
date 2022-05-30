@@ -30,15 +30,15 @@ class Words(private val values: List<Word>, today: LocalDate = LocalDate.now()) 
     }
 
     private fun List<Tile>.markGreen(word: Word): List<Tile> {
-        return List(size) { index -> grayOrGreen(word, index) }
+        return mapIndexed { index, tile -> grayOrGreen(tile, word, index) }
     }
 
-    private fun grayOrGreen(word: Word, index: Int): Tile {
+    private fun grayOrGreen(tile: Tile, word: Word, index: Int): Tile {
         return if (answer.isSameChar(word, index)) {
             calculateAnswerMap(word.value[index])
             Tile.GREEN
         } else {
-            Tile.GRAY
+            tile
         }
     }
 
