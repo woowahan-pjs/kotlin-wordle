@@ -2,7 +2,10 @@ package wordle.domain
 
 const val TOTAL_ROUNDS_NUM = 6
 
-class Game(private val words: Words) {
+class Game(
+    private val words: Words,
+    val totalCount: Int = TOTAL_ROUNDS_NUM
+) {
 
     var count: Int = 0
         private set
@@ -10,10 +13,13 @@ class Game(private val words: Words) {
     var results: MutableList<List<Tile>> = ArrayList()
         private set
 
-    constructor(words: List<Word>) : this(Words(words))
+    constructor(
+        words: List<Word>,
+        totalCount: Int = TOTAL_ROUNDS_NUM
+    ) : this(Words(words), totalCount)
 
     fun isGameOver(answer: Word): Boolean {
-        return count >= TOTAL_ROUNDS_NUM || words.isCorrect(answer)
+        return count >= totalCount || words.isCorrect(answer)
     }
 
     fun match(answer: Word) {
