@@ -17,22 +17,34 @@ class GameTest {
     }
 
     @Test
-    fun `게임 종료시 true를 반환한다`() {
+    fun `시도 횟수를 채워 게임이 종료된 경우 true를 반환한다`() {
         val game = Game(
             listOf(Word("apple"), Word("hello"), Word("spicy")),
             LocalDate.of(2021, 6, 19), 0
         )
 
-        game.isGameOver(Word("hello")) shouldBe true
+        game.isGameOver shouldBe true
     }
 
     @Test
-    fun `게임 종료시 false를 반환한다`() {
+    fun `정답을 맞춰 게임이 종료된 경우 true를 반환한다`() {
+        val game = Game(
+            listOf(Word("apple"), Word("hello"), Word("spicy")),
+            LocalDate.of(2021, 6, 19)
+        )
+
+        game.match(Word("apple"))
+
+        game.isGameOver shouldBe true
+    }
+
+    @Test
+    fun `시도 횟수가 남은 경우 false를 반환한다`() {
         val game = Game(
             listOf(Word("apple"), Word("hello"), Word("spicy")),
             LocalDate.of(2021, 6, 19), 1
         )
 
-        game.isGameOver(Word("hello")) shouldBe false
+        game.isGameOver shouldBe false
     }
 }

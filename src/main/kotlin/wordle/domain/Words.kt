@@ -63,7 +63,7 @@ class Words(private val values: List<Word>, today: LocalDate = LocalDate.now()) 
     }
 
     companion object {
-        private const val WORD_SIZE = 5
+        const val WORD_SIZE = 5
         private val DEFAULT_RESULT = List(WORD_SIZE) { Tile.GRAY }
         private val STANDARD_DATE = LocalDate.of(2021, 6, 19)
     }

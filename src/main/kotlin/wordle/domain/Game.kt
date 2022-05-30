@@ -1,5 +1,6 @@
 package wordle.domain
 
+import wordle.domain.Words.Companion.WORD_SIZE
 import java.time.LocalDate
 
 class Game(private val words: Words, val maxGameCount: Int) {
@@ -18,9 +19,8 @@ class Game(private val words: Words, val maxGameCount: Int) {
     val results: List<List<Tile>>
         get() = _results
 
-    fun isGameOver(answer: Word): Boolean {
-        return count == maxGameCount || words.isCorrect(answer)
-    }
+    val isGameOver: Boolean
+        get() = count == maxGameCount || _results.contains(ALL_GREEN_TILES)
 
     fun match(answer: Word) {
         require(words.contains(answer)) { "등록된 단어가 아닙니다." }
@@ -30,5 +30,6 @@ class Game(private val words: Words, val maxGameCount: Int) {
 
     companion object {
         const val DEFAULT_MAX_GAME_COUNT = 6
+        private val ALL_GREEN_TILES = List(WORD_SIZE) { Tile.GREEN }
     }
 }

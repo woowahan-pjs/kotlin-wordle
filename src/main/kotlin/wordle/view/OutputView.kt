@@ -12,14 +12,14 @@ object OutputView {
         """.trimMargin()
     )
 
-    fun printResults(game: Game, isGameOver: Boolean) {
-        if (isGameOver) {
+    fun printResults(game: Game) {
+        if (game.isGameOver) {
             printCount(game.count, game.maxGameCount)
         }
         println(game.results.joinToString(separator = "\n", prefix = "\n") { it.toSymbols() })
     }
 
-    private fun List<Tile>.toSymbols() = joinToString(separator = "") { it.symbol }
-
     private fun printCount(count: Int, maxGameCount: Int) = println("\n$count/$maxGameCount")
+
+    private fun List<Tile>.toSymbols() = joinToString(separator = "") { it.symbol }
 }
