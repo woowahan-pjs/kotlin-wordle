@@ -9,9 +9,7 @@ class Game(private val word: String) {
     fun playRound(answer: Answer) {
         val result = answer.compareToWord(word)
         results.add(result)
-        if (isOver(result)) {
-            isPlaying = false
-        }
+        isPlaying = !isOver(result)
     }
 
     private fun isOver(result: MutableList<Mark>) =
