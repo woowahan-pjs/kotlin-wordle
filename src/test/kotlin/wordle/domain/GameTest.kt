@@ -1,12 +1,12 @@
 package wordle.domain
 
 import io.kotest.assertions.throwables.shouldThrow
+import io.kotest.core.spec.style.AnnotationSpec
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.throwable.shouldHaveMessage
-import org.junit.jupiter.api.Test
 import java.time.LocalDate
 
-class GameTest {
+class GameTest : AnnotationSpec() {
 
     @Test
     fun `등록된 단어가 아닌 경우 예외가 발생한다`() {

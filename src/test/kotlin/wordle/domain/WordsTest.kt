@@ -1,9 +1,9 @@
 package wordle.domain
 
+import io.kotest.core.spec.style.AnnotationSpec
 import io.kotest.matchers.shouldBe
-import org.junit.jupiter.api.Test
 
-class WordsTest {
+class WordsTest : AnnotationSpec() {
 
     @Test
     fun `단어가 리스트 안에 존재하는지 확인해준다`() {

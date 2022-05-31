@@ -1,13 +1,13 @@
 package study
 
+import io.kotest.core.spec.style.AnnotationSpec
 import io.kotest.matchers.collections.shouldContainExactly
 import io.kotest.matchers.shouldBe
-import org.junit.jupiter.api.Test
 import study.language.Language
 import study.skill.HardSkill
 import study.skill.SoftSkill
 
-class DslTest {
+class DslTest : AnnotationSpec() {
 
     @Test
     fun `dsl introduce 만들어 보기`() {

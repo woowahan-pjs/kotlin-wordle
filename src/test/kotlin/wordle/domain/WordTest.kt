@@ -1,12 +1,12 @@
 package wordle.domain
 
 import io.kotest.assertions.throwables.shouldThrow
+import io.kotest.core.spec.style.AnnotationSpec
 import io.kotest.inspectors.forAll
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.throwable.shouldHaveMessage
-import org.junit.jupiter.api.Test
 
-class WordTest {
+class WordTest : AnnotationSpec() {
 
     @Test
     fun `5글자가 아닌 word를 생성하면 예외가 발생한다`() {
