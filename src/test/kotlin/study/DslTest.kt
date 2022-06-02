@@ -1,16 +1,15 @@
 package study
 
-import io.kotest.core.spec.style.AnnotationSpec
+import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.collections.shouldContainExactly
 import io.kotest.matchers.shouldBe
 import study.language.Language
 import study.skill.HardSkill
 import study.skill.SoftSkill
 
-class DslTest : AnnotationSpec() {
+class DslTest : FunSpec({
 
-    @Test
-    fun `dsl introduce 만들어 보기`() {
+    test("dsl introduce 만들어 보기") {
         val resume = introduce {
             name("이하은")
             company("우아한테크코스")
@@ -37,4 +36,4 @@ class DslTest : AnnotationSpec() {
             Language("English", 3)
         )
     }
-}
+})

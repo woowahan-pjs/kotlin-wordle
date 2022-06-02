@@ -1,23 +1,21 @@
 package wordle.domain
 
 import io.kotest.assertions.throwables.shouldThrow
-import io.kotest.core.spec.style.AnnotationSpec
+import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.throwable.shouldHaveMessage
 import java.time.LocalDate
 
-class GameTest : AnnotationSpec() {
+class GameTest : FunSpec({
 
-    @Test
-    fun `등록된 단어가 아닌 경우 예외가 발생한다`() {
+    test("등록된 단어가 아닌 경우 예외가 발생한다") {
         val game = Game(listOf(Word("apple"), Word("hello"), Word("spicy")))
 
         shouldThrow<IllegalArgumentException> { game.match(Word("spell")) }
             .shouldHaveMessage("등록된 단어가 아닙니다.")
     }
 
-    @Test
-    fun `시도 횟수를 채워 게임이 종료된 경우 true를 반환한다`() {
+    test("시도 횟수를 채워 게임이 종료된 경우 true를 반환한다") {
         val game = Game(
             listOf(Word("apple"), Word("hello"), Word("spicy")),
             LocalDate.of(2021, 6, 19), 0
@@ -26,8 +24,7 @@ class GameTest : AnnotationSpec() {
         game.isGameOver shouldBe true
     }
 
-    @Test
-    fun `정답을 맞춰 게임이 종료된 경우 true를 반환한다`() {
+    test("정답을 맞춰 게임이 종료된 경우 true를 반환한다") {
         val game = Game(
             listOf(Word("apple"), Word("hello"), Word("spicy")),
             LocalDate.of(2021, 6, 19)
@@ -38,8 +35,7 @@ class GameTest : AnnotationSpec() {
         game.isGameOver shouldBe true
     }
 
-    @Test
-    fun `시도 횟수가 남은 경우 false를 반환한다`() {
+    test("시도 횟수가 남은 경우 false를 반환한다") {
         val game = Game(
             listOf(Word("apple"), Word("hello"), Word("spicy")),
             LocalDate.of(2021, 6, 19), 1
@@ -47,4 +43,4 @@ class GameTest : AnnotationSpec() {
 
         game.isGameOver shouldBe false
     }
-}
+})
