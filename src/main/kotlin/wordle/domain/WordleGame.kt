@@ -5,8 +5,11 @@ import java.time.temporal.ChronoUnit
 
 class WordleGame(
     private val words: WordleWords,
+    private var count: Int = 6
 ) {
     private val results = mutableListOf<WordleGameResult>()
+
+    fun isEnd(): Boolean = count <= 0
 
     fun getTodaysWord(today: LocalDate): Word {
         val index = (ChronoUnit.DAYS.between(STANDARD_DATE, today).toInt()) % words.size
@@ -17,6 +20,7 @@ class WordleGame(
         validateWord(word)
         results.add(WordleComparator().getTileColors(answerWord, word))
         resultEvent(results)
+        count--
     }
 
     private fun validateWord(word: Word) {

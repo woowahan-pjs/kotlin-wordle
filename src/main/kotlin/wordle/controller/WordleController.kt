@@ -1,7 +1,6 @@
 package wordle.controller
 
 import wordle.domain.Word
-import wordle.domain.WordleComparator
 import wordle.domain.WordleGame
 import wordle.domain.WordleWordsFactory
 import wordle.view.InputView
@@ -18,10 +17,10 @@ class WordleController(
         val words = WordleWordsFactory().generate()
         val wordleGame = WordleGame(words)
         val todaysWord = wordleGame.getTodaysWord(LocalDate.now())
-        val wordleComparator = WordleComparator()
 
-        // 검증 필요
-        play(wordleGame, todaysWord)
+        while (!wordleGame.isEnd()) {
+            play(wordleGame, todaysWord)
+        }
     }
 
     private fun play(wordleGame: WordleGame, todaysWord: Word) {
