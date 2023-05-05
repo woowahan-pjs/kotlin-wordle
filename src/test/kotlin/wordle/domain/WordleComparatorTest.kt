@@ -10,9 +10,9 @@ class WordleComparatorTest {
 
     @Test
     fun `모든 문자가 일치하면 모두 초록색을 반환한다`() {
-        val actual = wordleComparator.getTileColors("apple", "apple")
+        val actual = wordleComparator.getTileColors(Word("apple"), Word("apple"))
 
-        assertThat(actual).containsExactly(
+        assertThat(actual.result).containsExactly(
             GREEN,
             GREEN,
             GREEN,
@@ -23,9 +23,9 @@ class WordleComparatorTest {
 
     @Test
     fun `단어가 한 글자도 일치하지 않는 경우 모두 회색을 반환한다`() {
-        val actual = wordleComparator.getTileColors("spill", "abcde")
+        val actual = wordleComparator.getTileColors(Word("spill"), Word("abcde"))
 
-        assertThat(actual).containsExactly(
+        assertThat(actual.result).containsExactly(
             GRAY,
             GRAY,
             GRAY,
@@ -36,9 +36,9 @@ class WordleComparatorTest {
 
     @Test
     fun `문자가 맞으면은 초록색 존재하지 않으면 회색을 반환한다`() {
-        val actual = wordleComparator.getTileColors("spill", "spaal")
+        val actual = wordleComparator.getTileColors(Word("spill"), Word("spaal"))
 
-        assertThat(actual).containsExactly(
+        assertThat(actual.result).containsExactly(
             GREEN,
             GREEN,
             GRAY,
@@ -49,9 +49,9 @@ class WordleComparatorTest {
 
     @Test
     fun `문자는 존재하지만 위치가 맞지 않으면 노란색을 반환한다`() {
-        val actual = wordleComparator.getTileColors("abcde", "bcdea")
+        val actual = wordleComparator.getTileColors(Word("abcde"), Word("bcdea"))
 
-        assertThat(actual).containsExactly(
+        assertThat(actual.result).containsExactly(
             YELLOW,
             YELLOW,
             YELLOW,
@@ -62,9 +62,9 @@ class WordleComparatorTest {
 
     @Test
     fun `정답이 spill이고 문자가 hello인 경우 회회노초회를 반환한다`() {
-        val actual = wordleComparator.getTileColors("spill", "hello")
+        val actual = wordleComparator.getTileColors(Word("spill"), Word("hello"))
 
-        assertThat(actual).containsExactly(
+        assertThat(actual.result).containsExactly(
             GRAY,
             GRAY,
             YELLOW,
@@ -75,9 +75,9 @@ class WordleComparatorTest {
 
     @Test
     fun `정답이 spill이고 문자가 ablll인 경우 회회회초초를 반환한다`() {
-        val actual = wordleComparator.getTileColors("spill", "ablll")
+        val actual = wordleComparator.getTileColors(Word("spill"), Word("ablll"))
 
-        assertThat(actual).containsExactly(
+        assertThat(actual.result).containsExactly(
             GRAY,
             GRAY,
             GRAY,
@@ -88,9 +88,9 @@ class WordleComparatorTest {
 
     @Test
     fun `정답이 pplab이고 문자가 apppc인 경우 노초노회회를 반환한다`() {
-        val actual = wordleComparator.getTileColors("pplab", "apppc")
+        val actual = wordleComparator.getTileColors(Word("pplab"), Word("apppc"))
 
-        assertThat(actual).containsExactly(
+        assertThat(actual.result).containsExactly(
             YELLOW,
             GREEN,
             YELLOW,

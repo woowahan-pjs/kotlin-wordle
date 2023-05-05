@@ -4,16 +4,16 @@ import wordle.domain.TileColor.*
 
 class WordleComparator {
 
-    fun getTileColors(secretWord: String, guessedWord: String): List<TileColor> {
-        val result = MutableList(secretWord.length) { GRAY }
+    fun getTileColors(secretWord: Word, guessedWord: Word): WordleGameResult {
+        val result = MutableList(secretWord.value.length) { GRAY }
 
-        val secretWordChars = secretWord.toCharArray()
-        val guessedWordChars = guessedWord.toCharArray()
+        val secretWordChars = secretWord.value.toCharArray()
+        val guessedWordChars = guessedWord.value.toCharArray()
 
         replaceToGreen(secretWordChars, guessedWordChars, result)
         replaceToYellow(secretWordChars, guessedWordChars, result)
 
-        return result
+        return WordleGameResult(result)
     }
 
     private fun replaceToGreen(
