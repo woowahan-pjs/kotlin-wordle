@@ -1,7 +1,6 @@
 package wordle.domain
 
-enum class ResultType {
-
+enum class TileColor {
     GREEN,
     YELLOW,
     GRAY,

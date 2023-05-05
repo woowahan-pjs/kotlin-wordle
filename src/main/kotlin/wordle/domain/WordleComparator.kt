@@ -1,11 +1,11 @@
 package wordle.domain
 
-import wordle.domain.ResultType.*
+import wordle.domain.TileColor.*
 
-class WordleCalculator {
+class WordleComparator {
 
-    fun calculate(secretWord: String, guessedWord: String): List<ResultType> {
-        val result = MutableList<ResultType>(secretWord.length) { GRAY }
+    fun getTileColors(secretWord: String, guessedWord: String): List<TileColor> {
+        val result = MutableList(secretWord.length) { GRAY }
 
         val secretWordChars = secretWord.toCharArray()
         val guessedWordChars = guessedWord.toCharArray()
@@ -19,7 +19,7 @@ class WordleCalculator {
     private fun replaceToGreen(
         secretWordChars: CharArray,
         guessedWordChars: CharArray,
-        result: MutableList<ResultType>
+        result: MutableList<TileColor>
     ) {
         guessedWordChars.forEachIndexed { index, guessWord ->
             if (secretWordChars[index] == guessWord) {
@@ -33,7 +33,7 @@ class WordleCalculator {
     private fun replaceToYellow(
         secretWordChars: CharArray,
         guessedWordChars: CharArray,
-        result: MutableList<ResultType>
+        result: MutableList<TileColor>
     ) {
         guessedWordChars.forEachIndexed { index, guessWord ->
             if (isUnchecked(guessWord) && guessWord in secretWordChars) {

@@ -2,15 +2,15 @@ package wordle.domain
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
-import wordle.domain.ResultType.*
+import wordle.domain.TileColor.*
 
-class WordleCalculatorTest {
+class WordleComparatorTest {
+
+    private val wordleComparator = WordleComparator()
 
     @Test
     fun `모든 문자가 일치하면 모두 초록색을 반환한다`() {
-        val wordleCalculator = WordleCalculator()
-
-        val actual = wordleCalculator.calculate("apple", "apple")
+        val actual = wordleComparator.getTileColors("apple", "apple")
 
         assertThat(actual).containsExactly(
             GREEN,
@@ -23,9 +23,7 @@ class WordleCalculatorTest {
 
     @Test
     fun `단어가 한 글자도 일치하지 않는 경우 모두 회색을 반환한다`() {
-        val wordleCalculator = WordleCalculator()
-
-        val actual = wordleCalculator.calculate("spill", "abcde")
+        val actual = wordleComparator.getTileColors("spill", "abcde")
 
         assertThat(actual).containsExactly(
             GRAY,
@@ -38,9 +36,7 @@ class WordleCalculatorTest {
 
     @Test
     fun `문자가 맞으면은 초록색 존재하지 않으면 회색을 반환한다`() {
-        val wordleCalculator = WordleCalculator()
-
-        val actual = wordleCalculator.calculate("spill", "spaal")
+        val actual = wordleComparator.getTileColors("spill", "spaal")
 
         assertThat(actual).containsExactly(
             GREEN,
@@ -53,9 +49,7 @@ class WordleCalculatorTest {
 
     @Test
     fun `문자는 존재하지만 위치가 맞지 않으면 노란색을 반환한다`() {
-        val wordleCalculator = WordleCalculator()
-
-        val actual = wordleCalculator.calculate("abcde", "bcdea")
+        val actual = wordleComparator.getTileColors("abcde", "bcdea")
 
         assertThat(actual).containsExactly(
             YELLOW,
@@ -68,9 +62,7 @@ class WordleCalculatorTest {
 
     @Test
     fun `정답이 spill이고 문자가 hello인 경우 회회노초회를 반환한다`() {
-        val wordleCalculator = WordleCalculator()
-
-        val actual = wordleCalculator.calculate("spill", "hello")
+        val actual = wordleComparator.getTileColors("spill", "hello")
 
         assertThat(actual).containsExactly(
             GRAY,
@@ -83,9 +75,7 @@ class WordleCalculatorTest {
 
     @Test
     fun `정답이 spill이고 문자가 ablll인 경우 회회회초초를 반환한다`() {
-        val wordleCalculator = WordleCalculator()
-
-        val actual = wordleCalculator.calculate("spill", "ablll")
+        val actual = wordleComparator.getTileColors("spill", "ablll")
 
         assertThat(actual).containsExactly(
             GRAY,
@@ -98,9 +88,7 @@ class WordleCalculatorTest {
 
     @Test
     fun `정답이 pplab이고 문자가 apppc인 경우 노초노회회를 반환한다`() {
-        val wordleCalculator = WordleCalculator()
-
-        val actual = wordleCalculator.calculate("pplab", "apppc")
+        val actual = wordleComparator.getTileColors("pplab", "apppc")
 
         assertThat(actual).containsExactly(
             YELLOW,
