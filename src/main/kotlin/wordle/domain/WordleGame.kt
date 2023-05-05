@@ -7,9 +7,10 @@ class WordleGame(
     private val words: WordleWords,
     private var count: Int = 6
 ) {
+    private var isCorrect: Boolean = false
     private val results = mutableListOf<WordleGameResult>()
 
-    fun isEnd(): Boolean = count <= 0
+    fun isEnd(): Boolean = count <= 0 || isCorrect
 
     fun getTodaysWord(today: LocalDate): Word {
         val index = (ChronoUnit.DAYS.between(STANDARD_DATE, today).toInt()) % words.size
@@ -18,7 +19,9 @@ class WordleGame(
 
     fun play(answerWord: Word, word: Word, resultEvent: (List<WordleGameResult>) -> Unit) {
         validateWord(word)
-        results.add(WordleComparator().getTileColors(answerWord, word))
+        val result = WordleComparator().getTileColors(answerWord, word)
+        isCorrect = result.isCorrect()
+        results.add(result)
         resultEvent(results)
         count--
     }
