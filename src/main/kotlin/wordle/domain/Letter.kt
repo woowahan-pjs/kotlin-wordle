@@ -1,6 +1,6 @@
 package wordle.domain
 
-data class Letter(private val position: Int, private val letter: Char) {
+data class Letter(val position: Int, val letter: Char) {
 
     init {
         require(letter in 'a'..'z') { "글자는 소문자 알파벳만 허용합니다." }
