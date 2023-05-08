@@ -3,10 +3,11 @@ package wordle.domain
 import java.io.File
 
 object WordPool {
-    val words = readWordsFile("src/main/resources/words.txt")
-    fun readWordsFile(filePath: String): List<String> {
+    private const val filePath = "src/main/resources/words.txt"
+    val words = readWordsFile()
+
+    private fun readWordsFile(): List<String> {
         val file = File(filePath)
-        println(file.absolutePath)
         return file.readLines()
     }
 }

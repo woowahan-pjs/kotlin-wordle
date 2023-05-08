@@ -5,7 +5,7 @@ data class Word private constructor(val word: List<Letter>) {
         require(word.size == 5) { "단어는 5글자여야 합니다." }
     }
 
-    fun match(other: Word): List<MatchResult> {
+    fun match(other: Word): Result {
         var result: MutableList<MatchResult> = MutableList(5) { MatchResult.GRAY }
 
         val greenPositions: List<Int> = checkGreen(other.word)
@@ -13,7 +13,7 @@ data class Word private constructor(val word: List<Letter>) {
 
         greenPositions.forEach { result[it] = MatchResult.GREEN }
         yellowPositions.forEach { result[it] = MatchResult.YELLOW }
-        return result.toList()
+        return Result(result.toList())
     }
 
     private fun checkGreen(other: List<Letter>): List<Int> =
