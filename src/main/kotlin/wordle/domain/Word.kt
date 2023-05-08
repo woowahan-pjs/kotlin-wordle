@@ -1,6 +1,6 @@
 package wordle.domain
 
-class Word private constructor(val word: List<Letter>) {
+data class Word private constructor(val word: List<Letter>) {
     init {
         require(word.size == 5) { "단어는 5글자여야 합니다." }
     }
@@ -13,12 +13,11 @@ class Word private constructor(val word: List<Letter>) {
 
         greenPositions.forEach { result[it] = MatchResult.GREEN }
         yellowPositions.forEach { result[it] = MatchResult.YELLOW }
-        return result.toList();
+        return result.toList()
     }
 
     private fun checkGreen(other: List<Letter>): List<Int> =
         other.filter { this.match(it, listOf()) == MatchResult.GREEN }.map { it.position }
-
 
     private fun checkYellow(other: List<Letter>, excludeIndex: List<Int>): List<Int> =
         other.filter { excludeIndex.contains(it.position).not() && this.match(it, excludeIndex) == MatchResult.YELLOW }
