@@ -29,4 +29,8 @@ object OutputView {
             MatchResult.GRAY -> print("⬜")
         }
     }
+
+    fun printError(message: String) {
+        println(message)
+    }
 }

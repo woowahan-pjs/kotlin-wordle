@@ -19,8 +19,7 @@ class WordleGameController() {
         val results: Results = Results()
 
         do {
-            val userInput: String = InputView.readWord()
-            val word: Word = Word.from(userInput)
+            val word: Word = getValidWord()
             val result: Result = answer.match(word)
             results.add(result)
             trialCount++
@@ -32,6 +31,14 @@ class WordleGameController() {
 
     private fun isContinue(result: Result): Boolean {
         return trialCount < MAX_TRIAL_COUNT && !result.isRight()
+    }
+
+    private fun getValidWord(): Word {
+        return runCatching {
+            Word.from(InputView.readWord())
+        }.onFailure {
+            OutputView.printError(it.message!!)
+        }.getOrNull() ?: getValidWord()
     }
 
     companion object {
