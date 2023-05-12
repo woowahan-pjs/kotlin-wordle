@@ -41,4 +41,14 @@ class TryCountTest {
         // then
         assertEquals(tryCount2, tryCount3)
     }
+
+    @Test
+    fun 회수가_같다면_true를_반환한다() {
+        // given
+        val tryCount1 = TryCount(1)
+        val tryCount2 = TryCount(1)
+
+        // when
+        assertEquals(true, tryCount1.isSame(tryCount2))
+    }
 }
