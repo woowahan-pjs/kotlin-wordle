@@ -1,0 +1,1 @@
+fun main() = WordleController().run()
