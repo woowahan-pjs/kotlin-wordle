@@ -6,9 +6,9 @@ class WordleGame(private val wordPicker: WordPicker) {
     private val todayAnswer: Answer by lazy { Answer(wordPicker.pick()) }
 
     fun playGame(
-        userGuess: String,
+        userGuess: UserGuess,
     ): List<List<Tile>> {
-        val judgeResult = todayAnswer.judge(userGuess)
+        val judgeResult = todayAnswer.judge(userGuess.value)
 
         history.add(judgeResult)
 
