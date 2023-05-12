@@ -4,5 +4,5 @@ interface WordDictionary {
 
     fun pickWord(): String
 
-    fun contains(target:String): Boolean
+    fun contains(target: String): Boolean
 }

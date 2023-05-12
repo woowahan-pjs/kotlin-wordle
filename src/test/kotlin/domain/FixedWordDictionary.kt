@@ -9,5 +9,4 @@ class FixedWordDictionary(val word: String) : WordDictionary {
     override fun contains(target: String): Boolean {
         return true
     }
-
 }

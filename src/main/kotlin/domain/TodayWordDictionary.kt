@@ -4,7 +4,7 @@ import java.io.FileReader
 import java.time.LocalDate
 import java.time.temporal.ChronoUnit
 
-class TodayWordDictionary: WordDictionary {
+class TodayWordDictionary : WordDictionary {
 
     private val words: List<String> = FileReader(WORD_RESOURCE).readText().split(DELIMITERS)
 
@@ -21,6 +21,6 @@ class TodayWordDictionary: WordDictionary {
     companion object {
         private const val WORD_RESOURCE = "src/main/resources/words.txt"
         private const val DELIMITERS = "\n"
-        private val TARGET_DATE = LocalDate.of(2021, 6,19)
+        private val TARGET_DATE = LocalDate.of(2021, 6, 19)
     }
 }
