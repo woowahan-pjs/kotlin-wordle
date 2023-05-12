@@ -9,7 +9,9 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
 import org.junit.jupiter.params.provider.ValueSource
+import wordle.domain.Tile.*
 import java.util.stream.Stream
+// ktlint-disable no-wildcard-imports
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class AnswerTest {
@@ -30,12 +32,12 @@ class AnswerTest {
 
     @ParameterizedTest
     @MethodSource("getAnswerJudgeTestCase")
-    fun 정답과_입력값을_비교한다(answer: String, input: String, expected: List<String>) {
+    fun 정답과_입력값을_비교한다(answer: String, input: String, expected: List<Tile>) {
         // given
         val realAnswer = Answer(answer)
 
         // when
-        val judgeResult: List<String> = realAnswer.judge(input)
+        val judgeResult = realAnswer.judge(input)
 
         // then
         assertThat(judgeResult).isEqualTo(expected)
@@ -43,13 +45,13 @@ class AnswerTest {
 
     private fun getAnswerJudgeTestCase(): Stream<Arguments?>? {
         return Stream.of(
-            Arguments.of("auple", "poppy", listOf("회색", "회색", "초록", "회색", "회색")),
-            Arguments.of("apple", "poppy", listOf("노랑", "회색", "초록", "회색", "회색")),
-            Arguments.of("hello", "label", listOf("노랑", "회색", "회색", "노랑", "노랑")),
-            Arguments.of("aalll", "llbaa", listOf("노랑", "노랑", "회색", "노랑", "노랑")),
-            Arguments.of("apple", "pbbpp", listOf("노랑", "회색", "회색", "노랑", "회색")),
-            Arguments.of("aaall", "bbaaa", listOf("회색", "회색", "초록", "노랑", "노랑")),
-            Arguments.of("aaall", "lllaa", listOf("노랑", "노랑", "회색", "노랑", "노랑")),
+            Arguments.of("auple", "poppy", listOf(GREY, GREY, GREEN, GREY, GREY)),
+            Arguments.of("apple", "poppy", listOf(YELLOW, GREY, GREEN, GREY, GREY)),
+            Arguments.of("hello", "label", listOf(YELLOW, GREY, GREY, YELLOW, YELLOW)),
+            Arguments.of("aalll", "llbaa", listOf(YELLOW, YELLOW, GREY, YELLOW, YELLOW)),
+            Arguments.of("apple", "pbbpp", listOf(YELLOW, GREY, GREY, YELLOW, GREY)),
+            Arguments.of("aaall", "bbaaa", listOf(GREY, GREY, GREEN, YELLOW, YELLOW)),
+            Arguments.of("aaall", "lllaa", listOf(YELLOW, YELLOW, GREY, YELLOW, YELLOW)),
         )
     }
 }
