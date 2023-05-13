@@ -13,7 +13,6 @@ class WordleGame(
         return count >= MAX_ROUND || isCorrect
     }
 
-
     fun play(word: Word): List<WordleGameResult> {
         val result = WordleComparator().getTileColors(answerWord, word)
         isCorrect = result.isCorrect()
