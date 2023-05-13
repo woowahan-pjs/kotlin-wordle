@@ -11,7 +11,7 @@ class WordleGameTest {
 
         game.play(Word("apple"))
 
-        assertThat(game.isEnd()).isTrue
+        assertThat(game.isNotEnd()).isFalse
     }
 
     @Test
@@ -22,7 +22,7 @@ class WordleGameTest {
             game.play(Word("abcde"))
         }
 
-        assertThat(game.isEnd()).isTrue
+        assertThat(game.isNotEnd()).isFalse
     }
 
     @Test
@@ -33,7 +33,7 @@ class WordleGameTest {
             game.play(Word("abcde"))
         }
 
-        assertThat(game.isEnd()).isFalse
+        assertThat(game.isNotEnd()).isTrue
     }
 
     @Test

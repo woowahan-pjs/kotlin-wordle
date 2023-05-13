@@ -9,8 +9,8 @@ class WordleGame(
     var count: Int = 0
         private set
 
-    fun isEnd(): Boolean {
-        return count >= MAX_ROUND || isCorrect
+    fun isNotEnd(): Boolean {
+        return count < MAX_ROUND && !isCorrect
     }
 
     fun play(word: Word): List<WordleGameResult> {

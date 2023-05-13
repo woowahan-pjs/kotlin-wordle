@@ -18,7 +18,7 @@ class WordleController(
         val answerWord = words.getTodaysWord(LocalDate.now())
         val wordleGame = WordleGame(answerWord)
 
-        while (!wordleGame.isEnd()) {
+        while (wordleGame.isNotEnd()) {
             val word = getWord(words)
             play(word, wordleGame)
         }
