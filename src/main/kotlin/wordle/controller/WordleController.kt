@@ -26,7 +26,12 @@ class WordleController(
     private fun play(wordleGame: WordleGame, todaysWord: Word) {
         try {
             val rawWord = inputView.readGuessWord()
-            wordleGame.play(todaysWord, rawWord, outputView::printResults)
+            val results = wordleGame.play(todaysWord, rawWord)
+
+            if (wordleGame.isCorrect) {
+                outputView.printCount(WordleGame.MAX_ROUND, wordleGame.count)
+            }
+            outputView.printResults(results)
         } catch (e: IllegalArgumentException) {
             println(e.message)
             play(wordleGame, todaysWord)

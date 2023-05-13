@@ -28,4 +28,8 @@ class OutputView {
         }
         println()
     }
+
+    fun printCount(maxRound: Int, count: Int) {
+        println("$count / $maxRound")
+    }
 }
