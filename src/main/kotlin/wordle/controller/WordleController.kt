@@ -9,7 +9,8 @@ import wordle.view.OutputView
 import java.time.LocalDate
 
 class WordleController(
-    private val inputView: InputView, private val outputView: OutputView
+    private val inputView: InputView,
+    private val outputView: OutputView,
 ) {
 
     fun run() {

@@ -1,6 +1,8 @@
 package wordle.view
 
-import wordle.domain.TileColor.*
+import wordle.domain.TileColor.GRAY
+import wordle.domain.TileColor.GREEN
+import wordle.domain.TileColor.YELLOW
 import wordle.domain.WordleGameResult
 
 class OutputView {

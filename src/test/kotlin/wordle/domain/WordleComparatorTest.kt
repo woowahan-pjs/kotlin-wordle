@@ -2,7 +2,9 @@ package wordle.domain
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
-import wordle.domain.TileColor.*
+import wordle.domain.TileColor.GRAY
+import wordle.domain.TileColor.GREEN
+import wordle.domain.TileColor.YELLOW
 
 class WordleComparatorTest {
 
