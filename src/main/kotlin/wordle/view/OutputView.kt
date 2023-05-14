@@ -24,8 +24,8 @@ object OutputView {
 
     private fun printMatchResult(matchResult: MatchResult) {
         when (matchResult) {
-            MatchResult.GREEN -> print("\uD83D\uDFE9")
-            MatchResult.YELLOW -> print("\uD83D\uDFE8")
+            MatchResult.GREEN -> print("🟩")
+            MatchResult.YELLOW -> print("🟨")
             MatchResult.GRAY -> print("⬜")
         }
     }
