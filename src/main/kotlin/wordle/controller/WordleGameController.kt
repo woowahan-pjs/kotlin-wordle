@@ -11,25 +11,29 @@ import java.time.LocalDate
 
 class WordleGameController() {
 
-    private var trialCount = 0
-
     fun run() {
+        var trialCount: Int = 0
         OutputView.printGameStart()
         val answer = AnswerGenerator(WordPool.words).generate(LocalDate.now())
         val results: Results = Results()
 
         do {
-            val word: Word = getValidWord()
-            val result: Result = answer.match(word)
-            results.add(result)
+            val result: Result = matchWord(answer, results)
             trialCount++
-            OutputView.printGameResults(results)
-        } while (isContinue(result))
+        } while (isContinue(result, trialCount))
 
         OutputView.printTrialCount(trialCount, MAX_TRIAL_COUNT)
     }
 
-    private fun isContinue(result: Result): Boolean {
+    private fun matchWord(answer: Word, results: Results): Result {
+        val word: Word = getValidWord()
+        val result: Result = answer.match(word)
+        results.add(result)
+        OutputView.printGameResults(results)
+        return result
+    }
+
+    private fun isContinue(result: Result, trialCount: Int): Boolean {
         return trialCount < MAX_TRIAL_COUNT && !result.isRight()
     }
 
@@ -42,6 +46,6 @@ class WordleGameController() {
     }
 
     companion object {
-        const val MAX_TRIAL_COUNT = 6
+        private const val MAX_TRIAL_COUNT = 6
     }
 }
