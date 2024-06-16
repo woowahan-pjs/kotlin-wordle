@@ -1,9 +1,6 @@
-import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Assertions
-import org.junit.jupiter.api.Test
 import stage.Stage
 import stage.step.Step
-import stage.step.word.Word
+import wordle.Word
 import java.time.LocalDate
 import java.util.Scanner
 

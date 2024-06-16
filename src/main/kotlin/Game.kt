@@ -1,8 +1,8 @@
 import dictionary.Dictionary
 import stage.Stage
-import stage.step.word.Word
 import view.Input
 import view.Print
+import wordle.Word
 import java.time.LocalDate
 
 class Game {
