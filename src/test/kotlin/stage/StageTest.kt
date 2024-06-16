@@ -15,78 +15,78 @@ import stage.step.Step
  * */
 class StageTest {
 
-    @Test
-    fun `스테이지가 Progress일 때 play할 수 있음`() {
-        val stage = Stage("answer", Stage.State.PROGRESS)
-        assertThat(stage.canPlay()).isTrue()
-    }
+  @Test
+  fun `스테이지가 Progress일 때 play할 수 있음`() {
+    val stage = Stage("answer", Stage.State.PROGRESS)
+    assertThat(stage.canPlay()).isTrue()
+  }
 
-    @Test
-    fun `스테이지가 Complete일 때 더이상 play를 할 수 없음`() {
-        val stage = Stage("answer", Stage.State.COMPLETE)
-        assertThat(stage.canPlay()).isFalse()
-    }
+  @Test
+  fun `스테이지가 Complete일 때 더이상 play를 할 수 없음`() {
+    val stage = Stage("answer", Stage.State.COMPLETE)
+    assertThat(stage.canPlay()).isFalse()
+  }
 
 
-    @Test
-    fun `스테이지가 Fail일 때 더이상 play를 할 수 없음`() {
-        val stage = Stage("answer", Stage.State.FAIL)
-        assertThat(stage.canPlay()).isFalse()
-    }
+  @Test
+  fun `스테이지가 Fail일 때 더이상 play를 할 수 없음`() {
+    val stage = Stage("answer", Stage.State.FAIL)
+    assertThat(stage.canPlay()).isFalse()
+  }
 
-    @Test
-    fun `스테이지가 play시 정답을 맞추면(step이 isCorrect) Complete`() {
-        // given
-        val stage = Stage("answer", Stage.State.PROGRESS)
+  @Test
+  fun `스테이지가 play시 정답을 맞추면(step이 isCorrect) Complete`() {
+    // given
+    val stage = Stage("answer", Stage.State.PROGRESS)
 
-        // when
-        stage.play("answer")
+    // when
+    stage.play("answer")
 
-        // then
-        assertThat(stage.state).isEqualTo(Stage.State.COMPLETE)
-    }
+    // then
+    assertThat(stage.state).isEqualTo(Stage.State.COMPLETE)
+  }
 
-    @Test
-    fun `스테이지가 play시 6번 모두 정답을 맞추지 못하면(step이 모두 isCorrect false) FAIL`() {
-        // given
-        val stage = Stage("answer", Stage.State.PROGRESS)
+  @Test
+  fun `스테이지가 play시 6번 모두 정답을 맞추지 못하면(step이 모두 isCorrect false) FAIL`() {
+    // given
+    val stage = Stage("answer", Stage.State.PROGRESS)
 
-        // when
-        stage.play("world")
-        stage.play("world")
-        stage.play("world")
-        stage.play("world")
-        stage.play("world")
-        stage.play("world")
+    // when
+    stage.play("world")
+    stage.play("world")
+    stage.play("world")
+    stage.play("world")
+    stage.play("world")
+    stage.play("world")
 
-        // then
-        assertThat(stage.state).isEqualTo(Stage.State.FAIL)
-    }
+    // then
+    assertThat(stage.state).isEqualTo(Stage.State.FAIL)
+  }
 }
 
 data class Stage(val answer: String, var state: State = State.PROGRESS) {
 
-    val steps = mutableListOf<Step>()
+  val steps = mutableListOf<Step>()
 
-    enum class State {
-        PROGRESS, COMPLETE, FAIL
+  enum class State {
+    PROGRESS, COMPLETE, FAIL
+  }
+
+  fun play(word: String) {
+    if (!canPlay()) return
+    val step = Step.create(answer, word)
+    steps.add(step)
+
+    if (step.isCorrect) {
+      state = State.COMPLETE
     }
 
-    fun play(word: String) {
-        if (!canPlay()) return
-        val step = Step.create(answer, word)
-        steps.add(step)
-
-        if (step.isCorrect) {
-            state = State.COMPLETE
-        }
-
-        if (steps.size == 6 && state != State.COMPLETE) {
-            state = State.FAIL
-        }
+    if (steps.size == 6 && state != State.COMPLETE) {
+      state = State.FAIL
     }
+  }
 
-    fun canPlay(): Boolean {
-        return state != State.COMPLETE && state != State.FAIL
-    }
+  fun canPlay(): Boolean {
+    return state != State.COMPLETE && state != State.FAIL
+  }
 }
