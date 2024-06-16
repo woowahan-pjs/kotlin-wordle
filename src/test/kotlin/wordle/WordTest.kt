@@ -5,16 +5,15 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
+import wordle.domain.Word
 
 internal class WordTest {
-
-    private val alwaysInDic = { _: String -> true }
 
     @ParameterizedTest
     @ValueSource(strings = ["-1", "1", " ", "w!", " ;fs"])
     fun `모두 영문으로 구성된다`(value: String) {
         //when
-        val errorResponse = assertThrows<IllegalArgumentException> { Word.fromInput(value, alwaysInDic) }
+        val errorResponse = assertThrows<IllegalArgumentException> { Word.fromInput(value) }
 
         ///then
         assertThat(errorResponse.message).isEqualTo("영문만 입력해야합니다.")
@@ -24,7 +23,7 @@ internal class WordTest {
     @ValueSource(strings = ["test", "hi", "h", "tttttt"])
     fun `5글자가 아니면 IllegalArgumentException 예외가 발생한다`(value: String) {
         //when
-        val errorResponse = assertThrows<IllegalArgumentException> { Word.fromInput(value, alwaysInDic) }
+        val errorResponse = assertThrows<IllegalArgumentException> { Word.fromInput(value) }
 
         ///then
         assertThat(errorResponse.message).isEqualTo("5글자여야 합니다.")
@@ -32,17 +31,7 @@ internal class WordTest {
 
     @Test
     fun `영문 대문자는 소문자로 치환된다`() {
-        assertThat(Word.fromInput("Hello", alwaysInDic)).isEqualTo(Word.fromInput("hello", alwaysInDic))
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = ["testa", "hiwww", "heeee", "tttaa"])
-    fun `사전에 존재하지 않으면 IllegalArgumentException 예외가 발생한다`(value: String) {
-        val errorResponse =
-            assertThrows<IllegalArgumentException> { Word.fromInput(value) { _ -> false } }
-
-        //then
-        assertThat(errorResponse.message).isEqualTo("존재하지 않는 단어입니다.")
+        assertThat(Word.fromInput("Hello")).isEqualTo(Word.fromInput("hello"))
     }
 }
 

@@ -1,7 +1,7 @@
-package wordle
+package wordle.domain
 
 /**
- * 사용자가 하나의 정답을 가지고 진행하는 한
+ * 사용자가 하나의 정답을 가지고 진행하는 워들 한 판
  */
 data class Stage(val answer: String, val steps: List<Step> = listOf()) {
 

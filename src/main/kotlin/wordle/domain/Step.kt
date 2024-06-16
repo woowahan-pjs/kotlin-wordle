@@ -1,4 +1,4 @@
-package wordle
+package wordle.domain
 
 /**
  * 사용자가 [Word]를 입력하여 정답과 비교한 결과를 가진 한 번의 단계
@@ -15,7 +15,7 @@ data class Step(val answer: String, val word: Word) {
 
     init {
         result = if (answer == word.value) {
-             List(5) { Result.CORRECT }.toList()
+            List(5) { Result.CORRECT }.toList()
         } else {
             MutableList(5) { Result.WRONG }.apply {
                 fillCorrect(this)
@@ -35,7 +35,8 @@ data class Step(val answer: String, val word: Word) {
     }
 
     private fun fillMismatch(correctedResult: MutableList<Result>) {
-        val calculatedAnswer = StringBuilder(answer.filterIndexed { index, _ ->  correctedResult[index] != Result.CORRECT })
+        val calculatedAnswer =
+            StringBuilder(answer.filterIndexed { index, _ -> correctedResult[index] != Result.CORRECT })
 
         word.value.forEachIndexed { index, c ->
             if (correctedResult[index] != Result.CORRECT && calculatedAnswer.contains(c)) {

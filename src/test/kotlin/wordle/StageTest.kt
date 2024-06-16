@@ -2,8 +2,8 @@ package wordle
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
-import wordle.Stage
-import wordle.Word
+import wordle.domain.Stage
+import wordle.domain.Word
 
 internal class StageTest {
 
