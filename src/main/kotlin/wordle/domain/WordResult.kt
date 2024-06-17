@@ -15,4 +15,8 @@ data class WordResult(private val result: MutableList<LetterMatch> = MutableList
     }
 
     fun isCorrectMatchIndex(index: Int): Boolean = result[index] == LetterMatch.CORRECT
+
+    fun isSuccessGame() = result.all { matchType -> matchType == LetterMatch.CORRECT }
+
+    fun matches(): List<LetterMatch> = result.toList()
 }
