@@ -1,4 +1,4 @@
-package domain
+package wordle.domain
 
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
@@ -6,13 +6,13 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.EmptySource
 import org.junit.jupiter.params.provider.ValueSource
-import wordle.domain.WORD_LENGTH
-import wordle.domain.Word
 
 class WordTest {
     @Test
     fun `(성공) 단어를 생성한다`() {
-        assertThat(Word("hello")).isEqualTo(Word("hello"))
+        val actual = Word("hello")
+
+        assertThat(actual).isEqualTo(Word("hello"))
     }
 
     @EmptySource

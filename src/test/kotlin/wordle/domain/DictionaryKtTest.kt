@@ -1,10 +1,8 @@
-package domain
+package wordle.domain
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.assertAll
 import org.junit.jupiter.api.Test
-import wordle.domain.dictionaryElementAt
-import wordle.domain.isDictionaryWord
 import wordle.infra.dictionaryWordsSize
 
 private const val CONTAINS_WORD = "hello"
