@@ -9,8 +9,6 @@ enum class Tile(val matchType: LetterMatch, val color: String) {
     ;
 
     companion object {
-        fun of(matchType: LetterMatch): Tile {
-            return entries.find { tile -> tile.matchType == matchType } ?: GREY
-        }
+        fun of(matchType: LetterMatch): Tile = entries.find { tile -> tile.matchType == matchType } ?: GREY
     }
 }

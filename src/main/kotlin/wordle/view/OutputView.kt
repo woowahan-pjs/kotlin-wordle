@@ -5,7 +5,7 @@ import wordle.domain.Word
 import wordle.domain.WordResults
 
 fun printStartingGameMessage() {
-    println("🎮 WORDLE을 6번 만에 맞춰 보세요.\n📌 시도의 결과는 타일의 색 변화로 나타납니다.🥳\n")
+    println("🎮 WORDLE을 ${MAX_TRY_COUNT}번 만에 맞춰 보세요.\n📌 시도의 결과는 타일의 색 변화로 나타납니다.🥳\n")
 }
 
 fun printResult(results: WordResults) {
