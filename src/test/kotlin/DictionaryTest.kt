@@ -1,3 +1,4 @@
+import dictionary.Dictionary
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
@@ -34,25 +35,5 @@ class DictionaryTest {
     val findTodayWord = Dictionary.findTodayWord(now)
     //then
     assertThat(findTodayWord).isNotNull()
-  }
-}
-
-object Dictionary {
-  private const val PATH = "./src/main/resources"
-  private const val FILE_NAME = "words.txt"
-  private val words: List<String> = File(PATH, FILE_NAME).readLines()
-  private val BASE_DATE = LocalDate.of(2021, 6, 19)
-  fun hasWord(word: String): Boolean {
-    return words.contains(word)
-  }
-
-  operator fun get(index: Int): String {
-    return words[index]
-  }
-
-  fun findTodayWord(nowDate: LocalDate): String {
-    val calcDate = nowDate.toEpochDay().minus(BASE_DATE.toEpochDay())
-    val index: Int = (calcDate % words.size).toInt()
-    return words[index]
   }
 }
