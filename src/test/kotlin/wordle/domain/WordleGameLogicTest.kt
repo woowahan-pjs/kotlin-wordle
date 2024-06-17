@@ -29,7 +29,7 @@ class WordleGameLogicTest {
                     LetterMatch.ABSENT,
                     LetterMatch.ABSENT,
                     LetterMatch.ABSENT,
-                ),
+                ).toWordResult(),
             )
         }
 
@@ -46,7 +46,7 @@ class WordleGameLogicTest {
                     LetterMatch.ABSENT,
                     LetterMatch.ABSENT,
                     LetterMatch.CORRECT,
-                ),
+                ).toWordResult(),
             )
         }
     }
@@ -66,7 +66,7 @@ class WordleGameLogicTest {
                     LetterMatch.ABSENT,
                     LetterMatch.PRESENT,
                     LetterMatch.ABSENT,
-                ),
+                ).toWordResult(),
             )
         }
 
@@ -83,7 +83,7 @@ class WordleGameLogicTest {
                     LetterMatch.ABSENT,
                     LetterMatch.ABSENT,
                     LetterMatch.ABSENT,
-                ),
+                ).toWordResult(),
             )
         }
 
@@ -100,7 +100,7 @@ class WordleGameLogicTest {
                     LetterMatch.PRESENT,
                     LetterMatch.CORRECT,
                     LetterMatch.ABSENT,
-                ),
+                ).toWordResult(),
             )
         }
 
@@ -117,7 +117,7 @@ class WordleGameLogicTest {
                     LetterMatch.ABSENT,
                     LetterMatch.ABSENT,
                     LetterMatch.CORRECT,
-                ),
+                ).toWordResult(),
             )
         }
 
@@ -134,7 +134,7 @@ class WordleGameLogicTest {
                     LetterMatch.ABSENT,
                     LetterMatch.ABSENT,
                     LetterMatch.ABSENT,
-                ),
+                ).toWordResult(),
             )
         }
 
@@ -151,7 +151,7 @@ class WordleGameLogicTest {
                     LetterMatch.ABSENT,
                     LetterMatch.CORRECT,
                     LetterMatch.CORRECT,
-                ),
+                ).toWordResult(),
             )
         }
     }
@@ -164,7 +164,7 @@ class WordleGameLogicTest {
 
             val result = wordleGameLogic.compare(answerWord)
 
-            assertThat(result).isEqualTo(MutableList(WORD_LENGTH) { LetterMatch.ABSENT })
+            assertThat(result).isEqualTo(MutableList(WORD_LENGTH) { LetterMatch.ABSENT }.toWordResult())
         }
 
         @Test
@@ -173,7 +173,7 @@ class WordleGameLogicTest {
 
             val result = wordleGameLogic.compare(answerWord)
 
-            assertThat(result).isEqualTo(MutableList(WORD_LENGTH) { LetterMatch.PRESENT })
+            assertThat(result).isEqualTo(MutableList(WORD_LENGTH) { LetterMatch.PRESENT }.toWordResult())
         }
 
         @Test
@@ -182,7 +182,7 @@ class WordleGameLogicTest {
 
             val result = wordleGameLogic.compare(answerWord)
 
-            assertThat(result).isEqualTo(MutableList(WORD_LENGTH) { LetterMatch.CORRECT })
+            assertThat(result).isEqualTo(MutableList(WORD_LENGTH) { LetterMatch.CORRECT }.toWordResult())
         }
     }
 }
