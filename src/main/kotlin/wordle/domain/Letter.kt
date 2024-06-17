@@ -1,10 +1,10 @@
 package wordle.domain
 
-import wordle.exception.ExceptionMessage.INVALID_LATTER
+import wordle.exception.ExceptionMessage.INVALID_LETTER
 
 data class Letter(private val value: Char) {
     init {
-        check(isAlphabetOrMatchMarker()) { INVALID_LATTER.message }
+        check(isAlphabetOrMatchMarker()) { INVALID_LETTER.message }
     }
 
     fun changeMatchMarker(): Letter = MATCH_MARKER_LETTER
