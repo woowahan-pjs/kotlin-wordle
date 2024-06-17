@@ -1,30 +1,40 @@
 package wordle.application
 
-import wordle.domain.AnswerWord
 import wordle.domain.TodayWord
+import wordle.domain.Word
+import wordle.domain.WordResults
 import wordle.domain.WordleGameLogic
 import wordle.view.inputAnswerWord
+import wordle.view.printFail
+import wordle.view.printResult
+import wordle.view.printRetry
+import wordle.view.printSuccess
 import java.time.LocalDate
 
 class WordleGame(gameStartDate: LocalDate) {
     private val todayWord = TodayWord(gameStartDate)
+    private val wordleGameLogic = WordleGameLogic(todayWord)
+    private val results = WordResults()
 
     fun play() {
-        var tryCount = 6
-        while (isContinuousGame(tryCount)) {
+        while (results.isContinuousGame()) {
             try {
-                val answerWord = AnswerWord(inputAnswerWord())
-                WordleGameLogic(todayWord, answerWord).compare()
-                tryCount--
+                val answerWord = Word(inputAnswerWord())
+                val result = wordleGameLogic.compare(answerWord)
+                results.addResults(result)
+                printResult(results)
             } catch (e: IllegalStateException) {
-                println("다시 시도 해주세요!")
+                printRetry(e.message)
             }
         }
+        gameResult(todayWord)
     }
 
-    private fun isContinuousGame(tryCount: Int) = !isSuccessGame() && tryCount > 0
-
-    private fun isSuccessGame(): Boolean {
-        return false
+    private fun gameResult(todayWord: Word) {
+        if (results.isSuccessGame()) {
+            printSuccess(results.attemptCount)
+            return
+        }
+        printFail(todayWord)
     }
 }
