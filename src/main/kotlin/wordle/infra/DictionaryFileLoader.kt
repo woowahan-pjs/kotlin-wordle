@@ -6,9 +6,16 @@ private const val NEW_LINE = "\n"
 private const val WORDS_FILE_PATH = "words.txt"
 private val classLoader: ClassLoader = Thread.currentThread().contextClassLoader
 private val dictionaryWords: List<String> by lazy { loadDictionaryWords() }
-val dictionaryWordSet: Set<String> by lazy { dictionaryWords.toSet() }
+private val dictionaryWordSet: Set<String> by lazy { dictionaryWords.toSet() }
+val dictionaryWordsSize = dictionaryWords.size
 
 fun contains(word: String): Boolean = dictionaryWordSet.contains(word)
+
+fun dictionaryWord(index: Int): String {
+    check(dictionaryWords.isNotEmpty()) { NoSuchElementException("Dictionary File is Empty") }
+
+    return dictionaryWords[index % dictionaryWordsSize]
+}
 
 private fun loadDictionaryWords(): List<String> =
     classLoader.getResourceAsStream(WORDS_FILE_PATH)
