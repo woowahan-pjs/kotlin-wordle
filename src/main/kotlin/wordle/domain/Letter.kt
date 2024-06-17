@@ -7,6 +7,8 @@ data class Letter(private val value: Char) {
         check(isAlphabetOrMatchMarker()) { WordleExceptionCode.LETTER_INVALID_CHARACTER_TYPE.message }
     }
 
+    fun changeMatchMarker(): Letter = MATCH_MARKER_LETTER
+
     private fun isAlphabetOrMatchMarker(): Boolean = isAlphabet() || isMatchMarker()
 
     private fun isAlphabet(): Boolean = value in ALPHABET
@@ -16,5 +18,6 @@ data class Letter(private val value: Char) {
     companion object {
         private const val MATCH_MARKER = '#'
         private val ALPHABET = ('a'..'z').toSet()
+        private val MATCH_MARKER_LETTER = Letter(MATCH_MARKER)
     }
 }

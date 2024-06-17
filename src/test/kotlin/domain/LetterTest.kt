@@ -29,6 +29,15 @@ class LetterTest {
             .isInstanceOf(IllegalStateException::class.java)
             .hasMessage("유효하지 않은 글자 형식입니다.")
     }
+
+    @Test
+    fun `(성공) 체크 표시 글자로 변경한다`() {
+        val letter = Letter('b')
+
+        val actual = letter.changeMatchMarker()
+
+        assertThat(actual).isEqualTo(Letter(MATCH_MARKER))
+    }
 }
 
 private const val MATCH_MARKER = '#'
