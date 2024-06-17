@@ -28,4 +28,11 @@ class WordTest {
         assertThatThrownBy { (Word(invalidWord)) }
             .isInstanceOf(IllegalStateException::class.java)
     }
+
+    @ValueSource(strings = ["aaaaa", "abced"])
+    @ParameterizedTest
+    fun `(예외) 단어는 사전에 있는 단어이어야 한다`(invalidWord: String) {
+        assertThatThrownBy { (Word(invalidWord)) }
+            .isInstanceOf(IllegalStateException::class.java)
+    }
 }
