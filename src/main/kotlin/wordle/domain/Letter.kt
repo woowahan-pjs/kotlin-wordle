@@ -9,6 +9,8 @@ data class Letter(private val value: Char) {
 
     fun changeMatchMarker(): Letter = MATCH_MARKER_LETTER
 
+    fun value(): String = value.toString()
+
     private fun isAlphabetOrMatchMarker(): Boolean = isAlphabet() || isMatchMarker()
 
     private fun isAlphabet(): Boolean = value in ALPHABET
