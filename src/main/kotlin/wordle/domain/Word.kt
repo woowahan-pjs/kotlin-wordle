@@ -4,7 +4,7 @@ import wordle.exception.WordleExceptionCode.WORD_INVALID_LENGTH
 import wordle.exception.WordleExceptionCode.WORD_IS_NOT_IN_DICTIONARY
 import wordle.exception.WordleExceptionCode.WORD_NOT_ALLOW_SPACE
 
-data class Word(val word: List<Letter>) : List<Letter> by word
+data class Word(private val word: List<Letter>) : List<Letter> by word
 
 const val WORD_LENGTH = 5
 

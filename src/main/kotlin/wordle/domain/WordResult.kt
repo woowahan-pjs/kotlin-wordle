@@ -7,4 +7,6 @@ data class WordResult(private val result: MutableList<LetterMatch> = MutableList
     ) {
         result[index] = matchType
     }
+
+    fun isCorrectMatchIndex(index: Int): Boolean = result[index] == LetterMatch.CORRECT
 }

@@ -2,6 +2,7 @@ package wordle.domain
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertAll
 
 class WordResultTest {
     @Test
@@ -12,7 +13,7 @@ class WordResultTest {
     }
 
     @Test
-    fun `답안 단어의 일치 여부를 변경한다`() {
+    fun `해당 글자의 글자 일치 상태를 변경할 수 있다`() {
         val wordResult = WordResult()
 
         wordResult.changeMatchType(0, LetterMatch.CORRECT)
@@ -27,6 +28,18 @@ class WordResultTest {
                 LetterMatch.ABSENT,
                 LetterMatch.CORRECT,
             ).toWordResult(),
+        )
+    }
+
+    @Test
+    fun `해당 글자가 '완전 일치 상태'인지 확인한다`() {
+        val wordResult = WordResult()
+
+        wordResult.changeMatchType(1, LetterMatch.CORRECT)
+
+        assertAll(
+            { assertThat(wordResult.isCorrectMatchIndex(0)).isFalse() },
+            { assertThat(wordResult.isCorrectMatchIndex(1)).isTrue() },
         )
     }
 }
