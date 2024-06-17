@@ -1,5 +1,5 @@
 package wordle.domain
 
-import wordle.infra.dictionaryWordSet
+import wordle.infra.contains
 
-fun isDictionaryWord(word: String): Boolean = dictionaryWordSet.contains(word)
+fun isDictionaryWord(word: String): Boolean = contains(word)

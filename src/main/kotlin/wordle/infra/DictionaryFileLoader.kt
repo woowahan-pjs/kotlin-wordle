@@ -8,6 +8,8 @@ private val classLoader: ClassLoader = Thread.currentThread().contextClassLoader
 private val dictionaryWords: List<String> by lazy { loadDictionaryWords() }
 val dictionaryWordSet: Set<String> by lazy { dictionaryWords.toSet() }
 
+fun contains(word: String): Boolean = dictionaryWordSet.contains(word)
+
 private fun loadDictionaryWords(): List<String> =
     classLoader.getResourceAsStream(WORDS_FILE_PATH)
         ?.bufferedReader(StandardCharsets.UTF_8)
