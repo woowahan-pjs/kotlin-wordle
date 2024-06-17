@@ -30,7 +30,7 @@
   - **Java 코드가 아닌 Kotlin 코드로만 구현해야 한다.**
 
 ### 구현 전 확인 사항
-- [ ] 프로그램 실행의 시작점은 `Application`의 `main()`이다.
+- [x] 프로그램 실행의 시작점은 `Application`의 `main()`이다.
 - [ ] `build.gradle.kts` 파일은 변경할 수 없으며, **제공된 라이브러리 이외의 외부 라이브러리는 사용하지 않는다.**
   - `Unknown Kotlin JVM target: 21` 문제로 `kotlin 1.9.23`으로 올림
   - [문제해결](https://github.com/gradle/gradle/issues/25574#issuecomment-1761314551)
@@ -52,7 +52,7 @@
     - [AssertJ Exception Assertions](https://www.baeldung.com/assertj-exception-assertion)
     - [Guide to JUnit 5 Parameterized Tests](https://www.baeldung.com/parameterized-tests-junit-5)
   - 단, UI(System.out, System.in, Scanner) 로직은 제외한다.
-- [ ] 핵심 로직을 구현하는 코드와 UI를 담당하는 로직을 분리해 구현한다.
+- [x] 핵심 로직을 구현하는 코드와 UI를 담당하는 로직을 분리해 구현한다.
   - 힌트: MVC 패턴 기반으로 구현한 후, View와 Controller를 제외한 Model에 대한 단위 테스트 추가에 집중한다.
 
 ### 제출 전 확인 사항
