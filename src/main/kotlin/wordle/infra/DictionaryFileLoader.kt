@@ -1,12 +1,16 @@
 package wordle.infra
 
-import java.io.File
+import java.nio.charset.StandardCharsets
 
-private const val CARRIAGE_RETURN = "\n"
-private const val WORDS_FILE_PATH = "src/main/resources/words.txt"
+private const val NEW_LINE = "\n"
+private const val WORDS_FILE_PATH = "words.txt"
+private val classLoader: ClassLoader = Thread.currentThread().contextClassLoader
 private val dictionaryWords: List<String> by lazy { loadDictionaryWords() }
 val dictionaryWordSet: Set<String> by lazy { dictionaryWords.toSet() }
 
 private fun loadDictionaryWords(): List<String> =
-    File(WORDS_FILE_PATH).readText()
-        .split(CARRIAGE_RETURN)
+    classLoader.getResourceAsStream(WORDS_FILE_PATH)
+        ?.bufferedReader(StandardCharsets.UTF_8)
+        ?.use { it.readText().split(NEW_LINE) }
+        ?.filter { it.isNotBlank() }
+        ?: throw IllegalArgumentException("Dictionary File not found: $WORDS_FILE_PATH")
