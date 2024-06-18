@@ -4,16 +4,16 @@ class WordResults(
     private val results: MutableList<WordResult> = mutableListOf(),
     private val tryCount: TryCount = TryCount(),
 ) {
-    val attemptCount get() = tryCount.attempts
+    val attemptCount: Int get() = tryCount.attempts
 
     fun addResults(result: WordResult) {
         tryCount.minus()
         results.add(result)
     }
 
-    fun isContinuousGame(): Boolean = !isSuccessGame() && tryCount.isRemainder()
+    fun isContinuousGame(): Boolean = !isSuccessfulGame() && tryCount.isRemainder()
 
-    fun isSuccessGame(): Boolean = results.any(WordResult::isSuccessGame)
+    fun isSuccessfulGame(): Boolean = (tryCount.attempts != 0) && results.last().isSuccessfulWordResult()
 
-    fun wordResults(): List<List<LetterMatch>> = results.map(WordResult::matches)
+    fun wordResults(): List<List<LetterMatch>> = results.map { it.matches() }
 }
