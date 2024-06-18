@@ -6,9 +6,9 @@ import wordle.domain.WordResults
 import wordle.domain.WordleGameLogic
 import wordle.view.inputAnswerWord
 import wordle.view.printFail
-import wordle.view.printResult
 import wordle.view.printRetry
 import wordle.view.printSuccess
+import wordle.view.printWordResults
 import java.time.LocalDate
 
 class WordleGame(gameStartDate: LocalDate) {
@@ -22,7 +22,7 @@ class WordleGame(gameStartDate: LocalDate) {
                 val answerWord = Word(inputAnswerWord())
                 val result = wordleGameLogic.compare(answerWord)
                 results.addResults(result)
-                printResult(results)
+                printWordResults(results)
             } catch (e: IllegalStateException) {
                 printRetry(e.message)
             }
