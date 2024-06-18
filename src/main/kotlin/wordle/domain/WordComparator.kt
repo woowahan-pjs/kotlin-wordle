@@ -1,61 +1,57 @@
 package wordle.domain
 
 class WordComparator(
-    private val letters: MutableList<Letter>,
+    private val markerLetters: MutableList<Letter>,
     private val wordResult: WordResult = WordResult(),
 ) {
     fun matchCorrect(answerWord: Word): WordComparator =
         apply {
-            letters.forEachIndexed { index, _ ->
-                changeCorrectMatch(index, answerWord[index])
-            }
+            markerLetters.forEachIndexed { index, _ -> changeCorrectMatch(index, answerWord[index]) }
         }
 
     fun matchPresent(answerWord: Word): WordComparator =
         apply {
-            letters.forEachIndexed { index, _ ->
-                changePresentMatch(index, answerWord[index])
-            }
+            markerLetters.forEachIndexed { index, _ -> changePresentMatch(index, answerWord[index]) }
         }
 
     fun result(): WordResult = wordResult
 
     private fun changeCorrectMatch(
         index: Int,
-        letter: Letter,
+        answerLetter: Letter,
     ) {
-        if (isCorrectLetter(index, letter)) {
+        if (isCorrectLetter(index, answerLetter)) {
             wordResult.changeMatchType(index, LetterMatch.CORRECT)
-            changeLetter(index)
+            changeMarkerLetter(index)
         }
     }
 
     private fun changePresentMatch(
         index: Int,
-        letter: Letter,
+        answerLetter: Letter,
     ) {
-        if (isPresentLatter(index, letter)) {
+        if (isPresentLatter(index, answerLetter)) {
             wordResult.changeMatchType(index, LetterMatch.PRESENT)
-            changeLetterIndexOf(letter)
+            changeMarkerLetterIndexOf(answerLetter)
         }
     }
 
     private fun isCorrectLetter(
         index: Int,
-        letter: Letter,
-    ) = letters[index] == letter
+        answerLetter: Letter,
+    ) = markerLetters[index] == answerLetter
 
     private fun isPresentLatter(
         index: Int,
-        letter: Letter,
-    ) = !wordResult.isCorrectMatchIndex(index) && !isCorrectLetter(index, letter) && (letter in letters)
+        answerLetter: Letter,
+    ) = !(wordResult.isCorrectLetterMatch(index) || isCorrectLetter(index, answerLetter)) && (answerLetter in markerLetters)
 
-    private fun changeLetter(index: Int) {
-        letters[index] = letters[index].changeMatchMarker()
+    private fun changeMarkerLetter(index: Int) {
+        markerLetters[index] = markerLetters[index].changeMatchMarker()
     }
 
-    private fun changeLetterIndexOf(letter: Letter) {
-        changeLetter(letters.indexOf(letter))
+    private fun changeMarkerLetterIndexOf(letter: Letter) {
+        changeMarkerLetter(markerLetters.indexOf(letter))
     }
 }
 

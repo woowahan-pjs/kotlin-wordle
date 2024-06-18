@@ -39,8 +39,8 @@ class WordResultTest {
         wordResult.changeMatchType(1, LetterMatch.CORRECT)
 
         assertAll(
-            { assertThat(wordResult.isCorrectMatchIndex(0)).isFalse() },
-            { assertThat(wordResult.isCorrectMatchIndex(1)).isTrue() },
+            { assertThat(wordResult.isCorrectLetterMatch(0)).isFalse() },
+            { assertThat(wordResult.isCorrectLetterMatch(1)).isTrue() },
         )
     }
 
