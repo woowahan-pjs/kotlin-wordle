@@ -12,7 +12,7 @@ private val GAME_START_DATE = LocalDate.of(2021, 6, 20)
 class WordleGameTest {
     @Test
     fun `6번 이내 오늘의 단어를 맞추면 성공 안내 문구를 출력한다`() {
-        val inputAnswerWords = "$answerWordHello$br$answerWordLabel$br$answerWordSpell$br$wordSpill"
+        val inputAnswerWords = successConsoleInput
         val (printStream, outputStream) = printStreamByteArrayOutputStreamPair(inputAnswerWords)
 
         WordleGame(GAME_START_DATE).play()
@@ -23,8 +23,7 @@ class WordleGameTest {
 
     @Test
     fun `6번 이내 오늘의 단어를 맞추지 못하면 실패 안내 문구와 오늘의 단어를 출력한다`() {
-        val inputAnswerWords =
-            "$answerWordHello$br$answerWordLabel$br$answerWordSpell$br$answerWordHello$br$answerWordLabel$br$answerWordSpell"
+        val inputAnswerWords = failConsoleInput
         val (printStream, outputStream) = printStreamByteArrayOutputStreamPair(inputAnswerWords)
 
         WordleGame(GAME_START_DATE).play()
@@ -90,98 +89,101 @@ class WordleGameTest {
     private val blank = ""
     private val invalidLengthWord = "word"
     private val invalidWord = "abcde"
+    private val successConsoleInput = "$answerWordHello$br$answerWordLabel$br$answerWordSpell$br$wordSpill"
+    private val failConsoleInput =
+        "$answerWordHello$br$answerWordLabel$br$answerWordSpell$br$answerWordHello$br$answerWordLabel$br$answerWordSpell"
 
     private val successConsolePrint =
         """
-🚀 정답을 입력하세요. : 
-⬜⬜🟨🟩⬜
-
-🚀 정답을 입력하세요. : 
-⬜⬜🟨🟩⬜
-🟨⬜⬜⬜🟩
-
-🚀 정답을 입력하세요. : 
-⬜⬜🟨🟩⬜
-🟨⬜⬜⬜🟩
-🟩🟩⬜🟩🟩
-
-🚀 정답을 입력하세요. : 
-⬜⬜🟨🟩⬜
-🟨⬜⬜⬜🟩
-🟩🟩⬜🟩🟩
-🟩🟩🟩🟩🟩
-
-🎉 성공입니다. 4 / 6
-"""
+        🚀 정답을 입력하세요. : 
+        ⬜⬜🟨🟩⬜
+        
+        🚀 정답을 입력하세요. : 
+        ⬜⬜🟨🟩⬜
+        🟨⬜⬜⬜🟩
+        
+        🚀 정답을 입력하세요. : 
+        ⬜⬜🟨🟩⬜
+        🟨⬜⬜⬜🟩
+        🟩🟩⬜🟩🟩
+        
+        🚀 정답을 입력하세요. : 
+        ⬜⬜🟨🟩⬜
+        🟨⬜⬜⬜🟩
+        🟩🟩⬜🟩🟩
+        🟩🟩🟩🟩🟩
+        
+        🎉 성공입니다. 4 / 6
+        """
 
     private val failConsolePrint =
         """
-  🚀 정답을 입력하세요. : 
-  ⬜⬜🟨🟩⬜
-  
-  🚀 정답을 입력하세요. : 
-  ⬜⬜🟨🟩⬜
-  🟨⬜⬜⬜🟩
-  
-  🚀 정답을 입력하세요. : 
-  ⬜⬜🟨🟩⬜
-  🟨⬜⬜⬜🟩
-  🟩🟩⬜🟩🟩
-  
-  🚀 정답을 입력하세요. : 
-  ⬜⬜🟨🟩⬜
-  🟨⬜⬜⬜🟩
-  🟩🟩⬜🟩🟩
-  ⬜⬜🟨🟩⬜
-  
-  🚀 정답을 입력하세요. : 
-  ⬜⬜🟨🟩⬜
-  🟨⬜⬜⬜🟩
-  🟩🟩⬜🟩🟩
-  ⬜⬜🟨🟩⬜
-  🟨⬜⬜⬜🟩
-  
-  🚀 정답을 입력하세요. : 
-  ⬜⬜🟨🟩⬜
-  🟨⬜⬜⬜🟩
-  🟩🟩⬜🟩🟩
-  ⬜⬜🟨🟩⬜
-  🟨⬜⬜⬜🟩
-  🟩🟩⬜🟩🟩
-  
-  👻 실패하였습니다. 오늘의 단어는 [ spill ] 입니다.
-"""
+        🚀 정답을 입력하세요. : 
+        ⬜⬜🟨🟩⬜
+        
+        🚀 정답을 입력하세요. : 
+        ⬜⬜🟨🟩⬜
+        🟨⬜⬜⬜🟩
+        
+        🚀 정답을 입력하세요. : 
+        ⬜⬜🟨🟩⬜
+        🟨⬜⬜⬜🟩
+        🟩🟩⬜🟩🟩
+        
+        🚀 정답을 입력하세요. : 
+        ⬜⬜🟨🟩⬜
+        🟨⬜⬜⬜🟩
+        🟩🟩⬜🟩🟩
+        ⬜⬜🟨🟩⬜
+        
+        🚀 정답을 입력하세요. : 
+        ⬜⬜🟨🟩⬜
+        🟨⬜⬜⬜🟩
+        🟩🟩⬜🟩🟩
+        ⬜⬜🟨🟩⬜
+        🟨⬜⬜⬜🟩
+        
+        🚀 정답을 입력하세요. : 
+        ⬜⬜🟨🟩⬜
+        🟨⬜⬜⬜🟩
+        🟩🟩⬜🟩🟩
+        ⬜⬜🟨🟩⬜
+        🟨⬜⬜⬜🟩
+        🟩🟩⬜🟩🟩
+        
+        👻 실패하였습니다. 오늘의 단어는 [ spill ] 입니다.
+        """
 
     private val blankConsolePrint =
         """
-🚀 정답을 입력하세요. : 
-🥲 다시 시도하세요! : 단어는 공백만 입력할 수 없습니다.
-
-🚀 정답을 입력하세요. : 
-🟩🟩🟩🟩🟩
-
-🎉 성공입니다. 1 / 6
-"""
+        🚀 정답을 입력하세요. : 
+        🥲 다시 시도하세요! : 단어는 공백만 입력할 수 없습니다.
+        
+        🚀 정답을 입력하세요. : 
+        🟩🟩🟩🟩🟩
+        
+        🎉 성공입니다. 1 / 6
+        """
 
     private val invalidLengthConsolePrint =
         """
-🚀 정답을 입력하세요. : 
-🥲 다시 시도하세요! : 단어의 길이는 5자 입니다.
-
-🚀 정답을 입력하세요. : 
-🟩🟩🟩🟩🟩
-
-🎉 성공입니다. 1 / 6
-"""
+        🚀 정답을 입력하세요. : 
+        🥲 다시 시도하세요! : 단어의 길이는 5자 입니다.
+        
+        🚀 정답을 입력하세요. : 
+        🟩🟩🟩🟩🟩
+        
+        🎉 성공입니다. 1 / 6
+        """
 
     private val invalidWordConsolePrint =
         """
-🚀 정답을 입력하세요. : 
-🥲 다시 시도하세요! : Wordle Game에서 유효한 단어가 아닙니다.
-
-🚀 정답을 입력하세요. : 
-🟩🟩🟩🟩🟩
-
-🎉 성공입니다. 1 / 6
-"""
+        🚀 정답을 입력하세요. : 
+        🥲 다시 시도하세요! : Wordle Game에서 유효한 단어가 아닙니다.
+        
+        🚀 정답을 입력하세요. : 
+        🟩🟩🟩🟩🟩
+        
+        🎉 성공입니다. 1 / 6
+        """
 }
