@@ -27,11 +27,11 @@ class WordleGame(gameStartDate: LocalDate) {
                 printRetry(e.message)
             }
         }
-        gameResult(todayWord)
+        printGameResult()
     }
 
-    private fun gameResult(todayWord: Word) {
-        if (results.isSuccessGame()) {
+    private fun printGameResult() {
+        if (results.isSuccessfulGame()) {
             printSuccess(results.attemptCount)
             return
         }
