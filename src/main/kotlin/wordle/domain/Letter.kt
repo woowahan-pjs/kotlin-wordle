@@ -1,10 +1,10 @@
 package wordle.domain
 
-import wordle.exception.WordleExceptionCode
+import wordle.exception.WordleExceptionCode.LETTER_INVALID_CHARACTER_TYPE
 
 data class Letter(private val value: Char) {
     init {
-        check(isAlphabetOrMatchMarker()) { WordleExceptionCode.LETTER_INVALID_CHARACTER_TYPE.message }
+        check(isAlphabetOrMatchMarker()) { LETTER_INVALID_CHARACTER_TYPE.message }
     }
 
     fun changeMatchMarker(): Letter = MATCH_MARKER_LETTER
