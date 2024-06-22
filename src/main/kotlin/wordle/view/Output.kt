@@ -17,6 +17,7 @@ object Output {
     fun show(stage: Stage) {
         when (stage.state) {
             Stage.State.FAIL -> {
+                println("X/6")
                 showAllSteps(stage)
                 println("answer = ${stage.answer}")
             }
