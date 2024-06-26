@@ -4,14 +4,12 @@ import wordle.exception.WordleExceptionCode.LETTER_INVALID_CHARACTER_TYPE
 
 data class Letter(private val value: Char) {
     init {
-        check(isAlphabetOrMatchMarker()) { LETTER_INVALID_CHARACTER_TYPE.message }
+        check(isAlphabet() || isMatchMarker()) { LETTER_INVALID_CHARACTER_TYPE.message }
     }
 
     fun changeMatchMarker(): Letter = MATCH_MARKER_LETTER
 
     fun value(): String = value.toString()
-
-    private fun isAlphabetOrMatchMarker(): Boolean = isAlphabet() || isMatchMarker()
 
     private fun isAlphabet(): Boolean = value in ALPHABET
 
