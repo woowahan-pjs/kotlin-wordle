@@ -27,8 +27,8 @@ data class Step(val answer: String, val word: Word) {
     val isCorrect = result.all { it == Result.CORRECT }
 
     private fun fillCorrect(initResult: MutableList<Result>) {
-        word.value.forEachIndexed { index, c ->
-            if (answer[index] == c) {
+        word.value.forEachIndexed { index, letter ->
+            if (answer[index] == letter) {
                 initResult[index] = Result.CORRECT
             }
         }
@@ -38,10 +38,10 @@ data class Step(val answer: String, val word: Word) {
         val calculatedAnswer =
             StringBuilder(answer.filterIndexed { index, _ -> correctedResult[index] != Result.CORRECT })
 
-        word.value.forEachIndexed { index, c ->
-            if (correctedResult[index] != Result.CORRECT && calculatedAnswer.contains(c)) {
+        word.value.forEachIndexed { index, letter ->
+            if (correctedResult[index] != Result.CORRECT && calculatedAnswer.contains(letter)) {
                 correctedResult[index] = Result.MISMATCH
-                val foundIndex = calculatedAnswer.indexOf(c)
+                val foundIndex = calculatedAnswer.indexOf(letter)
                 calculatedAnswer.deleteAt(foundIndex)
             }
         }
