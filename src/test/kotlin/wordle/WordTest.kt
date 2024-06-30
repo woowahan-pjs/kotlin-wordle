@@ -34,4 +34,3 @@ internal class WordTest {
         assertThat(Word("Hello")).isEqualTo(Word("hello"))
     }
 }
-
