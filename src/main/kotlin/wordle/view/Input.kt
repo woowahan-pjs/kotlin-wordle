@@ -6,7 +6,7 @@ object Input {
 
     fun guess(): Word {
         println("정답을 입력해 주세요.")
-        return Word.fromInput(readln().trim())
+        return Word(readln().trim())
     }
 
 }

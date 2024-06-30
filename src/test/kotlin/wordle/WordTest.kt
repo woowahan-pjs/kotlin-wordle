@@ -13,7 +13,7 @@ internal class WordTest {
     @ValueSource(strings = ["-1", "1", " ", "w!", " ;fs"])
     fun `모두 영문으로 구성된다`(value: String) {
         //when
-        val errorResponse = assertThrows<IllegalArgumentException> { Word.fromInput(value) }
+        val errorResponse = assertThrows<IllegalArgumentException> { Word(value) }
 
         ///then
         assertThat(errorResponse.message).isEqualTo("영문만 입력해야합니다.")
@@ -23,7 +23,7 @@ internal class WordTest {
     @ValueSource(strings = ["test", "hi", "h", "tttttt"])
     fun `5글자가 아니면 IllegalArgumentException 예외가 발생한다`(value: String) {
         //when
-        val errorResponse = assertThrows<IllegalArgumentException> { Word.fromInput(value) }
+        val errorResponse = assertThrows<IllegalArgumentException> { Word(value) }
 
         ///then
         assertThat(errorResponse.message).isEqualTo("5글자여야 합니다.")
@@ -31,7 +31,7 @@ internal class WordTest {
 
     @Test
     fun `영문 대문자는 소문자로 치환된다`() {
-        assertThat(Word.fromInput("Hello")).isEqualTo(Word.fromInput("hello"))
+        assertThat(Word("Hello")).isEqualTo(Word("hello"))
     }
 }
 
