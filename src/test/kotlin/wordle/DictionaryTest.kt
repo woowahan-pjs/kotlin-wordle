@@ -38,6 +38,6 @@ class DictionaryTest {
     fun `answerSelector 기준으로 단어를 추출한다`() {
         val findTodayWord = dictionary.findAnswer(answerSelector)
 
-        assertThat(findTodayWord).isEqualTo("answer")
+        assertThat(findTodayWord).isEqualTo("angry")
     }
 }
