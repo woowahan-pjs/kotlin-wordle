@@ -14,7 +14,7 @@ class Game(today: LocalDate) {
 
     fun start() {
         Output.start()
-        while (!stage.finished) {
+        while (stage.finished.not()) {
             val word = readWord()
             stage = stage.play(word)
             Output.show(stage)
