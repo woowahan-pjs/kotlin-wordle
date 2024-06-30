@@ -33,6 +33,10 @@ object Output {
         }
     }
 
+    fun error(e: Exception) {
+        println(e.message)
+    }
+
     private fun showAllSteps(stage: Stage) {
         stage.steps.forEach { showStep(it) }
     }

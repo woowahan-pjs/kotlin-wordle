@@ -28,7 +28,7 @@ class Game(today: LocalDate) {
                 require(dictionary.hasWord(word)) { "존재하지 않는 단어입니다." }
                 return word
             } catch (e: Exception) {
-                println(e.message)
+                Output.error(e)
             }
         }
     }
