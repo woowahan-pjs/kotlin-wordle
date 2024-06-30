@@ -2,6 +2,7 @@ package wordle
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertAll
 import wordle.domain.Stage
 import wordle.domain.Word
 
@@ -11,8 +12,10 @@ internal class StageTest {
     fun `스테이지를 만들면 PROGRESS`() {
         val stage = Stage("hello")
 
-        assertThat(stage.state).isEqualTo(Stage.State.PROGRESS)
-        assertThat(stage.finished).isFalse()
+        assertAll(
+            { assertThat(stage.state).isEqualTo(Stage.State.PROGRESS) },
+            { assertThat(stage.finished).isFalse() }
+        )
     }
 
     @Test
@@ -24,8 +27,10 @@ internal class StageTest {
         val newStage = stage.play(Word("hello"))
 
         // then
-        assertThat(newStage.state).isEqualTo(Stage.State.COMPLETE)
-        assertThat(newStage.finished).isTrue()
+        assertAll(
+            { assertThat(newStage.state).isEqualTo(Stage.State.COMPLETE) },
+            { assertThat(newStage.finished).isTrue() }
+        )
     }
 
     @Test
@@ -37,8 +42,10 @@ internal class StageTest {
         val newStage = stage.play(Word("wrong"))
 
         // then
-        assertThat(newStage.state).isEqualTo(Stage.State.PROGRESS)
-        assertThat(newStage.finished).isFalse()
+        assertAll(
+            { assertThat(newStage.state).isEqualTo(Stage.State.PROGRESS) },
+            { assertThat(newStage.finished).isFalse() }
+        )
     }
 
     @Test
@@ -56,7 +63,9 @@ internal class StageTest {
             .play(Word("wrong"))
 
         // then
-        assertThat(failedStage.state).isEqualTo(Stage.State.FAIL)
-        assertThat(failedStage.finished).isTrue()
+        assertAll(
+            { assertThat(failedStage.state).isEqualTo(Stage.State.FAIL) },
+            { assertThat(failedStage.finished).isTrue() }
+        )
     }
 }

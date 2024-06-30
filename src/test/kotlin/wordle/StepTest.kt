@@ -2,6 +2,7 @@ package wordle
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertAll
 import wordle.domain.Step
 import wordle.domain.Word
 
@@ -23,8 +24,10 @@ internal class StepTest {
         val resultCode = Step(answer, word).result
 
         // then
-        assertThat(resultCode[0]).isEqualTo(Step.Result.CORRECT)
-        assertThat(resultCode[2]).isEqualTo(Step.Result.CORRECT)
+        assertAll(
+            { assertThat(resultCode[0]).isEqualTo(Step.Result.CORRECT) },
+            { assertThat(resultCode[2]).isEqualTo(Step.Result.CORRECT) },
+        )
     }
 
     @Test
@@ -35,8 +38,10 @@ internal class StepTest {
         val resultCode = Step(answer, word).result
 
         // then
-        assertThat(resultCode[3]).isEqualTo(Step.Result.MISMATCH)
-        assertThat(resultCode[4]).isEqualTo(Step.Result.MISMATCH)
+        assertAll(
+            { assertThat(resultCode[3]).isEqualTo(Step.Result.MISMATCH) },
+            { assertThat(resultCode[4]).isEqualTo(Step.Result.MISMATCH) },
+        )
     }
 
     @Test
